@@ -2,7 +2,9 @@
 @use 'tokens' as *;
 @use 'mixins' as *;
 @use 'logo';
+@use 'button';
 @use '../sections/header/header';
+@use '../sections/hero/hero';
 
 * {
   margin: 0;

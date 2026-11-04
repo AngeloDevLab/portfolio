@@ -1,0 +1,27 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.button {
+  display: inline-block;
+  padding: 13px fluid(14.5px, 24px);
+  border: $border-width solid $color-white;
+  border-radius: $radius-100;
+  font-family: $font-karla;
+  font-size: 18px;
+  font-weight: $font-weight-regular;
+  color: $color-white;
+  text-decoration: none;
+  transition: color 200ms ease, border-color 200ms ease;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-teal;
+    border-color: $color-teal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

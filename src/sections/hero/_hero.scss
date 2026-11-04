@@ -1,0 +1,156 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-12;
+  height: 100dvh;
+  @include section-padding;
+  text-align: center;
+  background: linear-gradient(to bottom left, $color-green-dark, $color-dark 60%);
+
+  &__role {
+    font-family: $font-fira;
+    font-size: fluid(24px, 40px);
+    font-weight: $font-weight-regular;
+  }
+
+  &__decor {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    @include section-padding;
+    pointer-events: none;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-12;
+    width: 32px;
+  }
+
+  &__scroll {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 48px;
+    border: $border-width solid $color-teal;
+    border-radius: $radius-100;
+    color: $color-white;
+    pointer-events: auto;
+    transition: color 200ms ease;
+
+    svg {
+      width: 12px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: $color-teal;
+    }
+  }
+
+  &__social {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    pointer-events: auto;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: $color-teal;
+      opacity: 0;
+      transform: translateY(-50%);
+      transition: opacity 200ms ease;
+    }
+
+    &:hover,
+    &:focus-visible {
+      .hero__icon {
+        background: $color-white;
+      }
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__icon {
+    display: block;
+    width: 26px;
+    height: 26px;
+    background: $color-teal;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    transition: background 200ms ease;
+
+    &--mail {
+      width: 27px;
+      height: 22px;
+      mask-image: url('/icons/mail.svg');
+    }
+
+    &--github {
+      mask-image: url('/icons/github.svg');
+    }
+
+    &--linkedin {
+      mask-image: url('/icons/linkedin.svg');
+    }
+  }
+
+  &__line {
+    display: block;
+    width: $border-width;
+    height: 224px;
+    margin-top: $space-12;
+    background: $color-grey;
+
+    &--teal {
+      background: $color-teal;
+    }
+
+    &--short {
+      height: 112px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $space-24;
+    margin-top: $space-32;
+  }
+
+  &__name {
+    font-family: $font-karla;
+    font-size: fluid(62px, 128px);
+    font-weight: $font-weight-bold;
+    color: $color-grey;
+  }
+}

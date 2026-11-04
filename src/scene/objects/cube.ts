@@ -38,24 +38,24 @@ export function updateCube(cube: THREE.Mesh, progress: number) {
 }
 
 /**
- * Moves the cube from the center to the exit corner, then from the enter corner back to the center.
+ * Moves the cube from the enter corner to the center, then from the center to the exit corner.
  * @param cube - Cube to move.
  * @param progress - Scroll progress between 0 and 1.
  */
 function updateCubePosition(cube: THREE.Mesh, progress: number) {
   if (progress < 0.5) {
-    cube.position.lerpVectors(centerPosition, exitPosition, easeInSoft(progress * 2));
+    cube.position.lerpVectors(enterPosition, centerPosition, easeOutSoft(progress * 2));
   } else {
-    cube.position.lerpVectors(enterPosition, centerPosition, easeOutSoft((progress - 0.5) * 2));
+    cube.position.lerpVectors(centerPosition, exitPosition, easeInSoft((progress - 0.5) * 2));
   }
 }
 
 /**
- * Rotates the cube based on scroll progress, ending in the same orientation it started with.
+ * Rotates the cube based on scroll progress, facing the camera upright at the center.
  * @param cube - Cube to rotate.
  * @param progress - Scroll progress between 0 and 1.
  */
 function updateCubeRotation(cube: THREE.Mesh, progress: number) {
-  cube.rotation.x = progress * Math.PI * 2;
-  cube.rotation.y = progress * Math.PI * 4;
+  cube.rotation.x = (progress - 0.5) * Math.PI * 2;
+  cube.rotation.y = (progress - 0.5) * Math.PI * 4;
 }

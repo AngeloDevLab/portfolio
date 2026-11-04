@@ -25,20 +25,62 @@
       </button>
     </header>
     <main class="content">
-      <section class="content__section">
-        <h1>Hi, ich bin ...</h1>
+      <section class="hero">
+        <p class="hero__role">Frontend Developer</p>
+        <h1 class="hero__name">Angelo Pietsch</h1>
+        <div class="hero__actions">
+          <a class="button" href="#projects">Check my work</a>
+          <a class="button" href="#contact">Contact me</a>
+        </div>
+        <div class="hero__decor">
+          <div class="hero__column">
+            <a class="hero__scroll" href="#about" aria-label="Scroll to about me">
+              <svg viewBox="0 0 12 18" aria-hidden="true">
+                <path d="M6 1V17M1 12L6 17L11 12" />
+              </svg>
+            </a>
+            <span class="hero__line hero__line--teal"></span>
+          </div>
+          <div class="hero__column">
+            <a class="hero__social" href="#" aria-label="Email"><span class="hero__icon hero__icon--mail"></span></a>
+            <a class="hero__social" href="https://github.com/AngeloDevLab" aria-label="GitHub"><span class="hero__icon hero__icon--github"></span></a>
+            <a class="hero__social" href="#" aria-label="LinkedIn"><span class="hero__icon hero__icon--linkedin"></span></a>
+            <span class="hero__line hero__line--short"></span>
+          </div>
+        </div>
       </section>
-      <section class="content__section">
+      <section id="about" class="content__section">
         <h2>Über mich</h2>
       </section>
-      <section class="content__section">
+      <section id="projects" class="content__section">
         <h2>Projekte</h2>
       </section>
-      <section class="content__section">
+      <section id="contact" class="content__section">
         <h2>Kontakt</h2>
       </section>
-      <section class="content__section" aria-hidden="true">
-        <h1>Hi, ich bin ...</h1>
+      <section class="hero" aria-hidden="true" inert>
+        <p class="hero__role">Frontend Developer</p>
+        <div class="hero__name">Angelo Pietsch</div>
+        <div class="hero__actions">
+          <a class="button" href="#projects">Check my work</a>
+          <a class="button" href="#contact">Contact me</a>
+        </div>
+        <div class="hero__decor">
+          <div class="hero__column">
+            <a class="hero__scroll" href="#about">
+              <svg viewBox="0 0 12 18" aria-hidden="true">
+                <path d="M6 1V17M1 12L6 17L11 12" />
+              </svg>
+            </a>
+            <span class="hero__line hero__line--teal"></span>
+          </div>
+          <div class="hero__column">
+            <a class="hero__social" href="#"><span class="hero__icon hero__icon--mail"></span></a>
+            <a class="hero__social" href="https://github.com/AngeloDevLab"><span class="hero__icon hero__icon--github"></span></a>
+            <a class="hero__social" href="#"><span class="hero__icon hero__icon--linkedin"></span></a>
+            <span class="hero__line hero__line--short"></span>
+          </div>
+        </div>
       </section>
     </main>
     <script type="module" src="/src/main.ts"></script>

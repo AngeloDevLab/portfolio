@@ -22,15 +22,27 @@ function wrapScrollY(scrollY: number) {
 }
 
 /**
- * Returns the path progress: 0 to 0.5 while scrolling through the first screen, 0.5 to 1 through the last screen.
- * @returns Path progress between 0 and 1.
+ * Returns the progress of a section passing through the screen: 0 one screen before it fills the viewport, 0.5 when it does, 1 one screen after.
+ * @param section - Section to measure against.
+ * @returns Section progress between 0 and 1.
  */
-function getPathProgress() {
+function getSectionProgress(section: HTMLElement) {
   const screenHeight = window.innerHeight;
-  const scrollY = wrapScrollY(smoothScrollY);
-  const exit = MathUtils.clamp(scrollY / screenHeight, 0, 1);
-  const enter = MathUtils.clamp(1 - (getMaxScroll() - scrollY) / screenHeight, 0, 1);
-  return (exit + enter) / 2;
+  const distance = wrapScrollY(smoothScrollY) - section.offsetTop;
+  return MathUtils.clamp((distance + screenHeight) / (2 * screenHeight), 0, 1);
+}
+
+/**
+ * Returns the bottom edge of the first element that is currently inside the viewport.
+ * @param elements - Elements to check.
+ * @returns Bottom edge in pixels, or null if none of them is visible.
+ */
+export function getVisibleBottom(elements: NodeListOf<HTMLElement>) {
+  for (const element of elements) {
+    const { top, bottom } = element.getBoundingClientRect();
+    if (bottom > 0 && top < window.innerHeight) return bottom;
+  }
+  return null;
 }
 
 /**
@@ -67,10 +79,11 @@ export function loopScroll() {
 /**
  * Moves the smoothed scroll position a bit closer to the real one.
  * @param deltaSeconds - Time since the last frame in seconds.
- * @returns Path progress between 0 and 1.
+ * @param section - Section the progress is measured against.
+ * @returns Section progress between 0 and 1.
  */
-export function updateSmoothProgress(deltaSeconds: number) {
+export function updateSmoothProgress(deltaSeconds: number, section: HTMLElement) {
   const factor = 1 - Math.exp(-8 * deltaSeconds);
   smoothScrollY += (window.scrollY - smoothScrollY) * factor;
-  return getPathProgress();
+  return getSectionProgress(section);
 }
