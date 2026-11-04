@@ -1,7 +1,7 @@
 import './styles/main.scss';
-import { createStage, resizeStage } from './stage.ts';
-import { createCube, updateCube } from './cube.ts';
-import { initScrollLoop, loopScroll, updateSmoothProgress } from './scroll.ts';
+import { createStage, resizeStage } from './scene/stage.ts';
+import { createCube, updateCube } from './scene/objects/cube.ts';
+import { initScrollLoop, loopScroll, updateSmoothProgress } from './scene/scroll.ts';
 
 const canvas = document.querySelector<HTMLCanvasElement>('.scene')!;
 const stage = createStage(canvas);

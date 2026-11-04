@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { easeInSoft, easeOutSoft } from './easing.ts';
+import { easeInSoft, easeOutSoft } from '../easing.ts';
 
 const centerPosition = new THREE.Vector3(0, 0, 0);
 const exitPosition = new THREE.Vector3(10, 8, -5);
