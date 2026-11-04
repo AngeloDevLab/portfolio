@@ -2,6 +2,7 @@
 
 // Colors
 $color-white: #ffffff;
+$color-grey: #d9d9d9;
 $color-teal: #3dcfb6;
 $color-teal-10: rgba($color-teal, 0.1);
 $color-teal-30: rgba($color-teal, 0.3);
@@ -36,6 +37,13 @@ $radius-16: 16px;
 $radius-30: 30px;
 $radius-100: 100px;
 $border-width: 1px;
+
+// Layout
+$section-max-width: 1440px;
+
+// Breakpoints (mobile first: styles outside a breakpoint are the mobile base)
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
 
 // Viewport range fluid() scales across (Figma mobile / desktop frame widths).
 $fluid-from: 320px;

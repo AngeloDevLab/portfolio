@@ -1,8 +1,57 @@
 @use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
 
 .header {
   position: absolute;
   top: $space-16;
-  left: $space-16;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include section-padding;
   z-index: 1;
+
+  .logo__wordmark {
+    display: none;
+
+    @include desktop {
+      display: block;
+    }
+  }
+}
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 48px;
+  height: 48px;
+  padding: 14px 8px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+
+  @include desktop {
+    display: none;
+  }
+
+  &__line {
+    display: block;
+    height: 2px;
+    border-radius: 1px;
+    background: $color-white;
+    transition: background 200ms ease;
+  }
+
+  &:hover &__line,
+  &:focus-visible &__line {
+    background: $color-teal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burger__line {
+    transition: none;
+  }
 }

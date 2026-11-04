@@ -1,10 +1,12 @@
 @use 'tokens' as *;
 
 .logo {
-  display: inline-block;
+  display: inline-flex;
+  gap: $space-4;
   text-decoration: none;
 
-  &__mark {
+  &__mark,
+  &__wordmark {
     display: block;
     height: 50px;
     width: auto;

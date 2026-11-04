@@ -1,5 +1,6 @@
 @use 'fonts';
 @use 'tokens' as *;
+@use 'mixins' as *;
 @use 'logo';
 @use '../sections/header/header';
 
@@ -34,7 +35,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    padding: 2rem;
+    @include section-padding;
     text-align: center;
   }
 }
