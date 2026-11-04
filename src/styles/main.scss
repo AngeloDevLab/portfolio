@@ -1,5 +1,7 @@
 @use 'fonts';
 @use 'tokens' as *;
+@use 'logo';
+@use '../sections/header/header';
 
 * {
   margin: 0;

@@ -1,0 +1,8 @@
+@use '../../styles/tokens' as *;
+
+.header {
+  position: absolute;
+  top: $space-16;
+  left: $space-16;
+  z-index: 1;
+}

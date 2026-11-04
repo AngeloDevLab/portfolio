@@ -1,0 +1,43 @@
+@use 'tokens' as *;
+
+.logo {
+  display: inline-block;
+  text-decoration: none;
+
+  &__mark {
+    display: block;
+    height: 50px;
+    width: auto;
+    overflow: visible;
+  }
+
+  &__initials,
+  &__name {
+    stroke-width: 1;
+    transition: fill 300ms ease;
+  }
+
+  &__initials {
+    fill: $color-teal;
+    stroke: $color-teal;
+  }
+
+  &__name {
+    fill: $color-white;
+    stroke: $color-white;
+  }
+
+  &:hover &__initials,
+  &:hover &__name,
+  &:focus-visible &__initials,
+  &:focus-visible &__name {
+    fill: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo__initials,
+  .logo__name {
+    transition: none;
+  }
+}
