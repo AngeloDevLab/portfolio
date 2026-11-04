@@ -26,21 +26,23 @@ export function createStage(canvas: HTMLCanvasElement): Stage {
  * @returns The configured renderer.
  */
 function createRenderer(canvas: HTMLCanvasElement) {
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   return renderer;
 }
 
 /**
- * Adds a soft ambient light and a directional light to the scene.
+ * Adds a soft ambient light, a side light and a front light to the scene.
  * @param scene - Scene that receives the lights.
  */
 function addLights(scene: THREE.Scene) {
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
   const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
   directionalLight.position.set(3, 2, 0);
-  scene.add(ambientLight, directionalLight);
+  const frontLight = new THREE.DirectionalLight(0xffffff, 1.6);
+  frontLight.position.set(0, 0.4, 1);
+  scene.add(ambientLight, directionalLight, frontLight);
 }
 
 /**
