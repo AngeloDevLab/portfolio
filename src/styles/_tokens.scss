@@ -1,0 +1,42 @@
+// Design tokens extracted from the Figma template.
+
+// Colors
+$color-white: #ffffff;
+$color-teal: #3dcfb6;
+$color-teal-10: rgba($color-teal, 0.1);
+$color-teal-30: rgba($color-teal, 0.3);
+$color-dark: #1c1c1c;
+$color-green-dark: #08463b;
+$color-red: #ec7b7b;
+
+// Fonts
+$font-fira: 'Fira Code', monospace;
+$font-karla: 'Karla', sans-serif;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// Spacing
+$space-4: 4px;
+$space-10: 10px;
+$space-12: 12px;
+$space-16: 16px;
+$space-20: 20px;
+$space-24: 24px;
+$space-32: 32px;
+$space-40: 40px;
+$space-48: 48px;
+$space-64: 64px;
+$space-72: 72px;
+$space-96: 96px;
+
+// Borders
+$radius-16: 16px;
+$radius-30: 30px;
+$radius-100: 100px;
+$border-width: 1px;
+
+// Viewport range fluid() scales across (Figma mobile / desktop frame widths).
+$fluid-from: 320px;
+$fluid-to: 1440px;
