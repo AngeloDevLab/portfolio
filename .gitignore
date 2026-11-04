@@ -1,0 +1,16 @@
+# Logs
+*.log
+
+node_modules
+dist
+*.local
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+
+# Internal notes
+fragen.md
+Portfolio Checkliste.md
