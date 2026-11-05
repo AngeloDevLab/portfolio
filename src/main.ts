@@ -3,8 +3,9 @@ import { createStage, resizeStage } from './scene/stage.ts';
 import { createCube, updateCube } from './scene/objects/cube.ts';
 import { createRing, updateRing } from './scene/objects/ring.ts';
 import { updateRingBlur } from './scene/objects/ring-blur.ts';
-import { getVisibleBottom, initScrollLoop, jumpToHeroOnClick, loopScroll, updateSmoothProgress } from './scene/scroll.ts';
+import { getVisibleBottom, initScrollLoop, jumpToHeroOnClick, keepFocusOutOfHeroCopy, loopScroll, updateSmoothProgress } from './scene/scroll.ts';
 import { openExternalLinksInNewTab } from './external-links.ts';
+import { initMenu } from './sections/header/menu.ts';
 
 const canvas = document.querySelector<HTMLCanvasElement>('.scene')!;
 const aboutSection = document.querySelector<HTMLElement>('#about')!;
@@ -31,8 +32,10 @@ function animate(time: number) {
 }
 
 openExternalLinksInNewTab();
+initMenu();
 window.addEventListener('resize', () => resizeStage(stage));
 initScrollLoop();
 jumpToHeroOnClick(heroes[1]);
+keepFocusOutOfHeroCopy(heroes[1]);
 window.addEventListener('scroll', loopScroll);
 stage.renderer.setAnimationLoop(animate);

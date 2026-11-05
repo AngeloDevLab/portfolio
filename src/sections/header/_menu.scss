@@ -1,0 +1,39 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+.menu {
+  inset: $space-72 fluid(16px, 96px) auto auto;
+  margin: 0;
+  border: $border-width solid $color-teal;
+  border-radius: $radius-30;
+  background: linear-gradient(to bottom left, $color-green-dark, $color-dark);
+  color: $color-white;
+
+  &::backdrop {
+    background: $color-backdrop;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-24;
+    padding: $space-40 $space-72;
+  }
+
+  .nav__list {
+    flex-direction: column;
+  }
+
+  .nav__link {
+    font-size: 18px;
+  }
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html:has(.menu[open]) {
+  overflow: hidden;
+}

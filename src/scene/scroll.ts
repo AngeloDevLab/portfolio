@@ -88,6 +88,14 @@ export function jumpToHeroOnClick(heroCopy: HTMLElement) {
 }
 
 /**
+ * Stops mouse clicks from focusing elements in the hero copy, as it is hidden from assistive technology.
+ * @param heroCopy - Hero copy at the end of the page.
+ */
+export function keepFocusOutOfHeroCopy(heroCopy: HTMLElement) {
+  heroCopy.addEventListener('mousedown', (event) => event.preventDefault());
+}
+
+/**
  * Moves the smoothed scroll position a bit closer to the real one.
  * @param deltaSeconds - Time since the last frame in seconds.
  * @param section - Section the progress is measured against.
