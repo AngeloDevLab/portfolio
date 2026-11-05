@@ -18,6 +18,12 @@ body {
   background: $color-dark;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 .scene {
   position: fixed;
   inset: 0;

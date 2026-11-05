@@ -3,7 +3,7 @@ import { createStage, resizeStage } from './scene/stage.ts';
 import { createCube, updateCube } from './scene/objects/cube.ts';
 import { createRing, updateRing } from './scene/objects/ring.ts';
 import { updateRingBlur } from './scene/objects/ring-blur.ts';
-import { getVisibleBottom, initScrollLoop, loopScroll, updateSmoothProgress } from './scene/scroll.ts';
+import { getVisibleBottom, initScrollLoop, jumpToHeroOnClick, loopScroll, updateSmoothProgress } from './scene/scroll.ts';
 import { openExternalLinksInNewTab } from './external-links.ts';
 
 const canvas = document.querySelector<HTMLCanvasElement>('.scene')!;
@@ -33,5 +33,6 @@ function animate(time: number) {
 openExternalLinksInNewTab();
 window.addEventListener('resize', () => resizeStage(stage));
 initScrollLoop();
+jumpToHeroOnClick(heroes[1]);
 window.addEventListener('scroll', loopScroll);
 stage.renderer.setAnimationLoop(animate);

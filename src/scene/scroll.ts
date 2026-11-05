@@ -77,6 +77,17 @@ export function loopScroll() {
 }
 
 /**
+ * Moves clicks in the hero copy to the same spot in the real hero, so its links scroll the short way.
+ * @param heroCopy - Hero copy at the end of the page.
+ */
+export function jumpToHeroOnClick(heroCopy: HTMLElement) {
+  heroCopy.addEventListener('click', () => {
+    const targetY = window.scrollY - heroCopy.offsetTop;
+    if (targetY >= 0) jumpTo(Math.max(targetY, LOOP_MARGIN));
+  });
+}
+
+/**
  * Moves the smoothed scroll position a bit closer to the real one.
  * @param deltaSeconds - Time since the last frame in seconds.
  * @param section - Section the progress is measured against.

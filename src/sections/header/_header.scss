@@ -12,11 +12,96 @@
   @include section-padding;
   z-index: 1;
 
+  @include desktop {
+    top: $space-24;
+  }
+
   .logo__wordmark {
     display: none;
 
     @include desktop {
       display: block;
+    }
+  }
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: $space-24;
+
+  @include desktop {
+    display: flex;
+  }
+
+  &__list {
+    display: flex;
+    gap: $space-24;
+    list-style: none;
+  }
+
+  &__link {
+    position: relative;
+    display: block;
+    font-family: $font-fira;
+    font-size: 20px;
+    color: $color-white;
+    text-decoration: none;
+    transition: color 200ms ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: calc(100% + #{$space-4});
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: $color-teal;
+      opacity: 0;
+      transform: translateX(-50%);
+      transition: opacity 200ms ease;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: $color-teal;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.lang-toggle {
+  display: inline-flex;
+  border: $border-width solid $color-teal;
+  border-radius: $radius-100;
+
+  &__option {
+    width: 42px;
+    height: 26px;
+    border: 0;
+    border-radius: $radius-100;
+    background: none;
+    font-family: $font-fira;
+    font-size: 14px;
+    font-weight: $font-weight-bold;
+    color: $color-teal-60;
+    cursor: pointer;
+    transition: color 200ms ease;
+
+    &:hover,
+    &:focus-visible {
+      color: $color-teal;
+    }
+
+    &--active,
+    &--active:hover,
+    &--active:focus-visible {
+      background: $color-teal;
+      color: $color-dark;
     }
   }
 }
@@ -51,7 +136,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .burger__line {
+  .burger__line,
+  .nav__link,
+  .nav__link::after,
+  .lang-toggle__option {
     transition: none;
   }
 }

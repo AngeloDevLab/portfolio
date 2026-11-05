@@ -70,7 +70,15 @@
     justify-content: center;
     width: 32px;
     height: 32px;
+    text-decoration: none;
     pointer-events: auto;
+
+    &--mail {
+      @include desktop {
+        height: auto;
+        margin-bottom: $space-12;
+      }
+    }
 
     &::after {
       content: '';
@@ -90,6 +98,10 @@
     &:focus-visible {
       .hero__icon {
         background: $color-white;
+      }
+
+      .hero__email {
+        color: $color-teal;
       }
 
       &::after {
@@ -112,6 +124,10 @@
       width: 27px;
       height: 22px;
       mask-image: url('/icons/mail.svg');
+
+      @include desktop {
+        display: none;
+      }
     }
 
     &--github {
@@ -123,6 +139,20 @@
     }
   }
 
+  &__email {
+    display: none;
+    font-family: $font-karla;
+    font-size: 18px;
+    color: $color-white;
+    transition: color 200ms ease;
+
+    @include desktop {
+      display: block;
+      writing-mode: vertical-rl;
+      rotate: 180deg;
+    }
+  }
+
   &__line {
     display: block;
     width: $border-width;
@@ -130,12 +160,20 @@
     margin-top: $space-12;
     background: $color-grey;
 
+    @include desktop {
+      height: 36dvh;
+    }
+
     &--teal {
       background: $color-teal;
     }
 
     &--short {
       height: 112px;
+
+      @include desktop {
+        height: 32dvh;
+      }
     }
   }
 
