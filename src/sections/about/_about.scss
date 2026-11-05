@@ -1,0 +1,98 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: $space-40;
+  padding-block: fluid($space-96, 144px);
+  @include section-padding;
+  font-family: $font-karla;
+  font-size: fluid(16px, 18px);
+  line-height: 1.2;
+
+  @include desktop {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: $space-96;
+  }
+
+  &__photo {
+    aspect-ratio: 1;
+    border-radius: $radius-30;
+    background: $color-teal-10;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: fluid($space-16, $space-20);
+
+    @include desktop {
+      margin-top: $space-96;
+    }
+  }
+
+  &__label {
+    font-size: fluid(18px, 24px);
+    color: $color-teal;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    padding: fluid($space-24, $space-32);
+    border: $border-width solid $color-teal;
+    border-radius: $radius-30;
+    background: $color-teal-10;
+  }
+
+  &__title {
+    margin-bottom: fluid($space-32, $space-40);
+    font-family: $font-fira;
+    font-size: fluid(46px, 64px);
+    font-weight: $font-weight-bold;
+    color: $color-teal;
+  }
+
+  &__intro {
+    margin-bottom: fluid($space-24, $space-32);
+    text-align: justify;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    gap: fluid($space-24, $space-16);
+    color: $color-grey;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: fluid(32px, 24px);
+    height: fluid(32px, 24px);
+    background: $color-teal;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+
+    &--location {
+      mask-image: url('/icons/location.svg');
+    }
+
+    &--cognition {
+      mask-image: url('/icons/cognition.svg');
+    }
+
+    &--releases {
+      mask-image: url('/icons/releases.svg');
+    }
+  }
+}

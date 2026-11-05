@@ -22,13 +22,14 @@ function wrapScrollY(scrollY: number) {
 }
 
 /**
- * Returns the progress of a section passing through the screen: 0 one screen before it fills the viewport, 0.5 when it does, 1 one screen after.
- * @param section - Section to measure against.
- * @returns Section progress between 0 and 1.
+ * Returns the progress of an element passing through the screen: 0.5 when its center is at the screen center, 0 one screen earlier, 1 one screen later.
+ * @param element - Element to measure against.
+ * @returns Element progress between 0 and 1.
  */
-function getSectionProgress(section: HTMLElement) {
+function getElementProgress(element: HTMLElement) {
   const screenHeight = window.innerHeight;
-  const distance = wrapScrollY(smoothScrollY) - section.offsetTop;
+  const centeredAt = element.offsetTop + element.offsetHeight / 2 - screenHeight / 2;
+  const distance = wrapScrollY(smoothScrollY) - centeredAt;
   return MathUtils.clamp((distance + screenHeight) / (2 * screenHeight), 0, 1);
 }
 
@@ -98,11 +99,11 @@ export function keepFocusOutOfHeroCopy(heroCopy: HTMLElement) {
 /**
  * Moves the smoothed scroll position a bit closer to the real one.
  * @param deltaSeconds - Time since the last frame in seconds.
- * @param section - Section the progress is measured against.
- * @returns Section progress between 0 and 1.
+ * @param element - Element the progress is measured against.
+ * @returns Element progress between 0 and 1.
  */
-export function updateSmoothProgress(deltaSeconds: number, section: HTMLElement) {
+export function updateSmoothProgress(deltaSeconds: number, element: HTMLElement) {
   const factor = 1 - Math.exp(-8 * deltaSeconds);
   smoothScrollY += (window.scrollY - smoothScrollY) * factor;
-  return getSectionProgress(section);
+  return getElementProgress(element);
 }

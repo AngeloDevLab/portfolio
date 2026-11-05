@@ -2,7 +2,7 @@
 @use '../../styles/mixins' as *;
 
 .menu {
-  inset: $space-72 fluid(16px, 96px) auto auto;
+  inset: $space-72 fluid($space-16, $space-96) auto auto;
   margin: 0;
   border: $border-width solid $color-teal;
   border-radius: $radius-30;

@@ -22,7 +22,7 @@
 // Side padding of a full-width section. Keeps the content centered within
 // $section-max-width while the section background can span the whole viewport.
 @mixin section-padding {
-  padding-inline: calc(#{fluid(16px, 96px)} + max(0px, (100% - #{$section-max-width}) / 2));
+  padding-inline: calc(#{fluid($space-16, $space-96)} + max(0px, (100% - #{$section-max-width}) / 2));
 }
 
 // Layout switches. Only for real layout changes; sizes and spacing

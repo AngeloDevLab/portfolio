@@ -8,7 +8,7 @@ import { openExternalLinksInNewTab } from './external-links.ts';
 import { initMenu } from './sections/header/menu.ts';
 
 const canvas = document.querySelector<HTMLCanvasElement>('.scene')!;
-const aboutSection = document.querySelector<HTMLElement>('#about')!;
+const cubeSlot = document.querySelector<HTMLElement>('.about__photo')!;
 const heroes = document.querySelectorAll<HTMLElement>('.hero');
 const ringBlur = document.querySelector<HTMLElement>('.ring-blur')!;
 const stage = createStage(canvas);
@@ -25,7 +25,7 @@ let lastTime = 0;
 function animate(time: number) {
   const deltaSeconds = (time - lastTime) / 1000;
   lastTime = time;
-  updateCube(cube, updateSmoothProgress(deltaSeconds, aboutSection));
+  updateCube(cube, stage.camera, cubeSlot.getBoundingClientRect(), updateSmoothProgress(deltaSeconds, cubeSlot));
   updateRing(ring, stage.camera, getVisibleBottom(heroes), deltaSeconds);
   updateRingBlur(ringBlur, ring, stage.camera);
   stage.renderer.render(stage.scene, stage.camera);

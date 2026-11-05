@@ -3,7 +3,7 @@
 
 .button {
   display: inline-block;
-  padding: 13px fluid(14.5px, 24px);
+  padding: 13px fluid(14.5px, $space-24);
   border: $border-width solid $color-white;
   border-radius: $radius-100;
   font-family: $font-karla;
