@@ -43,6 +43,7 @@ function traceEdge(ring: Ring, camera: THREE.PerspectiveCamera, y: number) {
 export function updateRingBlur(layer: HTMLElement, ring: Ring, camera: THREE.PerspectiveCamera) {
   layer.hidden = !ring.group.visible;
   if (layer.hidden) return;
+  layer.style.opacity = String(ring.front.material.opacity);
   ring.group.updateMatrixWorld();
   const outline = [...traceEdge(ring, camera, 0.5), ...traceEdge(ring, camera, -0.5).reverse()];
   layer.style.clipPath = `polygon(${outline.join(', ')})`;

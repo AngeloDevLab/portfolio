@@ -8,6 +8,8 @@ const DEPTH_PER_VIEW_HEIGHT = 0.4;
 const CENTER_ABOVE_HERO_BOTTOM = 64;
 const SPEED_IN_PIXELS = 40;
 const BACK_BLUR = 6;
+const FADE_START = 0.5;
+const FADE_END = 0.85;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 type Band = THREE.Mesh<THREE.CylinderGeometry, THREE.MeshStandardMaterial>;
@@ -99,6 +101,27 @@ function getPatternLength(band: Band, bandHeight: number) {
 }
 
 /**
+ * Returns how far the hero has moved out of its resting position, in either direction.
+ * @param heroBottom - Bottom edge of the visible hero in pixels.
+ * @returns 0 while the hero fills the screen, 1 once it is a full screen away.
+ */
+function getScrolledShare(heroBottom: number) {
+  return Math.min(1, Math.abs(window.innerHeight - heroBottom) / window.innerHeight);
+}
+
+/**
+ * Fades the ring out while the hero scrolls away and hides it once it is fully transparent.
+ * @param ring - Ring to fade.
+ * @param heroBottom - Bottom edge of the visible hero in pixels.
+ */
+function fadeRing({ group, front, back }: Ring, heroBottom: number) {
+  const opacity = 1 - THREE.MathUtils.smoothstep(getScrolledShare(heroBottom), FADE_START, FADE_END);
+  front.material.opacity = opacity;
+  back.material.opacity = opacity;
+  group.visible = opacity > 0;
+}
+
+/**
  * Sizes and places the ring at the bottom of the hero and tips it while the hero scrolls away.
  * @param ring - Ring to place.
  * @param camera - Camera that views the ring.
@@ -112,7 +135,7 @@ function layoutRing({ group, front, back }: Ring, camera: THREE.PerspectiveCamer
   const height = getBandHeight() / pixelsPerUnit;
   const centerY = heroBottom - CENTER_ABOVE_HERO_BOTTOM;
   group.position.set(0, (window.innerHeight / 2 - centerY) / pixelsPerUnit, -radiusZ);
-  group.rotation.x = Math.min(1, Math.abs(window.innerHeight - heroBottom) / window.innerHeight) * MAX_SCROLL_TILT;
+  group.rotation.x = getScrolledShare(heroBottom) * MAX_SCROLL_TILT;
   [front, back].forEach((band) => {
     band.scale.set(radiusX, height, radiusZ);
     repeatTexture(band, radiusX, getPatternLength(band, height));
@@ -151,4 +174,5 @@ export function updateRing(ring: Ring, camera: THREE.PerspectiveCamera, heroBott
   }
   layoutRing(ring, camera, heroBottom);
   spinRing(ring, heroBottom, deltaSeconds);
+  fadeRing(ring, heroBottom);
 }
