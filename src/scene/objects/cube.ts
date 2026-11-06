@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { easeInSoft } from '../easing.ts';
+import { getSlotTransform } from '../stage.ts';
 
 const ENTER_START = 0.15;
 const LAND_START = 0.4;
@@ -69,11 +70,7 @@ function getFlight(progress: number) {
  * @param flight - Flight state between -1 and 1.
  */
 function placeCube(cube: THREE.Mesh, camera: THREE.PerspectiveCamera, slot: DOMRect, flight: number) {
-  const viewHeight = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-  const pixelsPerUnit = window.innerHeight / viewHeight;
-  const size = slot.width / pixelsPerUnit;
-  const x = (slot.left + slot.width / 2 - window.innerWidth / 2) / pixelsPerUnit;
-  const y = (window.innerHeight / 2 - (slot.top + slot.height / 2)) / pixelsPerUnit;
+  const { size, x, y } = getSlotTransform(camera, slot);
   const depth = size * Math.max(MIN_DEPTH, THREE.MathUtils.smoothstep(Math.abs(flight), 0, FLATTEN_RANGE));
   cube.scale.set(size, size, depth);
   cube.position.set(x, y, -depth / 2);

@@ -26,7 +26,7 @@ function wrapScrollY(scrollY: number) {
  * @param element - Element to measure against.
  * @returns Element progress between 0 and 1.
  */
-function getElementProgress(element: HTMLElement) {
+export function getElementProgress(element: HTMLElement) {
   const screenHeight = window.innerHeight;
   const centeredAt = element.offsetTop + element.offsetHeight / 2 - screenHeight / 2;
   const distance = wrapScrollY(smoothScrollY) - centeredAt;

@@ -46,6 +46,22 @@ function addLights(scene: THREE.Scene) {
 }
 
 /**
+ * Converts the screen position of an element into world units on the plane at z = 0.
+ * @param camera - Camera that views the plane.
+ * @param slot - Screen position of the element.
+ * @returns Width and center of the element in world units.
+ */
+export function getSlotTransform(camera: THREE.PerspectiveCamera, slot: DOMRect) {
+  const viewHeight = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  const pixelsPerUnit = window.innerHeight / viewHeight;
+  return {
+    size: slot.width / pixelsPerUnit,
+    x: (slot.left + slot.width / 2 - window.innerWidth / 2) / pixelsPerUnit,
+    y: (window.innerHeight / 2 - (slot.top + slot.height / 2)) / pixelsPerUnit,
+  };
+}
+
+/**
  * Updates camera aspect ratio and renderer size to match the window.
  * @param stage - Stage to resize.
  */
