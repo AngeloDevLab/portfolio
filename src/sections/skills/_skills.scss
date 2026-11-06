@@ -1,0 +1,220 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+// File names in public/icons/skills.
+$skill-icons: html, css, sass, js, ts, angular, vite, supabase, firebase, api, git, n8n, figma, growth-mindset, threedotjs, dotnet;
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  gap: $space-40;
+  padding-bottom: fluid($space-96, 144px);
+  @include section-padding;
+  font-family: $font-karla;
+  font-size: fluid(16px, 18px);
+  line-height: 1.2;
+
+  @include desktop {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: start;
+    gap: $space-96;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: fluid($space-16, $space-20);
+  }
+
+  &__label {
+    font-size: fluid(18px, 24px);
+    font-weight: $font-weight-bold;
+    color: $color-teal;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: fluid($space-24, $space-32) $space-32;
+    border: $border-width solid $color-teal;
+    border-radius: $radius-30;
+    background: $color-teal-10;
+  }
+
+  &__title {
+    margin-bottom: fluid($space-32, $space-40);
+    font-family: $font-fira;
+    font-size: fluid(56px, 64px);
+    font-weight: $font-weight-bold;
+    color: $color-teal;
+  }
+
+  &__intro {
+    font-family: $font-karla;
+    font-weight: $font-weight-regular;
+    font-size: fluid(16px, 18px);
+    margin-bottom: fluid($space-24, $space-32);
+    text-align: justify;
+  }
+
+  &__subtitle {
+    margin-bottom: fluid($space-12, $space-16);
+    font-family: $font-fira;
+    font-size: fluid(20px, 24px);
+    font-weight: $font-weight-bold;
+  }
+
+  &__highlight {
+    color: $color-teal;
+  }
+
+  &__note {
+    margin-bottom: fluid($space-32, $space-40);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: fluid($space-32, $space-40) $space-16;
+    list-style: none;
+
+    @include tablet {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @include desktop {
+      margin-top: $space-48;
+    }
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-10;
+    text-align: center;
+    font-family: $font-fira;
+    font-size: fluid(14px, 18px);
+    font-weight: $font-weight-regular;
+
+    &:hover .skills__icon:not(.skills__icon--small),
+    &:focus-within .skills__icon:not(.skills__icon--small) {
+      scale: 1.1;
+    }
+  }
+
+  &__icon {
+    display: block;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    background: $color-white;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    transition: scale 200ms ease;
+
+    @each $name in $skill-icons {
+      &--#{$name} {
+        mask-image: url('/icons/skills/#{$name}.svg');
+      }
+    }
+
+    &--growth-mindset {
+      background: $color-teal;
+    }
+
+    &--threedotjs {
+      background: $color-dark;
+    }
+
+    &--dotnet {
+      background: #512bd4;
+    }
+
+    &--small {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  &__growth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-12;
+    width: 100%;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+
+    &:hover .skills__bubble,
+    &:focus .skills__bubble {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &__bubble {
+    position: absolute;
+    bottom: calc(100% + #{$space-12});
+    left: 50%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+    width: 200px;
+    padding: $space-12 $space-16;
+    border-radius: $radius-16;
+    background: $color-white;
+    box-shadow: 0 4px 16px $color-backdrop;
+    color: $color-teal;
+    font-family: $font-karla;
+    font-size: 16px;
+    font-weight: $font-weight-regular;
+    opacity: 0;
+    visibility: hidden;
+    translate: -50% 0;
+    transition: opacity 200ms ease, visibility 200ms ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      background: $color-white;
+      translate: -50% 0;
+      rotate: 45deg;
+    }
+  }
+
+  &__techs {
+    display: flex;
+    justify-content: center;
+    gap: $space-20;
+  }
+
+  &__tech {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-4;
+    font-size: 14px;
+    font-weight: $font-weight-bold;
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills__icon,
+  .skills__bubble {
+    transition: none;
+  }
+}
