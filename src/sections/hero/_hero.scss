@@ -179,10 +179,14 @@
 
   &__actions {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: $space-24;
     margin-top: $space-32;
+
+    @include tablet {
+      flex-direction: row;
+    }
   }
 
   &__name {

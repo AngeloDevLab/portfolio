@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-const TEXTS = ['Open to work', 'Frontend Developer', 'Based in Saxony', 'Available for remote work'];
+const TEXTS = ['Frontend Developer', 'Open to work', 'Based in Saxony', 'Available for remote work'];
 const HEIGHT = 128;
 const FONT = '400 64px Karla';
 const GAP = 80;
