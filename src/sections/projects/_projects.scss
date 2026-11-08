@@ -1,0 +1,158 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+$preview-width: 296px;
+$preview-gap: 72px;
+$preview-hatch-offset: 20px;
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: fluid($space-96, 144px);
+  @include section-padding;
+  font-family: $font-karla;
+  font-size: fluid(16px, 18px);
+  line-height: 1.2;
+
+  &__label {
+    margin-bottom: fluid($space-16, $space-24);
+    font-size: fluid(18px, 24px);
+    font-weight: $font-weight-bold;
+    color: $color-teal;
+  }
+
+  &__title {
+    margin-bottom: fluid($space-32, $space-40);
+    font-family: $font-fira;
+    font-size: fluid(46px, 64px);
+    font-weight: $font-weight-bold;
+    color: $color-teal;
+  }
+
+  &__intro {
+    margin-bottom: $space-40;
+    font-size: fluid(16px, 18px);
+
+    @include desktop {
+      max-width: 480px;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    border-bottom: $border-width solid $color-teal;
+
+    @include desktop {
+      width: min(880px, 100% - #{$preview-width + $preview-gap});
+    }
+  }
+
+  &__item {
+    position: relative;
+    border-top: $border-width solid $color-teal;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    gap: $space-12;
+    width: 100%;
+    padding: fluid($space-24, $space-32) 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 200ms ease;
+
+    @include desktop {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding-inline: $space-32;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background-color: $color-teal-30;
+    }
+
+    &:hover .projects__arrow,
+    &:focus-visible .projects__arrow,
+    &:hover .projects__preview,
+    &:focus-visible .projects__preview {
+      opacity: 1;
+    }
+  }
+
+  &__name {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-12;
+    font-family: $font-fira;
+    font-size: 24px;
+    font-weight: $font-weight-bold;
+  }
+
+  &__arrow {
+    width: 0.75em;
+    height: 0.75em;
+    background: $color-white;
+    mask: url('/icons/arrow-up-right.svg') center / contain no-repeat;
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+
+  &__preview {
+    display: none;
+
+    @include desktop {
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: calc(100% + #{$preview-gap});
+      width: $preview-width;
+      isolation: isolate;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-50%);
+      transition: opacity 200ms ease;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: $preview-hatch-offset (-$preview-hatch-offset) (-$preview-hatch-offset) $preview-hatch-offset;
+      z-index: -1;
+      background: repeating-linear-gradient(135deg, $color-teal 0 1px, transparent 1px 8px);
+    }
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: $radius-16;
+  }
+
+  &__techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-4;
+  }
+
+  &__tech + &__tech::before {
+    content: '|';
+    margin-right: $space-4;
+    color: $color-teal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects__row,
+  .projects__arrow,
+  .projects__preview {
+    transition: none;
+  }
+}
