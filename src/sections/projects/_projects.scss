@@ -91,8 +91,10 @@ $preview-hatch-offset: 20px;
     align-items: center;
     gap: $space-12;
     font-family: $font-fira;
+    flex-shrink: 0;
     font-size: 24px;
     font-weight: $font-weight-bold;
+    white-space: nowrap;
   }
 
   &__arrow {
@@ -140,6 +142,10 @@ $preview-hatch-offset: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: $space-4;
+
+    @include desktop {
+      justify-content: flex-end;
+    }
   }
 
   &__tech + &__tech::before {
