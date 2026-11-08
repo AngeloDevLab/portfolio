@@ -7,6 +7,7 @@ import { createSkillIcons, updateSkillIcons } from './scene/objects/skill-icons.
 import { getElementProgress, getVisibleBottom, initScrollLoop, jumpToHeroOnClick, keepFocusOutOfHeroCopy, loopScroll, updateSmoothProgress } from './scene/scroll.ts';
 import { openExternalLinksInNewTab } from './external-links.ts';
 import { initMenu } from './sections/header/menu.ts';
+import { initProjectDialog } from './sections/projects/project-dialog.ts';
 
 const canvas = document.querySelector<HTMLCanvasElement>('.scene')!;
 const cubeSlot = document.querySelector<HTMLElement>('.about__photo')!;
@@ -39,6 +40,7 @@ function animate(time: number) {
 
 openExternalLinksInNewTab();
 initMenu();
+initProjectDialog();
 window.addEventListener('resize', () => resizeStage(stage));
 initScrollLoop();
 jumpToHeroOnClick(heroes[1]);

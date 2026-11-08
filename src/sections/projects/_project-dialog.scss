@@ -1,0 +1,230 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+// File names in public/icons/skills used by the projects.
+$tech-icons: html, css, js, ts, angular, sass, supabase, firebase, n8n;
+$dialog-gutter: fluid($space-12, $space-96);
+
+.project-dialog {
+  width: min(1248px, calc(100% - 2 * #{$dialog-gutter}));
+  max-width: none;
+  max-height: calc(100dvh - 2 * #{$space-12});
+  margin: auto;
+  padding: 0;
+  border: $border-width solid $color-teal;
+  border-radius: $radius-30;
+  background: linear-gradient(to bottom left, $color-green-dark, $color-dark 60%);
+  color: $color-white;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  &::backdrop {
+    background: $color-backdrop;
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: fluid($space-16, 0px);
+    padding: fluid($space-24, $space-72) fluid($space-12, $space-80) fluid($space-40, $space-64);
+  }
+
+  &__close {
+    align-self: flex-end;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: none;
+    color: $color-white;
+    cursor: pointer;
+    transition: color 200ms ease, scale 200ms ease;
+
+    @include desktop {
+      position: absolute;
+      top: 52px;
+      right: 68px;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: $color-teal;
+      scale: 1.1;
+    }
+  }
+
+  &__close-icon {
+    width: 24px;
+    height: 24px;
+    background: currentColor;
+    mask: url('/icons/close.svg') center / contain no-repeat;
+  }
+
+  &__project {
+    display: flex;
+    flex-direction: column;
+    gap: fluid($space-32, $space-96);
+
+    @include desktop {
+      display: grid;
+      grid-template-columns: minmax(340px, 1fr) minmax(0, 520px);
+      align-items: center;
+      padding-top: $space-24;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: fluid($radius-16, $radius-30);
+
+    @include desktop {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: $font-karla;
+    font-size: fluid(16px, 18px);
+    line-height: 1.2;
+  }
+
+  &__number {
+    margin-bottom: fluid(8px, 24px);
+    font-family: $font-karla;
+    font-size: fluid(48px, 128px);
+    font-weight: $font-weight-bold;
+    line-height: 1;
+    color: $color-teal;
+  }
+
+  &__name {
+    margin-bottom: fluid($space-32, $space-40);
+    font-family: $font-fira;
+    font-size: fluid(38px, 64px);
+    font-weight: $font-weight-bold;
+  }
+
+  &__question {
+    margin-bottom: fluid($space-16, $space-24);
+    font-family: $font-fira;
+    font-size: fluid(20px, 24px);
+    font-weight: $font-weight-bold;
+    color: $color-teal;
+  }
+
+  &__text {
+    margin-bottom: $space-24;
+    font-size: 16px;
+  }
+
+  &__techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-12 $space-24;
+    margin-bottom: fluid($space-32, $space-40);
+    list-style: none;
+  }
+
+  &__tech {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    background: $color-teal;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+
+    @each $name in $tech-icons {
+      &--#{$name} {
+        mask-image: url('/icons/skills/#{$name}.svg');
+      }
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: fluid($space-16, $space-32);
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-4;
+  }
+
+  &__link-icon {
+    width: 16px;
+    height: 16px;
+    background: $color-teal;
+    mask: url('/icons/arrow-up-right.svg') center / contain no-repeat;
+    transition: translate 200ms ease;
+  }
+
+  &__link:hover &__link-icon,
+  &__link:focus-visible &__link-icon {
+    translate: 3px -3px;
+  }
+
+  &__next {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    gap: $space-16;
+    border: none;
+    background: none;
+    color: $color-teal;
+    font-family: $font-karla;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 200ms ease;
+
+    &:hover,
+    &:focus-visible {
+      color: $color-white;
+    }
+  }
+
+  &__next-icon {
+    width: 24px;
+    height: 24px;
+    background: $color-teal;
+    mask: url('/icons/arrow-right.svg') center / contain no-repeat;
+    transition: translate 200ms ease;
+  }
+
+  &__next:hover &__next-icon,
+  &__next:focus-visible &__next-icon {
+    translate: 6px 0;
+  }
+}
+
+html:has(.project-dialog[open]) {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-dialog__close,
+  .project-dialog__link-icon,
+  .project-dialog__next,
+  .project-dialog__next-icon {
+    transition: none;
+  }
+}
