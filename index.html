@@ -334,8 +334,34 @@
           <button class="references__arrow references__arrow--next" type="button" aria-label="Next reference"></button>
         </div>
       </section>
-      <section id="contact" class="content__section">
-        <h2>Kontakt</h2>
+      <section id="contact" class="contact">
+        <div class="contact__text">
+          <p class="contact__label">Contact me</p>
+          <h2 class="contact__title">Let's work together</h2>
+          <h3 class="contact__subtitle">Got a problem to solve?</h3>
+          <p class="contact__intro">Have an idea for a website or app, or are you looking for support in your team? Tell me what you are working on, and let's find out how I can help bring it to life.</p>
+          <p class="contact__intro">Need a Frontend developer? <span class="contact__highlight">Let's talk!</span></p>
+        </div>
+        <form class="contact__form" novalidate>
+          <div class="contact__field">
+            <label class="contact__question" for="contact-name">What's your name?</label>
+            <input class="contact__input" id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your name goes here" data-error="Oops! it seems your name is missing" required />
+          </div>
+          <div class="contact__field">
+            <label class="contact__question" for="contact-email">What's your email?</label>
+            <input class="contact__input" id="contact-email" name="email" type="email" autocomplete="email" placeholder="youremail@email.com" data-error="Hoppla! your email is required" required />
+          </div>
+          <div class="contact__field">
+            <label class="contact__question" for="contact-message">How can I help you?</label>
+            <textarea class="contact__input contact__input--message" id="contact-message" name="message" rows="1" placeholder="Hello Angelo, I am interested in..." data-error="What do you need to develop?" required></textarea>
+          </div>
+          <label class="contact__privacy">
+            <input class="contact__checkbox" name="privacy" type="checkbox" aria-describedby="contact-privacy-error" required />
+            <span>I've read the <a class="contact__link" href="privacy.html">privacy policy</a> and agree to the processing of my data as outlined.</span>
+          </label>
+          <p class="contact__privacy-error" id="contact-privacy-error">Please accept the privacy policy</p>
+          <button class="button contact__submit" type="submit">Say Hello ;)</button>
+        </form>
       </section>
       <section class="hero" aria-hidden="true">
         <div class="header">

@@ -1,0 +1,198 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+$checkbox-size: 18px;
+$message-max-height: 200px;
+$error-font-size: 14px;
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: fluid($space-56, $space-72);
+  padding-bottom: fluid($space-96, 144px);
+  @include section-padding;
+  font-family: $font-karla;
+  font-size: 16px;
+  line-height: 1.2;
+  color: $color-white;
+
+  @include desktop {
+    display: grid;
+    grid-template-columns: minmax(0, 568fr) minmax(0, 616fr);
+    align-items: start;
+    gap: $space-64;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    margin-bottom: fluid($space-16, $space-20);
+    font-size: fluid(18px, 24px);
+    color: $color-teal;
+  }
+
+  &__title {
+    margin-bottom: fluid($space-32, $space-40);
+    font-family: $font-fira;
+    font-size: fluid(46px, 64px);
+    font-weight: $font-weight-bold;
+    line-height: 1;
+    color: $color-teal;
+  }
+
+  &__subtitle {
+    margin-bottom: $space-16;
+    font-family: $font-fira;
+    font-size: fluid(20px, 24px);
+    font-weight: $font-weight-bold;
+    color: $color-teal;
+  }
+
+  &__intro + &__intro {
+    margin-top: $space-20;
+  }
+
+  &__highlight {
+    font-weight: $font-weight-bold;
+    color: $color-teal;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $space-16;
+    padding: fluid($space-24, $space-32) fluid($space-16, $space-32);
+    border-bottom: $border-width solid $color-teal;
+
+    &:first-child {
+      border-top: $border-width solid $color-teal;
+    }
+
+    &--invalid .contact__input {
+      color: $color-red;
+
+      &::placeholder {
+        color: $color-red;
+      }
+    }
+  }
+
+  &__question {
+    font-family: $font-fira;
+    font-size: fluid(20px, 24px);
+    font-weight: $font-weight-medium;
+    color: $color-teal;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+    color: $color-white;
+    font: inherit;
+    font-size: fluid(16px, 18px);
+
+    &::placeholder {
+      color: $color-grey;
+    }
+
+    &:-webkit-autofill {
+      -webkit-text-fill-color: $color-white;
+      caret-color: $color-white;
+      box-shadow: 0 0 0 100px $color-dark inset;
+    }
+
+    &--message {
+      max-height: $message-max-height;
+      resize: none;
+      field-sizing: content;
+    }
+  }
+
+  &__privacy {
+    display: flex;
+    align-items: center;
+    gap: $space-12;
+    margin-top: $space-40;
+    font-size: 15px;
+    line-height: 1.4;
+    cursor: pointer;
+  }
+
+  &__checkbox {
+    flex-shrink: 0;
+    width: $checkbox-size;
+    height: $checkbox-size;
+    border: 2px solid $color-teal;
+    background: center / 12px no-repeat;
+    appearance: none;
+    cursor: pointer;
+    transition: background-color 200ms ease;
+
+    &:checked {
+      background-image: url('/icons/check.svg');
+    }
+
+    &:hover {
+      background-color: $color-teal-30;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-white;
+      outline-offset: 2px;
+    }
+  }
+
+  &__privacy-error {
+    margin-top: $space-4;
+    padding-left: $checkbox-size + $space-12;
+    font-size: $error-font-size;
+    color: $color-red;
+    visibility: hidden;
+
+    &--visible {
+      visibility: visible;
+    }
+  }
+
+  &__link {
+    font-family: $font-fira;
+    color: $color-teal;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      color: $color-white;
+      text-decoration: underline $color-teal;
+      text-underline-offset: 4px;
+    }
+  }
+
+  &__submit {
+    align-self: center;
+    margin-top: $space-32;
+    background: none;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__checkbox {
+    transition: none;
+  }
+}

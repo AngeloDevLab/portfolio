@@ -11,6 +11,7 @@
 @use '../sections/projects/projects';
 @use '../sections/projects/project-dialog';
 @use '../sections/references/references';
+@use '../sections/contact/contact';
 
 * {
   margin: 0;
@@ -56,14 +57,4 @@ body {
   position: relative;
   color: $color-white;
   font-family: system-ui, sans-serif;
-
-  &__section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    @include section-padding;
-    text-align: center;
-  }
 }

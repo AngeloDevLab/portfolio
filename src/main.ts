@@ -9,6 +9,7 @@ import { openExternalLinksInNewTab } from './external-links.ts';
 import { initMenu } from './sections/header/menu.ts';
 import { initProjectDialog } from './sections/projects/project-dialog.ts';
 import { initReferences } from './sections/references/references.ts';
+import { initContactForm } from './sections/contact/contact-form.ts';
 
 const canvas = document.querySelector<HTMLCanvasElement>('.scene')!;
 const cubeSlot = document.querySelector<HTMLElement>('.about__photo')!;
@@ -43,6 +44,7 @@ openExternalLinksInNewTab();
 initMenu();
 initProjectDialog();
 initReferences();
+initContactForm();
 window.addEventListener('resize', () => resizeStage(stage));
 initScrollLoop();
 jumpToHeroOnClick(heroes[1]);
