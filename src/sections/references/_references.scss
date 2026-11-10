@@ -1,0 +1,190 @@
+@use 'sass:math';
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+$card-max-width: 632px;
+$side-scale: 0.9;
+// Distance between card centers in % of the card width, so the scaled side cards keep the gap.
+$card-step: math.div(1 + $side-scale, 2) * 100%;
+$slide-duration: 400ms;
+
+.references {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: fluid($space-40, $space-56);
+  padding-bottom: fluid($space-96, 144px);
+  overflow-x: clip;
+  font-family: $font-karla;
+  font-size: fluid(16px, 18px);
+  line-height: 1.2;
+  color: $color-white;
+
+  &__title {
+    @include section-padding;
+    font-family: $font-fira;
+    font-size: fluid(24px, 32px);
+    font-weight: $font-weight-bold;
+    color: $color-teal;
+    text-align: center;
+  }
+
+  &__cards {
+    --gap: #{fluid($space-12, $space-64)};
+    display: grid;
+    justify-items: center;
+    width: 100%;
+    list-style: none;
+    touch-action: pan-y;
+  }
+
+  &__card {
+    position: relative;
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    gap: $space-40;
+    width: min(#{$card-max-width}, 100% - #{2 * $space-16});
+    min-height: fluid(358px, 274px);
+    padding: fluid($space-40, $space-48);
+    border: $border-width solid $color-teal;
+    border-radius: $radius-30;
+    background: $color-teal-10;
+    color: rgba($color-white, 0.6);
+    translate: calc(var(--offset, 0) * (#{$card-step} + var(--gap)));
+    scale: $side-scale;
+    user-select: none;
+    transition:
+      translate $slide-duration ease,
+      scale $slide-duration ease,
+      opacity $slide-duration ease,
+      background-color $slide-duration ease,
+      color $slide-duration ease;
+
+    &::before {
+      content: '\201C';
+      position: absolute;
+      top: fluid(-18px, -14px);
+      left: fluid(0px, -44px);
+      font-weight: $font-weight-bold;
+      font-size: fluid(120px, 150px);
+      line-height: 0.8;
+      color: $color-white;
+      opacity: 0;
+      transition: opacity $slide-duration ease;
+    }
+
+    &--active {
+      z-index: 1;
+      scale: 1;
+      background: $color-teal-30;
+      color: $color-white;
+      user-select: auto;
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &--prev {
+      mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.3), #000);
+    }
+
+    &--next {
+      mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.3), #000);
+    }
+
+    &--hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  &__quote {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    font-size: fluid(18px, 20px);
+
+    @include desktop {
+      align-items: flex-start;
+    }
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: $space-16;
+    font-size: fluid(16px, 18px);
+
+    &::before {
+      content: '';
+      flex-grow: 1;
+      max-width: 335px;
+      height: $border-width;
+      background: currentColor;
+    }
+
+    @include desktop {
+      justify-content: flex-end;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: $space-24;
+  }
+
+  &__arrow {
+    width: 32px;
+    height: 32px;
+    padding: $space-4;
+    border: none;
+    background: $color-white;
+    mask: url('/icons/arrow-right.svg') center / 24px no-repeat;
+    cursor: pointer;
+    transition: background-color 200ms ease;
+
+    &--prev {
+      scale: -1 1;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: $color-teal;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    gap: $space-4;
+  }
+
+  &__dot {
+    width: 24px;
+    height: 24px;
+    padding: 8px;
+    border: none;
+    border-radius: 50%;
+    background: $color-white;
+    background-clip: content-box;
+    cursor: pointer;
+    transition: background-color 200ms ease;
+
+    &--active,
+    &:hover,
+    &:focus-visible {
+      background-color: $color-teal;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .references__card,
+  .references__card::before,
+  .references__arrow,
+  .references__dot {
+    transition: none;
+  }
+}
