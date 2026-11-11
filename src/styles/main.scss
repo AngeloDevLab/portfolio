@@ -1,4 +1,5 @@
 @use 'fonts';
+@use 'base';
 @use 'tokens' as *;
 @use 'mixins' as *;
 @use 'logo';
@@ -13,24 +14,6 @@
 @use '../sections/references/references';
 @use '../sections/contact/contact';
 @use '../sections/footer/footer';
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-  background: $color-dark;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
 
 .scene {
   position: fixed;

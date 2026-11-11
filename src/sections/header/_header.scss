@@ -23,6 +23,23 @@
       display: block;
     }
   }
+
+  &--legal {
+    position: static;
+    padding-top: $space-16;
+
+    @include desktop {
+      padding-top: $space-24;
+    }
+
+    .logo {
+      order: -1;
+
+      @include desktop {
+        order: 0;
+      }
+    }
+  }
 }
 
 .nav {

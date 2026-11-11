@@ -1,0 +1,98 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+$content-max-width: 970px;
+$back-size: 32px;
+
+.legal {
+  padding-block: fluid($space-32, $space-56) fluid($space-64, $space-96);
+  @include section-padding;
+  font-family: $font-karla;
+  font-size: 16px;
+  line-height: 1.3;
+  color: $color-teal;
+
+  &__content {
+    max-width: $content-max-width;
+    margin-inline: auto;
+  }
+
+  &__back {
+    display: block;
+    width: $back-size;
+    height: $back-size;
+    margin-bottom: $space-24;
+    background: $color-white;
+    mask: url('/icons/arrow-right.svg') center / 24px no-repeat;
+    transform: scaleX(-1);
+    transition: background-color 200ms ease;
+
+    &:hover,
+    &:focus-visible {
+      background-color: $color-teal;
+    }
+  }
+
+  &__title {
+    margin-bottom: fluid($space-32, $space-64);
+    font-family: $font-fira;
+    font-size: fluid(32px, 64px);
+    font-weight: $font-weight-bold;
+    line-height: 1.1;
+
+    @include desktop {
+      text-align: center;
+    }
+  }
+
+  &__heading {
+    margin-top: $space-32;
+    margin-bottom: $space-4;
+    font-size: 20px;
+    font-weight: $font-weight-medium;
+    color: $color-white;
+  }
+
+  &__text + &__text,
+  &__list + &__text,
+  &__text + &__list {
+    margin-top: $space-16;
+  }
+
+  &__list {
+    padding-left: $space-24;
+
+    li::marker {
+      color: $color-teal;
+    }
+  }
+
+  &__address {
+    font-style: normal;
+  }
+
+  &__highlight {
+    color: $color-white;
+  }
+
+  &__link {
+    color: $color-white;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline $color-teal;
+      text-underline-offset: 4px;
+    }
+  }
+
+  &__updated {
+    margin-top: $space-32;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .legal__back {
+    transition: none;
+  }
+}
