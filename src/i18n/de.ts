@@ -4,7 +4,7 @@ export const de: Dictionary = {
   'meta.title': 'Angelo Pietsch | Frontend Developer',
   'meta.description': 'Portfolio von Angelo Pietsch, Frontend-Entwickler aus Sachsen, mit Projekten in Angular, TypeScript und three.js.',
 
-  'lang.label': 'Sprache',
+  'lang.switch': 'Sprache auf Englisch umstellen',
   'logo.home': 'Angelo Pietsch, Startseite',
   'nav.label': 'Hauptnavigation',
   'nav.about': 'Über mich',

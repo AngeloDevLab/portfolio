@@ -1,8 +1,11 @@
 @use '../../styles/tokens' as *;
 @use '../../styles/mixins' as *;
 
+$menu-min-width: 244px;
+
 .menu {
   inset: $space-72 fluid($space-16, $space-96) auto auto;
+  min-width: $menu-min-width;
   margin: 0;
   border: $border-width solid $color-teal;
   border-radius: $radius-30;

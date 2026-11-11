@@ -1,6 +1,10 @@
 @use '../../styles/tokens' as *;
 @use '../../styles/mixins' as *;
 
+$lang-toggle-width: 84px;
+$lang-toggle-height: 28px;
+$lang-option-width: 44px;
+
 .header {
   position: absolute;
   top: $space-16;
@@ -92,34 +96,53 @@
 }
 
 .lang-toggle {
-  display: inline-flex;
+  position: relative;
+  flex-shrink: 0;
+  width: $lang-toggle-width;
+  height: $lang-toggle-height;
+  padding: 0;
   border: $border-width solid $color-teal;
   border-radius: $radius-100;
+  background: none;
+  cursor: pointer;
+  transition: border-color 200ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: $color-white;
+    outline: none;
+  }
 
   &__option {
-    width: 42px;
-    height: 26px;
-    border: 0;
+    position: absolute;
+    top: -$border-width;
+    left: -$border-width;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $lang-option-width;
+    height: $lang-toggle-height;
     border-radius: $radius-100;
-    background: none;
     font-family: $font-fira;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: $font-weight-bold;
-    color: $color-teal-60;
-    cursor: pointer;
-    transition: color 200ms ease;
+    color: $color-teal-50;
+    transition: color 200ms ease, background-color 200ms ease;
 
-    &:hover,
-    &:focus-visible {
-      color: $color-teal;
+    & + & {
+      left: auto;
+      right: -$border-width;
     }
 
-    &--active,
-    &--active:hover,
-    &--active:focus-visible {
+    &--active {
       background: $color-teal;
-      color: $color-dark;
+      color: $color-white;
     }
+  }
+
+  &:hover &__option:not(&__option--active),
+  &:focus-visible &__option:not(&__option--active) {
+    color: $color-teal;
   }
 }
 
@@ -156,6 +179,7 @@
   .burger__line,
   .nav__link,
   .nav__link::after,
+  .lang-toggle,
   .lang-toggle__option {
     transition: none;
   }

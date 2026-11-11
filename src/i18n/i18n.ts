@@ -82,14 +82,12 @@ function translateAttributes(dictionary: Dictionary) {
 }
 
 /**
- * Marks the button of the active language in every language toggle.
+ * Highlights the active language in every language toggle.
  * @param language - Active language.
  */
 function updateToggles(language: Language) {
-  document.querySelectorAll<HTMLButtonElement>('.lang-toggle__option').forEach((button) => {
-    const active = button.dataset.lang === language;
-    button.classList.toggle('lang-toggle__option--active', active);
-    if (button.hasAttribute('aria-pressed')) button.setAttribute('aria-pressed', String(active));
+  document.querySelectorAll<HTMLElement>('.lang-toggle__option').forEach((option) => {
+    option.classList.toggle('lang-toggle__option--active', option.dataset.lang === language);
   });
 }
 
@@ -137,16 +135,18 @@ export function onLanguageChange(listener: (language: Language) => void) {
 }
 
 /**
+ * Switches to the other language and remembers the choice.
+ */
+function toggleLanguage() {
+  const language = current === 'en' ? 'de' : 'en';
+  storeLanguage(language);
+  setLanguage(language);
+}
+
+/**
  * Connects the language toggles and shows the page in the stored or browser language.
  */
 export function initI18n() {
-  document.querySelectorAll<HTMLButtonElement>('.lang-toggle__option').forEach((button) => {
-    button.addEventListener('click', () => {
-      const language = button.dataset.lang;
-      if (!isLanguage(language) || language === current) return;
-      storeLanguage(language);
-      setLanguage(language);
-    });
-  });
+  document.querySelectorAll('.lang-toggle').forEach((toggle) => toggle.addEventListener('click', toggleLanguage));
   setLanguage(getInitialLanguage());
 }

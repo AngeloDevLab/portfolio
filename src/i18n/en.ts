@@ -2,7 +2,7 @@ export const en = {
   'meta.title': 'Angelo Pietsch | Frontend Developer',
   'meta.description': 'Portfolio of Angelo Pietsch, frontend developer from Saxony, with projects built in Angular, TypeScript and three.js.',
 
-  'lang.label': 'Language',
+  'lang.switch': 'Switch language to German',
   'logo.home': 'Angelo Pietsch, home',
   'nav.label': 'Main',
   'nav.about': 'About me',

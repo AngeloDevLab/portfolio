@@ -12,10 +12,10 @@
     <div class="ring-blur" aria-hidden="true"></div>
     <header class="header">
       <nav class="nav" data-i18n-attr="aria-label:nav.label">
-        <div class="lang-toggle" role="group" data-i18n-attr="aria-label:lang.label">
-          <button class="lang-toggle__option" type="button" data-lang="en" aria-pressed="false">EN</button>
-          <button class="lang-toggle__option" type="button" data-lang="de" aria-pressed="false">DE</button>
-        </div>
+        <button class="lang-toggle" type="button" data-i18n-attr="aria-label:lang.switch">
+          <span class="lang-toggle__option" data-lang="en">EN</span>
+          <span class="lang-toggle__option" data-lang="de">DE</span>
+        </button>
         <ul class="nav__list">
           <li><a class="nav__link" href="#about" data-i18n="nav.about"></a></li>
           <li><a class="nav__link" href="#skills" data-i18n="nav.skills"></a></li>
@@ -44,10 +44,10 @@
           <li><a class="nav__link" href="#skills" data-i18n="nav.skills"></a></li>
           <li><a class="nav__link" href="#projects" data-i18n="nav.projects"></a></li>
         </ul>
-        <div class="lang-toggle" role="group" data-i18n-attr="aria-label:lang.label">
-          <button class="lang-toggle__option" type="button" data-lang="en" aria-pressed="false">EN</button>
-          <button class="lang-toggle__option" type="button" data-lang="de" aria-pressed="false">DE</button>
-        </div>
+        <button class="lang-toggle" type="button" data-i18n-attr="aria-label:lang.switch">
+          <span class="lang-toggle__option" data-lang="en">EN</span>
+          <span class="lang-toggle__option" data-lang="de">DE</span>
+        </button>
       </nav>
     </dialog>
     <main class="content">
@@ -391,10 +391,10 @@
       <section class="hero" aria-hidden="true">
         <div class="header">
           <nav class="nav">
-            <div class="lang-toggle" role="group">
-              <button tabindex="-1" class="lang-toggle__option" type="button" data-lang="en">EN</button>
-              <button tabindex="-1" class="lang-toggle__option" type="button" data-lang="de">DE</button>
-            </div>
+            <button class="lang-toggle" type="button" tabindex="-1">
+              <span class="lang-toggle__option" data-lang="en">EN</span>
+              <span class="lang-toggle__option" data-lang="de">DE</span>
+            </button>
             <ul class="nav__list">
               <li><a tabindex="-1" class="nav__link" href="#about" data-i18n="nav.about"></a></li>
               <li><a tabindex="-1" class="nav__link" href="#skills" data-i18n="nav.skills"></a></li>
