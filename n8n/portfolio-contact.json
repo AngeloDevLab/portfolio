@@ -1,0 +1,250 @@
+{
+  "name": "Portfolio Contact",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "portfolio-contact",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "http://localhost:5173,https://angelodevelopment.de"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "5db209d4-ff5a-44c2-b5f9-5371e376083f",
+      "name": "Webhook",
+      "webhookId": "45aa2fb8-ce0f-48d0-a6a1-373877938b43"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "653d397b-c54d-4349-95be-2f86cf16a453",
+              "leftValue": "={{ $json.body.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "92aca9fb-e416-40c3-9861-9f14a6c3ac50",
+              "leftValue": "={{ $json.body.email }}",
+              "rightValue": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            },
+            {
+              "id": "e5cd9036-ee69-4444-b685-ad8a3c8d725a",
+              "leftValue": "={{ $json.body.message }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "88cbe40f-f805-4392-91cf-04a67d0a696c",
+              "leftValue": "={{ $json.body.message.length }}",
+              "rightValue": 5000,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            },
+            {
+              "id": "b3116b6b-5a7d-41a8-a8ce-3802b5f498f1",
+              "leftValue": "={{ $json.body.privacy }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "66da8737-0804-4c06-92fd-fc94b197d5ab",
+              "leftValue": "={{ $json.body.website }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        224,
+        0
+      ],
+      "id": "041eb34c-6f58-456d-9785-c26da5486e3d",
+      "name": "Valid Input?"
+    },
+    {
+      "parameters": {
+        "fromEmail": "Portfolio <apietsch94@gmail.com>",
+        "toEmail": "apietsch94@gmail.com",
+        "subject": "=Portfolio: {{ $json.body.name }}",
+        "emailFormat": "text",
+        "text": "=Name: {{ $json.body.name }}\nEmail: {{ $json.body.email }}\n\n{{ $json.body.message }}\n",
+        "options": {
+          "appendAttribution": false,
+          "replyTo": "={{ $json.body.email }}"
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        480,
+        -160
+      ],
+      "id": "12bef93a-b5a2-4a91-879a-174d9c9d4aee",
+      "name": "Send Mail",
+      "webhookId": "0e670459-6356-4c01-99ec-4e576e776dbf",
+      "credentials": {
+        "smtp": {
+          "id": "NirnMtIl7j1du3bg",
+          "name": "Gmail Portfolio"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"ok\": true }",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        752,
+        -176
+      ],
+      "id": "c28e58f2-ce2c-4c6d-9117-51027a6af18e",
+      "name": "Respond Success"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"ok\": false }",
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        752,
+        16
+      ],
+      "id": "8a63ed5e-1cbd-43bb-a6d8-ba4f30ea72c5",
+      "name": "Respond Mail Error"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"ok\": false }",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        480,
+        16
+      ],
+      "id": "72ecbb3d-b640-438f-9db3-cfe11f1b36c2",
+      "name": "Respond Invalid"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Valid Input?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Valid Input?": {
+      "main": [
+        [
+          {
+            "node": "Send Mail",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Invalid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Mail": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Mail Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "becf7335-4564-45f3-bacf-4bdf87a33561",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "fc5ff6d2fc2e3dcd37d9d77516aeec79a3c8b50b4868c9098c1ff757801e1ed9"
+  },
+  "nodeGroups": [],
+  "id": "GBYFmI25aH73lmYn",
+  "tags": []
+}

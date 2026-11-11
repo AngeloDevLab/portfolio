@@ -189,6 +189,27 @@ $error-font-size: 14px;
       cursor: not-allowed;
     }
   }
+
+  &__status {
+    min-height: 2.8em;
+    margin-top: $space-16;
+    font-size: 15px;
+    line-height: 1.4;
+    text-align: center;
+    color: $color-teal;
+
+    &--error {
+      color: $color-red;
+    }
+  }
+
+  &__honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

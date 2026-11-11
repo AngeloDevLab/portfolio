@@ -342,7 +342,8 @@
           <p class="contact__intro">Have an idea for a website or app, or are you looking for support in your team? Tell me what you are working on, and let's find out how I can help bring it to life.</p>
           <p class="contact__intro">Need a Frontend developer? <span class="contact__highlight">Let's talk!</span></p>
         </div>
-        <form class="contact__form" novalidate>
+        <form class="contact__form" action="https://n8n.angelodevelopment.de/webhook/portfolio-contact" method="post" novalidate>
+          <input class="contact__honeypot" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="contact__field">
             <label class="contact__question" for="contact-name">What's your name?</label>
             <input class="contact__input" id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your name goes here" data-error="Oops! it seems your name is missing" required />
@@ -361,6 +362,7 @@
           </label>
           <p class="contact__privacy-error" id="contact-privacy-error">Please accept the privacy policy</p>
           <button class="button contact__submit" type="submit">Say Hello ;)</button>
+          <p class="contact__status" role="status" data-success="Thanks! I'll get back to you soon." data-error="Sending failed. Please try again later."></p>
         </form>
       </section>
       <section class="hero" aria-hidden="true">
