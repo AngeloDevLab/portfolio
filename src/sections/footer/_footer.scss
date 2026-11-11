@@ -1,0 +1,101 @@
+@use '../../styles/tokens' as *;
+@use '../../styles/mixins' as *;
+
+$dot-size: 6px;
+
+.footer {
+  display: grid;
+  grid-template-areas:
+    'about'
+    'copyright'
+    'links';
+  gap: $space-32 $space-16;
+  padding-block: fluid($space-32, $space-48);
+  @include section-padding;
+  font-family: $font-karla;
+  font-size: 16px;
+  line-height: 1.7;
+  color: $color-white;
+
+  @include tablet {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'about links'
+      'copyright copyright';
+  }
+
+  @include desktop {
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas: 'about copyright links';
+    align-items: center;
+  }
+
+  &__about {
+    grid-area: about;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-32;
+  }
+
+  &__copyright {
+    grid-area: copyright;
+    justify-self: center;
+    font-family: $font-fira;
+    font-size: 18px;
+    color: $color-teal;
+  }
+
+  &__links {
+    grid-area: links;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+
+    @include tablet {
+      align-self: center;
+    }
+
+    @include desktop {
+      justify-self: end;
+    }
+  }
+
+  &__link {
+    position: relative;
+    color: $color-white;
+    text-decoration: none;
+    transition: color 200ms ease;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: calc(100% + #{$space-10});
+      width: $dot-size;
+      height: $dot-size;
+      border-radius: 50%;
+      background: $color-teal;
+      opacity: 0;
+      transform: translateY(-50%);
+      transition: opacity 200ms ease;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: $color-teal;
+
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__link,
+  .footer__link::before {
+    transition: none;
+  }
+}
