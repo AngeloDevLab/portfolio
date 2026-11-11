@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Legal Notice | Angelo Pietsch</title>
+    <title data-i18n="imprint.title">Legal Notice | Angelo Pietsch</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
     <header class="header header--legal">
-      <div class="lang-toggle" role="group" aria-label="Language">
+      <div class="lang-toggle" role="group" data-i18n-attr="aria-label:lang.label">
         <button class="lang-toggle__option" type="button" data-lang="en" aria-pressed="false">EN</button>
         <button class="lang-toggle__option" type="button" data-lang="de" aria-pressed="false">DE</button>
       </div>
-      <a class="logo" href="./" aria-label="Angelo Pietsch, home">
+      <a class="logo" href="./" data-i18n-attr="aria-label:logo.home">
         <svg class="logo__mark" viewBox="0 0 56.1 50" aria-hidden="true">
           <path class="logo__initials" transform="translate(1 1)" fill-rule="evenodd" d="M0 48 16.35 0H36.94Q45.04 0 49.57 3.99Q54.1 7.99 54.1 15.31Q54.1 22.56 49.57 26.55Q45.04 30.55 36.94 30.55H28.8V48H20V37.65H12.65L9.24 48ZM14.87 31.06H20V15.4ZM28.8 22.93H36.94Q41.01 22.93 43.08 20.78Q45.15 18.64 45.15 15.31Q45.15 11.91 43.08 9.73Q41.01 7.54 36.94 7.54H28.8Z" />
         </svg>
@@ -23,7 +23,7 @@
       </a>
     </header>
     <main class="legal">
-      <article class="legal__content">
+      <article class="legal__content" lang="en" data-lang-block>
         <a class="legal__back" href="./" aria-label="Back to portfolio"></a>
         <h1 class="legal__title">Legal Notice</h1>
 
@@ -64,6 +64,49 @@
         </p>
 
         <p class="legal__updated">Last updated: 11.11.2026</p>
+      </article>
+
+      <article class="legal__content" lang="de" data-lang-block hidden>
+        <a class="legal__back" href="./" aria-label="Zurück zum Portfolio"></a>
+        <h1 class="legal__title">Impressum</h1>
+
+        <h2 class="legal__heading">Angaben gemäß § 5 DDG</h2>
+        <address class="legal__text legal__address">
+          <span class="legal__highlight">Angelo Pietsch</span><br />
+          Haydnstraße 45<br />
+          02708 Löbau<br />
+          Deutschland
+        </address>
+
+        <h2 class="legal__heading">Kontakt</h2>
+        <p class="legal__text">E-Mail: <a class="legal__link" href="mailto:apietsch94@gmail.com">apietsch94@gmail.com</a></p>
+
+        <h2 class="legal__heading">Über diese Website</h2>
+        <p class="legal__text">
+          Diese Website ist das persönliche Portfolio von <span class="legal__highlight">Angelo Pietsch</span>. Sie ist im Rahmen der Weiterbildung zum
+          Webentwickler an der <span class="legal__highlight">Developer Akademie GmbH</span> entstanden und zeigt meine eigenen Lernprojekte.
+        </p>
+        <p class="legal__text">
+          Das Design dieses Portfolios basiert auf einer Vorlage, die Eigentum der <span class="legal__highlight">Developer Akademie GmbH</span> ist. Die
+          unerlaubte Nutzung, Vervielfältigung, Bearbeitung oder Verbreitung des Designs ist untersagt. Abgesehen vom Design gehören alle Texte, der Code und
+          die Projekt-Screenshots auf dieser Website mir.
+        </p>
+
+        <h2 class="legal__heading">Links zu anderen Websites</h2>
+        <p class="legal__text">
+          Diese Website verlinkt auf externe Websites, zum Beispiel GitHub, LinkedIn und die Live-Versionen meiner Projekte. Auf deren Inhalte habe ich keinen
+          Einfluss und übernehme dafür keine Verantwortung. Sollte ich von rechtswidrigen Inhalten auf einer verlinkten Website erfahren, entferne ich den Link
+          umgehend.
+        </p>
+
+        <h2 class="legal__heading">Haftungsausschluss</h2>
+        <p class="legal__text">
+          Die Inhalte dieser Website wurden mit Sorgfalt erstellt. Für Vollständigkeit, Richtigkeit und Aktualität kann ich jedoch keine Gewähr übernehmen.
+          Soweit gesetzlich zulässig, hafte ich nicht für Schäden, die aus der Nutzung dieser Website entstehen. Die Haftung für Vorsatz und grobe
+          Fahrlässigkeit sowie für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit bleibt unberührt.
+        </p>
+
+        <p class="legal__updated">Stand: 11.11.2026</p>
       </article>
     </main>
     <footer class="footer">

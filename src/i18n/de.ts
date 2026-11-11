@@ -103,6 +103,9 @@ export const de: Dictionary = {
   'contact.success': 'Danke! Ich melde mich bald bei dir.',
   'contact.failed': 'Senden fehlgeschlagen. Bitte versuch es später noch einmal.',
 
+  'imprint.title': 'Impressum | Angelo Pietsch',
+  'privacy.title': 'Datenschutzerklärung | Angelo Pietsch',
+
   'footer.info': 'Frontend Developer<br />Löbau, Deutschland',
   'footer.legal': 'Impressum',
   'footer.privacy': 'Datenschutz',

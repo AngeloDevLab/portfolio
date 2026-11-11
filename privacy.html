@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Privacy Policy | Angelo Pietsch</title>
+    <title data-i18n="privacy.title">Privacy Policy | Angelo Pietsch</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
     <header class="header header--legal">
-      <div class="lang-toggle" role="group" aria-label="Language">
+      <div class="lang-toggle" role="group" data-i18n-attr="aria-label:lang.label">
         <button class="lang-toggle__option" type="button" data-lang="en" aria-pressed="false">EN</button>
         <button class="lang-toggle__option" type="button" data-lang="de" aria-pressed="false">DE</button>
       </div>
-      <a class="logo" href="./" aria-label="Angelo Pietsch, home">
+      <a class="logo" href="./" data-i18n-attr="aria-label:logo.home">
         <svg class="logo__mark" viewBox="0 0 56.1 50" aria-hidden="true">
           <path class="logo__initials" transform="translate(1 1)" fill-rule="evenodd" d="M0 48 16.35 0H36.94Q45.04 0 49.57 3.99Q54.1 7.99 54.1 15.31Q54.1 22.56 49.57 26.55Q45.04 30.55 36.94 30.55H28.8V48H20V37.65H12.65L9.24 48ZM14.87 31.06H20V15.4ZM28.8 22.93H36.94Q41.01 22.93 43.08 20.78Q45.15 18.64 45.15 15.31Q45.15 11.91 43.08 9.73Q41.01 7.54 36.94 7.54H28.8Z" />
         </svg>
@@ -23,7 +23,7 @@
       </a>
     </header>
     <main class="legal">
-      <article class="legal__content">
+      <article class="legal__content" lang="en" data-lang-block>
         <a class="legal__back" href="./" aria-label="Back to portfolio"></a>
         <h1 class="legal__title">Privacy Policy</h1>
 
@@ -74,19 +74,27 @@
           I delete your messages once your request is completed and no statutory retention periods apply.
         </p>
 
-        <h2 class="legal__heading">6. Fonts and scripts</h2>
+        <h2 class="legal__heading">6. Language setting in your browser</h2>
+        <p class="legal__text">
+          When you switch the language with the EN/DE toggle, your choice is saved in the local storage of your browser under the name
+          <code>language</code>, so the website shows the same language on your next visit. This entry is not a cookie, is never sent to the server and stays
+          until you clear the site data of your browser. Without using the toggle, nothing is saved.
+        </p>
+        <p class="legal__text">Legal basis: § 25(2) No. 2 TDDDG, as the entry is necessary for the function you chose.</p>
+
+        <h2 class="legal__heading">7. Fonts and scripts</h2>
         <p class="legal__text">
           All fonts, icons and scripts are hosted on my own server. Your browser does not connect to Google Fonts, content delivery networks or other
           third-party services.
         </p>
 
-        <h2 class="legal__heading">7. Links to other websites</h2>
+        <h2 class="legal__heading">8. Links to other websites</h2>
         <p class="legal__text">
           This website links to GitHub, LinkedIn and the live versions of my projects. Data is only sent to these websites when you click a link. From then
           on, the privacy policy of the respective website applies.
         </p>
 
-        <h2 class="legal__heading">8. Your rights</h2>
+        <h2 class="legal__heading">9. Your rights</h2>
         <p class="legal__text">You have the right to:</p>
         <ul class="legal__list">
           <li>Access (Art. 15 GDPR)</li>
@@ -99,13 +107,106 @@
         </ul>
         <p class="legal__text">To exercise these rights, contact <a class="legal__link" href="mailto:apietsch94@gmail.com">apietsch94@gmail.com</a>.</p>
 
-        <h2 class="legal__heading">9. Data security</h2>
+        <h2 class="legal__heading">10. Data security</h2>
         <p class="legal__text">All data is transmitted encrypted via HTTPS.</p>
 
-        <h2 class="legal__heading">10. Changes to this privacy policy</h2>
+        <h2 class="legal__heading">11. Changes to this privacy policy</h2>
         <p class="legal__text">I update this privacy policy when the functions of the website change.</p>
 
         <p class="legal__updated">Last updated: 11.11.2026</p>
+      </article>
+
+      <article class="legal__content" lang="de" data-lang-block hidden>
+        <a class="legal__back" href="./" aria-label="Zurück zum Portfolio"></a>
+        <h1 class="legal__title">Datenschutz&shy;erklärung</h1>
+
+        <h2 class="legal__heading">1. Verantwortlicher</h2>
+        <address class="legal__text legal__address">
+          <span class="legal__highlight">Angelo Pietsch</span><br />
+          Haydnstraße 45<br />
+          02708 Löbau<br />
+          Deutschland<br />
+          E-Mail: <a class="legal__link" href="mailto:apietsch94@gmail.com">apietsch94@gmail.com</a>
+        </address>
+
+        <h2 class="legal__heading">2. Überblick</h2>
+        <p class="legal__text">
+          Diese Website verwendet keine Cookies, keine Analyse-Tools und kein Tracking. Personenbezogene Daten werden nur verarbeitet, um die Website
+          auszuliefern und deine Nachricht zu beantworten, wenn du mich kontaktierst.
+        </p>
+
+        <h2 class="legal__heading">3. Hosting</h2>
+        <p class="legal__text">
+          Die Website läuft auf meinem eigenen Server bei der <span class="legal__highlight">Hetzner Online GmbH</span>, Industriestr. 25, 91710 Gunzenhausen.
+          Der Server steht in Deutschland. Beim Aufruf der Website verarbeitet der Server deine IP-Adresse und die angefragte Seite, um sie auszuliefern.
+          Zugriffsprotokolle werden nicht gespeichert.
+        </p>
+        <p class="legal__text">Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, funktionierenden Website).</p>
+
+        <h2 class="legal__heading">4. Kontaktformular</h2>
+        <p class="legal__text">
+          Wenn du das Kontaktformular absendest, werden dein Name, deine E-Mail-Adresse, deine Nachricht und deine Zustimmung zu dieser Datenschutzerklärung an
+          die Automatisierungssoftware n8n auf meinem Server übertragen. n8n leitet sie als E-Mail an mich weiter. Zur Fehlersuche speichert n8n die Daten jeder
+          Anfrage höchstens 14 Tage und löscht sie danach automatisch.
+        </p>
+        <p class="legal__text">
+          Ich nutze deine Daten nur, um deine Nachricht zu beantworten. Sie werden nicht an Dritte weitergegeben, abgesehen vom unten genannten E-Mail-Anbieter.
+        </p>
+        <p class="legal__text">
+          Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO, wenn deine Nachricht eine mögliche Zusammenarbeit betrifft, sonst Art. 6 Abs. 1 lit. f DSGVO
+          (berechtigtes Interesse an der Beantwortung von Nachrichten).
+        </p>
+
+        <h2 class="legal__heading">5. E-Mail (Google Gmail)</h2>
+        <p class="legal__text">
+          Nachrichten aus dem Kontaktformular und E-Mails, die du mir direkt schickst, werden in mein Gmail-Postfach zugestellt und dort gespeichert. Anbieter:
+          <span class="legal__highlight">Google Ireland Limited</span>, Gordon House, Barrow Street, Dublin 4, Irland. Google kann Daten auf Servern in den USA
+          verarbeiten. Google ist nach dem EU-US Data Privacy Framework zertifiziert, das die EU-Kommission als angemessenes Datenschutzniveau anerkennt.
+        </p>
+        <p class="legal__text">
+          Ich lösche deine Nachrichten, sobald deine Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+        </p>
+
+        <h2 class="legal__heading">6. Spracheinstellung in deinem Browser</h2>
+        <p class="legal__text">
+          Wenn du die Sprache mit dem EN/DE-Schalter wechselst, wird deine Wahl im Local Storage deines Browsers unter dem Namen <code>language</code>
+          gespeichert, damit die Website beim nächsten Besuch in derselben Sprache erscheint. Dieser Eintrag ist kein Cookie, wird nie an den Server übertragen
+          und bleibt bestehen, bis du die Websitedaten in deinem Browser löschst. Ohne Nutzung des Schalters wird nichts gespeichert.
+        </p>
+        <p class="legal__text">Rechtsgrundlage: § 25 Abs. 2 Nr. 2 TDDDG, da der Eintrag für die von dir gewählte Funktion erforderlich ist.</p>
+
+        <h2 class="legal__heading">7. Schriften und Skripte</h2>
+        <p class="legal__text">
+          Alle Schriften, Icons und Skripte liegen auf meinem eigenen Server. Dein Browser baut keine Verbindung zu Google Fonts, Content Delivery Networks oder
+          anderen Drittanbietern auf.
+        </p>
+
+        <h2 class="legal__heading">8. Links zu anderen Websites</h2>
+        <p class="legal__text">
+          Diese Website verlinkt auf GitHub, LinkedIn und die Live-Versionen meiner Projekte. Daten werden an diese Websites erst übertragen, wenn du einen Link
+          anklickst. Ab dann gilt die Datenschutzerklärung der jeweiligen Website.
+        </p>
+
+        <h2 class="legal__heading">9. Deine Rechte</h2>
+        <p class="legal__text">Du hast das Recht auf:</p>
+        <ul class="legal__list">
+          <li>Auskunft (Art. 15 DSGVO)</li>
+          <li>Berichtigung (Art. 16 DSGVO)</li>
+          <li>Löschung (Art. 17 DSGVO)</li>
+          <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+          <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+          <li>Widerspruch (Art. 21 DSGVO)</li>
+          <li>Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO)</li>
+        </ul>
+        <p class="legal__text">Um diese Rechte wahrzunehmen, schreib an <a class="legal__link" href="mailto:apietsch94@gmail.com">apietsch94@gmail.com</a>.</p>
+
+        <h2 class="legal__heading">10. Datensicherheit</h2>
+        <p class="legal__text">Alle Daten werden verschlüsselt per HTTPS übertragen.</p>
+
+        <h2 class="legal__heading">11. Änderungen dieser Datenschutzerklärung</h2>
+        <p class="legal__text">Ich passe diese Datenschutzerklärung an, wenn sich die Funktionen der Website ändern.</p>
+
+        <p class="legal__updated">Stand: 11.11.2026</p>
       </article>
     </main>
     <footer class="footer">

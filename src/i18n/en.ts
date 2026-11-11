@@ -101,6 +101,9 @@ export const en = {
   'contact.success': "Thanks! I'll get back to you soon.",
   'contact.failed': 'Sending failed. Please try again later.',
 
+  'imprint.title': 'Legal Notice | Angelo Pietsch',
+  'privacy.title': 'Privacy Policy | Angelo Pietsch',
+
   'footer.info': 'Frontend Developer<br />Löbau, Germany',
   'footer.legal': 'Legal Notice',
   'footer.privacy': 'Privacy Policy',
