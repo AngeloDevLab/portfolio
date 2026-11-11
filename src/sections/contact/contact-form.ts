@@ -1,4 +1,5 @@
 type Control = HTMLInputElement | HTMLTextAreaElement;
+type StatusState = 'success' | 'error';
 
 interface ContactForm {
   form: HTMLFormElement;
@@ -109,7 +110,8 @@ async function sendForm(form: HTMLFormElement): Promise<boolean> {
  * @param status - Status line holding both texts in its data attributes.
  * @param state - Text to show, or null to clear the line.
  */
-function renderStatus(status: HTMLElement, state: 'success' | 'error' | null) {
+function renderStatus(status: HTMLElement, state: StatusState | null) {
+  status.dataset.state = state ?? '';
   status.textContent = state ? status.dataset[state]! : '';
   status.classList.toggle('contact__status--error', state === 'error');
 }
@@ -151,7 +153,6 @@ function getContactForm(): ContactForm {
 export function initContactForm() {
   const ctx = getContactForm();
   ctx.controls.forEach((control) => {
-    control.dataset.placeholder = control.placeholder;
     control.addEventListener('blur', () => validate(control));
     control.addEventListener('input', () => {
       revalidateIfInvalid(control);
@@ -163,4 +164,17 @@ export function initContactForm() {
     handleSubmit(ctx);
   });
   updateSubmit(ctx);
+  refreshContactTexts();
+}
+
+/**
+ * Shows the current placeholder, error and status texts again, e.g. after their data attributes were translated.
+ */
+export function refreshContactTexts() {
+  const form = document.querySelector<HTMLFormElement>('.contact__form')!;
+  form.querySelectorAll<Control>('.contact__input').forEach((control) => {
+    renderFieldState(control, control.getAttribute('aria-invalid') !== 'true');
+  });
+  const status = form.querySelector<HTMLElement>('.contact__status')!;
+  renderStatus(status, (status.dataset.state || null) as StatusState | null);
 }

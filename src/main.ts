@@ -1,15 +1,19 @@
 import './styles/main.scss';
 import { createStage, resizeStage } from './scene/stage.ts';
 import { createCube, updateCube } from './scene/objects/cube.ts';
-import { createRing, updateRing } from './scene/objects/ring.ts';
+import { createRing, setRingTexts, updateRing } from './scene/objects/ring.ts';
 import { updateRingBlur } from './scene/objects/ring-blur.ts';
 import { createSkillIcons, updateSkillIcons } from './scene/objects/skill-icons.ts';
 import { getElementProgress, getVisibleBottom, initScrollLoop, jumpToHeroOnClick, keepFocusOutOfHeroCopy, loopScroll, updateSmoothProgress } from './scene/scroll.ts';
 import { openExternalLinksInNewTab } from './external-links.ts';
 import { initMenu } from './sections/header/menu.ts';
 import { initProjectDialog } from './sections/projects/project-dialog.ts';
-import { initReferences } from './sections/references/references.ts';
-import { initContactForm } from './sections/contact/contact-form.ts';
+import { initReferences, labelReferenceDots } from './sections/references/references.ts';
+import { initContactForm, refreshContactTexts } from './sections/contact/contact-form.ts';
+import { initI18n, onLanguageChange, translate } from './i18n/i18n.ts';
+import type { TranslationKey } from './i18n/en.ts';
+
+const RING_TEXT_KEYS: TranslationKey[] = ['ring.role', 'ring.openToWork', 'ring.location', 'ring.remote'];
 
 const canvas = document.querySelector<HTMLCanvasElement>('.scene')!;
 const cubeSlot = document.querySelector<HTMLElement>('.about__photo')!;
@@ -40,6 +44,12 @@ function animate(time: number) {
   stage.renderer.render(stage.scene, stage.camera);
 }
 
+onLanguageChange(() => {
+  setRingTexts(ring, RING_TEXT_KEYS.map(translate));
+  labelReferenceDots();
+  refreshContactTexts();
+});
+initI18n();
 openExternalLinksInNewTab();
 initMenu();
 initProjectDialog();

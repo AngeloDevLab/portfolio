@@ -20,21 +20,28 @@ function fillCards(list: HTMLElement): HTMLElement[] {
 }
 
 /**
- * Clones the template dot so there is one dot per reference, each labeled with its number.
+ * Clones the template dot so there is one dot per reference.
  * @param template - Dot button from the markup, used for the first reference.
  * @param count - Number of references.
  * @returns All dot buttons in order.
  */
 function createDots(template: HTMLElement, count: number): HTMLElement[] {
-  const label = template.getAttribute('aria-label');
   const dots = [template];
   while (dots.length < count) {
     const clone = template.cloneNode(true) as HTMLElement;
     template.parentElement!.append(clone);
     dots.push(clone);
   }
-  dots.forEach((dot, index) => dot.setAttribute('aria-label', `${label} ${index + 1}`));
   return dots;
+}
+
+/**
+ * Labels every dot with the text from its data-label attribute and its number, e.g. "Show reference 2".
+ */
+export function labelReferenceDots() {
+  document.querySelectorAll<HTMLElement>('.references__dot').forEach((dot, index) => {
+    dot.setAttribute('aria-label', `${dot.dataset.label} ${index + 1}`);
+  });
 }
 
 /**
@@ -101,6 +108,7 @@ export function initReferences() {
   const count = list.children.length;
   const cards = fillCards(list);
   const dots = createDots(section.querySelector<HTMLElement>('.references__dot')!, count);
+  labelReferenceDots();
   let current = 0;
   const goTo = (index: number) => {
     current = (index + cards.length) % cards.length;

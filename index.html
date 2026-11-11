@@ -3,25 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Angelo Pietsch | Frontend Developer</title>
+    <title data-i18n="meta.title">Angelo Pietsch | Frontend Developer</title>
+    <meta name="description" content="Portfolio of Angelo Pietsch, frontend developer from Saxony, with projects built in Angular, TypeScript and three.js." data-i18n-attr="content:meta.description" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
     <canvas class="scene"></canvas>
     <div class="ring-blur" aria-hidden="true"></div>
     <header class="header">
-      <nav class="nav" aria-label="Main">
-        <div class="lang-toggle" role="group" aria-label="Language">
-          <button class="lang-toggle__option lang-toggle__option--active" type="button" aria-pressed="true">EN</button>
-          <button class="lang-toggle__option" type="button" aria-pressed="false">DE</button>
+      <nav class="nav" data-i18n-attr="aria-label:nav.label">
+        <div class="lang-toggle" role="group" data-i18n-attr="aria-label:lang.label">
+          <button class="lang-toggle__option" type="button" data-lang="en" aria-pressed="false">EN</button>
+          <button class="lang-toggle__option" type="button" data-lang="de" aria-pressed="false">DE</button>
         </div>
         <ul class="nav__list">
-          <li><a class="nav__link" href="#about">About me</a></li>
-          <li><a class="nav__link" href="#skills">Skills</a></li>
-          <li><a class="nav__link" href="#projects">Projects</a></li>
+          <li><a class="nav__link" href="#about" data-i18n="nav.about"></a></li>
+          <li><a class="nav__link" href="#skills" data-i18n="nav.skills"></a></li>
+          <li><a class="nav__link" href="#projects" data-i18n="nav.projects"></a></li>
         </ul>
       </nav>
-      <a class="logo" href="#" aria-label="Angelo Pietsch, home">
+      <a class="logo" href="#" data-i18n-attr="aria-label:logo.home">
         <svg class="logo__mark" viewBox="0 0 56.1 50" aria-hidden="true">
           <path class="logo__initials" transform="translate(1 1)" fill-rule="evenodd" d="M0 48 16.35 0H36.94Q45.04 0 49.57 3.99Q54.1 7.99 54.1 15.31Q54.1 22.56 49.57 26.55Q45.04 30.55 36.94 30.55H28.8V48H20V37.65H12.65L9.24 48ZM14.87 31.06H20V15.4ZM28.8 22.93H36.94Q41.01 22.93 43.08 20.78Q45.15 18.64 45.15 15.31Q45.15 11.91 43.08 9.73Q41.01 7.54 36.94 7.54H28.8Z" />
         </svg>
@@ -30,22 +31,22 @@
           <path class="logo__name" d="M62.1 49V29.88H68.85Q72.07 29.88 73.88 31.47Q75.68 33.06 75.68 35.98Q75.68 38.86 73.88 40.45Q72.07 42.05 68.85 42.05H65.61V49ZM157.16 49V40.63Q157.16 39.04 156.39 38.23Q155.62 37.42 154.39 37.42Q153.34 37.42 152.54 37.99Q151.74 38.57 151.28 39.73Q150.82 40.88 150.82 42.61V49H147.34V28.79H150.82V36.97Q151.43 35.85 152.32 35.21Q153.59 34.3 155.3 34.3Q157.07 34.3 158.25 35.08Q159.44 35.87 160.04 37.3Q160.63 38.73 160.63 40.63V49ZM94.29 49.41Q92.46 49.41 90.95 48.47Q89.43 47.53 88.52 45.83Q87.6 44.12 87.6 41.84Q87.6 39.48 88.51 37.79Q89.41 36.09 90.93 35.2Q92.45 34.3 94.29 34.3Q96 34.3 97.25 34.98Q98.49 35.67 99.25 36.84Q100.01 38.01 100.27 39.48Q100.54 40.96 100.3 42.52H91.05Q91.05 43.71 91.41 44.62Q91.77 45.55 92.49 46.08Q93.2 46.61 94.29 46.61Q95.31 46.61 96 46.14Q96.69 45.67 96.88 44.73H100.39Q100.17 46.11 99.35 47.17Q98.53 48.22 97.24 48.82Q95.94 49.41 94.29 49.41ZM121.53 49.41Q119.47 49.41 117.99 48.85Q116.51 48.28 115.71 47.21Q114.92 46.14 114.9 44.64H118.11Q118.16 45.7 118.95 46.19Q119.75 46.67 121.12 46.67Q121.87 46.67 122.45 46.45Q123.04 46.23 123.36 45.85Q123.68 45.46 123.68 44.99Q123.68 44.39 123.25 44.04Q122.81 43.7 121.86 43.4L118.73 42.28Q117.05 41.68 116.16 40.69Q115.26 39.7 115.26 38.33Q115.26 36.52 116.9 35.41Q118.54 34.3 121.3 34.3Q124.04 34.3 125.53 35.5Q127.03 36.7 127.07 38.54H123.8Q123.73 37.83 123.12 37.42Q122.52 37.01 121.3 37.01Q120.19 37.01 119.57 37.46Q118.94 37.91 118.94 38.51Q118.94 39.53 120.68 40.04L124.07 41.31Q125.72 41.87 126.63 42.75Q127.54 43.64 127.54 44.99Q127.54 46.13 126.79 47.14Q126.03 48.15 124.67 48.78Q123.32 49.41 121.53 49.41ZM137.16 49.41Q135.37 49.41 133.83 48.48Q132.29 47.54 131.34 45.84Q130.39 44.14 130.39 41.84Q130.39 39.41 131.34 37.72Q132.29 36.03 133.83 35.17Q135.37 34.3 137.16 34.3Q138.56 34.3 139.63 34.75Q140.7 35.2 141.45 35.95Q142.2 36.71 142.63 37.64Q143.06 38.57 143.18 39.51L139.67 39.6Q139.43 38.66 138.79 38.04Q138.15 37.42 137.13 37.42Q136.3 37.42 135.56 37.88Q134.82 38.35 134.36 39.32Q133.89 40.29 133.89 41.84Q133.89 43.31 134.33 44.29Q134.76 45.27 135.5 45.77Q136.24 46.26 137.13 46.26Q138.46 46.26 139.07 45.62Q139.67 44.98 139.67 43.9H143.18Q143.18 45.42 142.48 46.67Q141.79 47.92 140.45 48.67Q139.11 49.41 137.16 49.41ZM109.41 49.41Q108.14 49.41 107.09 48.94Q106.03 48.47 105.41 47.5Q104.78 46.52 104.78 45.02V37.01H102.78V34.71H104.78V30.91H108.26V34.71H112.15V37.01H108.26V44.9Q108.26 46.67 109.94 46.67Q110.45 46.67 110.97 46.55Q111.48 46.44 112.15 46.2L112.65 48.65Q111.82 48.97 111.04 49.19Q110.26 49.41 109.41 49.41ZM79.59 49V34.65H83.07V49ZM65.61 39.01H68.85Q70.47 39.01 71.29 38.16Q72.12 37.3 72.12 35.98Q72.12 34.62 71.29 33.75Q70.47 32.88 68.85 32.88H65.61ZM91.07 40.63H97.18Q97.17 40.16 97.1 39.67Q96.99 38.97 96.68 38.38Q96.37 37.79 95.8 37.43Q95.23 37.07 94.35 37.07Q93.29 37.07 92.55 37.6Q91.82 38.13 91.43 39.04Q91.13 39.76 91.07 40.63ZM81.33 32.09Q80.31 32.09 79.74 31.55Q79.18 31.01 79.18 30.05Q79.18 29.13 79.74 28.57Q80.31 28.02 81.33 28.02Q82.33 28.02 82.9 28.57Q83.48 29.13 83.48 30.05Q83.48 31.01 82.9 31.55Q82.33 32.09 81.33 32.09Z" />
         </svg>
       </a>
-      <button class="burger" type="button" aria-label="Open menu" aria-haspopup="dialog">
+      <button class="burger" type="button" data-i18n-attr="aria-label:menu.open" aria-haspopup="dialog">
         <span class="burger__line"></span>
         <span class="burger__line"></span>
         <span class="burger__line"></span>
       </button>
     </header>
-    <dialog class="menu" aria-label="Menu">
-      <nav class="menu__content" aria-label="Mobile">
+    <dialog class="menu" data-i18n-attr="aria-label:menu.label">
+      <nav class="menu__content" data-i18n-attr="aria-label:menu.nav">
         <ul class="nav__list">
-          <li><a class="nav__link" href="#about">About me</a></li>
-          <li><a class="nav__link" href="#skills">Skills</a></li>
-          <li><a class="nav__link" href="#projects">Projects</a></li>
+          <li><a class="nav__link" href="#about" data-i18n="nav.about"></a></li>
+          <li><a class="nav__link" href="#skills" data-i18n="nav.skills"></a></li>
+          <li><a class="nav__link" href="#projects" data-i18n="nav.projects"></a></li>
         </ul>
-        <div class="lang-toggle" role="group" aria-label="Language">
-          <button class="lang-toggle__option lang-toggle__option--active" type="button" aria-pressed="true">EN</button>
-          <button class="lang-toggle__option" type="button" aria-pressed="false">DE</button>
+        <div class="lang-toggle" role="group" data-i18n-attr="aria-label:lang.label">
+          <button class="lang-toggle__option" type="button" data-lang="en" aria-pressed="false">EN</button>
+          <button class="lang-toggle__option" type="button" data-lang="de" aria-pressed="false">DE</button>
         </div>
       </nav>
     </dialog>
@@ -54,12 +55,12 @@
         <p class="hero__role">Frontend Developer</p>
         <h1 class="hero__name">Angelo Pietsch</h1>
         <div class="hero__actions">
-          <a class="button" href="#projects">Check my work</a>
-          <a class="button" href="#contact">Contact me</a>
+          <a class="button" href="#projects" data-i18n="hero.work"></a>
+          <a class="button" href="#contact" data-i18n="hero.contact"></a>
         </div>
         <div class="hero__decor">
           <div class="hero__column">
-            <a class="hero__scroll" href="#about" aria-label="Scroll to about me">
+            <a class="hero__scroll" href="#about" data-i18n-attr="aria-label:hero.scroll">
               <svg viewBox="0 0 12 18" aria-hidden="true">
                 <path d="M6 1V17M1 12L6 17L11 12" />
               </svg>
@@ -67,7 +68,7 @@
             <span class="hero__line hero__line--teal"></span>
           </div>
           <div class="hero__column">
-            <a class="hero__social hero__social--mail" href="mailto:apietsch94@gmail.com" aria-label="Email">
+            <a class="hero__social hero__social--mail" href="mailto:apietsch94@gmail.com" data-i18n-attr="aria-label:social.email">
               <span class="hero__icon hero__icon--mail"></span>
               <span class="hero__email">apietsch94@gmail.com</span>
             </a>
@@ -80,22 +81,22 @@
       <section id="about" class="about">
         <div class="about__photo"></div>
         <div class="about__text">
-          <p class="about__label">Who I Am</p>
+          <p class="about__label" data-i18n="about.label"></p>
           <div class="about__card">
-            <h2 class="about__title">About me</h2>
-            <p class="about__intro">Hey there, I'm Angelo! I build for the web with HTML, SCSS, TypeScript and Angular. I also have a passion for game development: I love bringing my own ideas to life and iterating on them, which is how the 3D elements on this page came about.</p>
+            <h2 class="about__title" data-i18n="about.title"></h2>
+            <p class="about__intro" data-i18n="about.intro"></p>
             <ul class="about__list">
               <li class="about__item">
                 <span class="about__icon about__icon--location"></span>
-                <p>Based in Saxony, Germany and open to remote work.</p>
+                <p data-i18n="about.location"></p>
               </li>
               <li class="about__item">
                 <span class="about__icon about__icon--cognition"></span>
-                <p>Always learning, always iterating. I'm finishing the frontend part of my training at Developer Akademie, and backend comes next. For this portfolio I taught myself three.js.</p>
+                <p data-i18n="about.learning"></p>
               </li>
               <li class="about__item">
                 <span class="about__icon about__icon--releases"></span>
-                <p>I solve problems step by step: build, test, improve, repeat. My projects go beyond the browser too: they use services like Supabase and n8n, and some run on my own server.</p>
+                <p data-i18n="about.approach"></p>
               </li>
             </ul>
           </div>
@@ -103,13 +104,13 @@
       </section>
       <section id="skills" class="skills">
         <div class="skills__text">
-          <p class="skills__label">Technologies</p>
+          <p class="skills__label" data-i18n="skills.label"></p>
           <div class="skills__card">
             <h2 class="skills__title">Skill Set</h2>
-            <p class="skills__intro">These are the technologies I build with, from the first layout to the deployed project. My focus is on Angular and TypeScript, backed by services like Supabase and Firebase for data and n8n for automation.</p>
-            <h3 class="skills__subtitle">You need <span class="skills__highlight">another skill?</span></h3>
-            <p class="skills__note">Feel free to contact me. I enjoy picking up new tools and look forward to expanding my knowledge.</p>
-            <a class="button" href="#contact">Let's Talk</a>
+            <p class="skills__intro" data-i18n="skills.intro"></p>
+            <h3 class="skills__subtitle" data-i18n-html="skills.subtitle"></h3>
+            <p class="skills__note" data-i18n="skills.note"></p>
+            <a class="button" href="#contact" data-i18n="skills.talk"></a>
           </div>
         </div>
         <ul class="skills__grid">
@@ -129,9 +130,9 @@
           <li class="skills__item">
             <button class="skills__growth" type="button">
               <span class="skills__icon skills__icon--growth-mindset" data-skill="growth-mindset"></span>
-              Growth mindset
+              <span data-i18n="skills.growth"></span>
               <span class="skills__bubble">
-                I have a special interest in learning
+                <span data-i18n="skills.bubble"></span>
                 <span class="skills__techs">
                   <span class="skills__tech"><span class="skills__icon skills__icon--small skills__icon--threedotjs"></span>three.js</span>
                   <span class="skills__tech"><span class="skills__icon skills__icon--small skills__icon--dotnet"></span>.NET / C#</span>
@@ -143,8 +144,8 @@
       </section>
       <section id="projects" class="projects">
         <p class="projects__label">Portfolio</p>
-        <h2 class="projects__title">Featured Projects</h2>
-        <p class="projects__intro">Explore a selection of my work here. Interact with the projects to see my skills in action.</p>
+        <h2 class="projects__title" data-i18n="projects.title"></h2>
+        <p class="projects__intro" data-i18n="projects.intro"></p>
         <ul class="projects__list">
           <li class="projects__item">
             <button class="projects__row" type="button">
@@ -206,16 +207,16 @@
         </ul>
         <dialog class="project-dialog" aria-labelledby="project-name-join">
           <div class="project-dialog__content">
-            <button class="project-dialog__close" type="button" aria-label="Close">
+            <button class="project-dialog__close" type="button" data-i18n-attr="aria-label:dialog.close">
               <span class="project-dialog__close-icon" aria-hidden="true"></span>
             </button>
             <article class="project-dialog__project">
-              <img class="project-dialog__image" src="/images/join.webp" alt="Screenshot of Join" width="1280" height="910" loading="lazy" />
+              <img class="project-dialog__image" src="/images/join.webp" alt="" data-i18n-attr="alt:project.join.alt" width="1280" height="910" loading="lazy" />
               <div class="project-dialog__body">
                 <p class="project-dialog__number">01</p>
                 <h2 class="project-dialog__name" id="project-name-join">Join</h2>
-                <h3 class="project-dialog__question">What is this project about?</h3>
-                <p class="project-dialog__text">Task manager inspired by the Kanban system. Create and organize tasks with drag and drop, assign contacts and categories. Started as a group project, then extended on my own with an n8n issue collector that turns incoming emails into tickets using AI.</p>
+                <h3 class="project-dialog__question" data-i18n="dialog.question"></h3>
+                <p class="project-dialog__text" data-i18n="project.join.text"></p>
                 <ul class="project-dialog__techs">
                   <li class="project-dialog__tech"><span class="project-dialog__icon project-dialog__icon--html" aria-hidden="true"></span>HTML</li>
                   <li class="project-dialog__tech"><span class="project-dialog__icon project-dialog__icon--css" aria-hidden="true"></span>CSS</li>
@@ -225,17 +226,17 @@
                 </ul>
                 <div class="project-dialog__links">
                   <a class="button project-dialog__link" href="https://github.com/AngeloDevLab/join-3187">GitHub<span class="project-dialog__link-icon" aria-hidden="true"></span></a>
-                  <a class="button project-dialog__link" href="https://join.angelodevelopment.de/">Live Test<span class="project-dialog__link-icon" aria-hidden="true"></span></a>
+                  <a class="button project-dialog__link" href="https://join.angelodevelopment.de/"><span data-i18n="dialog.live"></span><span class="project-dialog__link-icon" aria-hidden="true"></span></a>
                 </div>
               </div>
             </article>
             <article class="project-dialog__project" hidden>
-              <img class="project-dialog__image" src="/images/chromatic.webp" alt="Screenshot of CHROMATIC" width="1280" height="910" loading="lazy" />
+              <img class="project-dialog__image" src="/images/chromatic.webp" alt="" data-i18n-attr="alt:project.chromatic.alt" width="1280" height="910" loading="lazy" />
               <div class="project-dialog__body">
                 <p class="project-dialog__number">02</p>
                 <h2 class="project-dialog__name" id="project-name-chromatic">CHROMATIC</h2>
-                <h3 class="project-dialog__question">What is this project about?</h3>
-                <p class="project-dialog__text">2D jump and run built to learn and practice object-oriented programming in JavaScript. Fight your way through the level and defeat all enemies. Along the way I designed the maps in Tiled and took a deep dive into pixel art.</p>
+                <h3 class="project-dialog__question" data-i18n="dialog.question"></h3>
+                <p class="project-dialog__text" data-i18n="project.chromatic.text"></p>
                 <ul class="project-dialog__techs">
                   <li class="project-dialog__tech"><span class="project-dialog__icon project-dialog__icon--html" aria-hidden="true"></span>HTML</li>
                   <li class="project-dialog__tech"><span class="project-dialog__icon project-dialog__icon--css" aria-hidden="true"></span>CSS</li>
@@ -243,17 +244,17 @@
                 </ul>
                 <div class="project-dialog__links">
                   <a class="button project-dialog__link" href="https://github.com/AngeloDevLab/CHROMATIC">GitHub<span class="project-dialog__link-icon" aria-hidden="true"></span></a>
-                  <a class="button project-dialog__link" href="https://chromatic.angelodevelopment.de/">Live Test<span class="project-dialog__link-icon" aria-hidden="true"></span></a>
+                  <a class="button project-dialog__link" href="https://chromatic.angelodevelopment.de/"><span data-i18n="dialog.live"></span><span class="project-dialog__link-icon" aria-hidden="true"></span></a>
                 </div>
               </div>
             </article>
             <article class="project-dialog__project" hidden>
-              <img class="project-dialog__image" src="/images/poll.webp" alt="Screenshot of the Poll App" width="1280" height="910" loading="lazy" />
+              <img class="project-dialog__image" src="/images/poll.webp" alt="" data-i18n-attr="alt:project.poll.alt" width="1280" height="910" loading="lazy" />
               <div class="project-dialog__body">
                 <p class="project-dialog__number">03</p>
                 <h2 class="project-dialog__name" id="project-name-poll">Poll App</h2>
-                <h3 class="project-dialog__question">What is this project about?</h3>
-                <p class="project-dialog__text">My first Angular app: create polls, vote and watch the results update live. It showed me how much a good framework takes off your hands, and was my first step into routing, custom pipes and Supabase as a database.</p>
+                <h3 class="project-dialog__question" data-i18n="dialog.question"></h3>
+                <p class="project-dialog__text" data-i18n="project.poll.text"></p>
                 <ul class="project-dialog__techs">
                   <li class="project-dialog__tech"><span class="project-dialog__icon project-dialog__icon--angular" aria-hidden="true"></span>Angular</li>
                   <li class="project-dialog__tech"><span class="project-dialog__icon project-dialog__icon--sass" aria-hidden="true"></span>SCSS</li>
@@ -262,17 +263,17 @@
                 </ul>
                 <div class="project-dialog__links">
                   <a class="button project-dialog__link" href="https://github.com/AngeloDevLab/poll-app">GitHub<span class="project-dialog__link-icon" aria-hidden="true"></span></a>
-                  <a class="button project-dialog__link" href="https://poll.angelodevelopment.de/">Live Test<span class="project-dialog__link-icon" aria-hidden="true"></span></a>
+                  <a class="button project-dialog__link" href="https://poll.angelodevelopment.de/"><span data-i18n="dialog.live"></span><span class="project-dialog__link-icon" aria-hidden="true"></span></a>
                 </div>
               </div>
             </article>
             <article class="project-dialog__project" hidden>
-              <img class="project-dialog__image" src="/images/cuisine.webp" alt="Screenshot of Code à Cuisine" width="1040" height="740" loading="lazy" />
+              <img class="project-dialog__image" src="/images/cuisine.webp" alt="" data-i18n-attr="alt:project.cuisine.alt" width="1040" height="740" loading="lazy" />
               <div class="project-dialog__body">
                 <p class="project-dialog__number">04</p>
                 <h2 class="project-dialog__name" id="project-name-cuisine">Code à Cuisine</h2>
-                <h3 class="project-dialog__question">What is this project about?</h3>
-                <p class="project-dialog__text">Recipe generator built with Angular. Enter the ingredients you have at home and an AI suggests three matching recipes, which are saved to a shared cookbook. n8n connects to Google Gemini with daily limits to keep costs under control, Supabase stores the recipes.</p>
+                <h3 class="project-dialog__question" data-i18n="dialog.question"></h3>
+                <p class="project-dialog__text" data-i18n="project.cuisine.text"></p>
                 <ul class="project-dialog__techs">
                   <li class="project-dialog__tech"><span class="project-dialog__icon project-dialog__icon--angular" aria-hidden="true"></span>Angular</li>
                   <li class="project-dialog__tech"><span class="project-dialog__icon project-dialog__icon--sass" aria-hidden="true"></span>SCSS</li>
@@ -282,92 +283,92 @@
                 </ul>
                 <div class="project-dialog__links">
                   <a class="button project-dialog__link" href="https://github.com/AngeloDevLab/code-a-cuisine">GitHub<span class="project-dialog__link-icon" aria-hidden="true"></span></a>
-                  <a class="button project-dialog__link" href="https://cuisine.angelodevelopment.de/">Live Test<span class="project-dialog__link-icon" aria-hidden="true"></span></a>
+                  <a class="button project-dialog__link" href="https://cuisine.angelodevelopment.de/"><span data-i18n="dialog.live"></span><span class="project-dialog__link-icon" aria-hidden="true"></span></a>
                 </div>
               </div>
             </article>
             <button class="project-dialog__next" type="button">
-              Next project<span class="project-dialog__next-icon" aria-hidden="true"></span>
+              <span data-i18n="dialog.next"></span><span class="project-dialog__next-icon" aria-hidden="true"></span>
             </button>
           </div>
         </dialog>
       </section>
       <section class="references" aria-labelledby="references-title">
-        <h2 class="references__title" id="references-title">What my colleagues say about me</h2>
+        <h2 class="references__title" id="references-title" data-i18n="references.title"></h2>
         <ul class="references__cards" aria-live="polite">
           <li class="references__card">
             <blockquote class="references__quote">
-              <p>Angelo stands out through his initiative, creativity and eagerness to learn. He questions things and dives into new topics with real commitment, aiming not just to find solutions but to truly understand them.</p>
+              <p data-i18n="references.quote1"></p>
             </blockquote>
-            <p class="references__author">ChatGPT - AI Assistant</p>
+            <p class="references__author" data-i18n="references.author1"></p>
           </li>
           <li class="references__card">
             <blockquote class="references__quote">
-              <p>Angelo knows what he wants and says it clearly. He asks for honest answers instead of sugarcoating, and his Unity and C# background shows in his strong sense for structure and game logic.</p>
+              <p data-i18n="references.quote2"></p>
             </blockquote>
-            <p class="references__author">Claude - AI Pair Programmer</p>
+            <p class="references__author" data-i18n="references.author2"></p>
           </li>
           <li class="references__card">
             <blockquote class="references__quote">
-              <p>Placeholder: Angelo has proven to be a reliable group partner. His technical skills and proactive approach were crucial to the success of our project.</p>
+              <p data-i18n="references.quote3"></p>
             </blockquote>
-            <p class="references__author">Name - Team Partner</p>
+            <p class="references__author" data-i18n="references.authorTeam"></p>
           </li>
           <li class="references__card">
             <blockquote class="references__quote">
-              <p>Placeholder: Working with Angelo was a great experience. He always kept the bigger picture in mind and helped the team whenever someone got stuck.</p>
+              <p data-i18n="references.quote4"></p>
             </blockquote>
-            <p class="references__author">Name - Frontend Developer</p>
+            <p class="references__author" data-i18n="references.authorDev"></p>
           </li>
           <li class="references__card">
             <blockquote class="references__quote">
-              <p>Placeholder: Angelo stayed calm under pressure, communicated clearly and delivered clean code on time. I would happily work with him again.</p>
+              <p data-i18n="references.quote5"></p>
             </blockquote>
-            <p class="references__author">Name - Team Partner</p>
+            <p class="references__author" data-i18n="references.authorTeam"></p>
           </li>
         </ul>
         <div class="references__controls">
-          <button class="references__arrow references__arrow--prev" type="button" aria-label="Previous reference"></button>
+          <button class="references__arrow references__arrow--prev" type="button" data-i18n-attr="aria-label:references.prev"></button>
           <div class="references__dots">
-            <button class="references__dot" type="button" aria-label="Show reference"></button>
+            <button class="references__dot" type="button" data-i18n-attr="data-label:references.dot"></button>
           </div>
-          <button class="references__arrow references__arrow--next" type="button" aria-label="Next reference"></button>
+          <button class="references__arrow references__arrow--next" type="button" data-i18n-attr="aria-label:references.next"></button>
         </div>
       </section>
       <section id="contact" class="contact">
         <div class="contact__text">
-          <p class="contact__label">Contact me</p>
-          <h2 class="contact__title">Let's work together</h2>
-          <h3 class="contact__subtitle">Got a problem to solve?</h3>
-          <p class="contact__intro">Have an idea for a website or app, or are you looking for support in your team? Tell me what you are working on, and let's find out how I can help bring it to life.</p>
-          <p class="contact__intro">Need a Frontend developer? <span class="contact__highlight">Let's talk!</span></p>
+          <p class="contact__label" data-i18n="contact.label"></p>
+          <h2 class="contact__title" data-i18n="contact.title"></h2>
+          <h3 class="contact__subtitle" data-i18n="contact.subtitle"></h3>
+          <p class="contact__intro" data-i18n="contact.intro"></p>
+          <p class="contact__intro" data-i18n-html="contact.cta"></p>
         </div>
         <form class="contact__form" action="https://n8n.angelodevelopment.de/webhook/portfolio-contact" method="post" novalidate>
           <input class="contact__honeypot" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="contact__field">
-            <label class="contact__question" for="contact-name">What's your name?</label>
-            <input class="contact__input" id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your name goes here" data-error="Oops! it seems your name is missing" required />
+            <label class="contact__question" for="contact-name" data-i18n="contact.name.label"></label>
+            <input class="contact__input" id="contact-name" name="name" type="text" autocomplete="name" data-i18n-attr="data-placeholder:contact.name.placeholder; data-error:contact.name.error" required />
           </div>
           <div class="contact__field">
-            <label class="contact__question" for="contact-email">What's your email?</label>
-            <input class="contact__input" id="contact-email" name="email" type="email" autocomplete="email" placeholder="youremail@email.com" data-error="Hoppla! your email is required" required />
+            <label class="contact__question" for="contact-email" data-i18n="contact.email.label"></label>
+            <input class="contact__input" id="contact-email" name="email" type="email" autocomplete="email" data-i18n-attr="data-placeholder:contact.email.placeholder; data-error:contact.email.error" required />
           </div>
           <div class="contact__field">
-            <label class="contact__question" for="contact-message">How can I help you?</label>
-            <textarea class="contact__input contact__input--message" id="contact-message" name="message" rows="1" placeholder="Hello Angelo, I am interested in..." data-error="What do you need to develop?" required></textarea>
+            <label class="contact__question" for="contact-message" data-i18n="contact.message.label"></label>
+            <textarea class="contact__input contact__input--message" id="contact-message" name="message" rows="1" data-i18n-attr="data-placeholder:contact.message.placeholder; data-error:contact.message.error" required></textarea>
           </div>
           <label class="contact__privacy">
             <input class="contact__checkbox" name="privacy" type="checkbox" aria-describedby="contact-privacy-error" required />
-            <span>I've read the <a class="contact__link" href="privacy.html">privacy policy</a> and agree to the processing of my data as outlined.</span>
+            <span data-i18n-html="contact.privacy"></span>
           </label>
-          <p class="contact__privacy-error" id="contact-privacy-error">Please accept the privacy policy</p>
-          <button class="button contact__submit" type="submit">Say Hello ;)</button>
-          <p class="contact__status" role="status" data-success="Thanks! I'll get back to you soon." data-error="Sending failed. Please try again later."></p>
+          <p class="contact__privacy-error" id="contact-privacy-error" data-i18n="contact.privacy.error"></p>
+          <button class="button contact__submit" type="submit" data-i18n="contact.submit"></button>
+          <p class="contact__status" role="status" data-i18n-attr="data-success:contact.success; data-error:contact.failed"></p>
         </form>
       </section>
       <footer class="footer">
         <div class="footer__about">
-          <a class="logo" href="#" aria-label="Angelo Pietsch, home">
+          <a class="logo" href="#" data-i18n-attr="aria-label:logo.home">
             <svg class="logo__mark" viewBox="0 0 56.1 50" aria-hidden="true">
               <path class="logo__initials" transform="translate(1 1)" fill-rule="evenodd" d="M0 48 16.35 0H36.94Q45.04 0 49.57 3.99Q54.1 7.99 54.1 15.31Q54.1 22.56 49.57 26.55Q45.04 30.55 36.94 30.55H28.8V48H20V37.65H12.65L9.24 48ZM14.87 31.06H20V15.4ZM28.8 22.93H36.94Q41.01 22.93 43.08 20.78Q45.15 18.64 45.15 15.31Q45.15 11.91 43.08 9.73Q41.01 7.54 36.94 7.54H28.8Z" />
             </svg>
@@ -376,28 +377,28 @@
               <path class="logo__name" d="M62.1 49V29.88H68.85Q72.07 29.88 73.88 31.47Q75.68 33.06 75.68 35.98Q75.68 38.86 73.88 40.45Q72.07 42.05 68.85 42.05H65.61V49ZM157.16 49V40.63Q157.16 39.04 156.39 38.23Q155.62 37.42 154.39 37.42Q153.34 37.42 152.54 37.99Q151.74 38.57 151.28 39.73Q150.82 40.88 150.82 42.61V49H147.34V28.79H150.82V36.97Q151.43 35.85 152.32 35.21Q153.59 34.3 155.3 34.3Q157.07 34.3 158.25 35.08Q159.44 35.87 160.04 37.3Q160.63 38.73 160.63 40.63V49ZM94.29 49.41Q92.46 49.41 90.95 48.47Q89.43 47.53 88.52 45.83Q87.6 44.12 87.6 41.84Q87.6 39.48 88.51 37.79Q89.41 36.09 90.93 35.2Q92.45 34.3 94.29 34.3Q96 34.3 97.25 34.98Q98.49 35.67 99.25 36.84Q100.01 38.01 100.27 39.48Q100.54 40.96 100.3 42.52H91.05Q91.05 43.71 91.41 44.62Q91.77 45.55 92.49 46.08Q93.2 46.61 94.29 46.61Q95.31 46.61 96 46.14Q96.69 45.67 96.88 44.73H100.39Q100.17 46.11 99.35 47.17Q98.53 48.22 97.24 48.82Q95.94 49.41 94.29 49.41ZM121.53 49.41Q119.47 49.41 117.99 48.85Q116.51 48.28 115.71 47.21Q114.92 46.14 114.9 44.64H118.11Q118.16 45.7 118.95 46.19Q119.75 46.67 121.12 46.67Q121.87 46.67 122.45 46.45Q123.04 46.23 123.36 45.85Q123.68 45.46 123.68 44.99Q123.68 44.39 123.25 44.04Q122.81 43.7 121.86 43.4L118.73 42.28Q117.05 41.68 116.16 40.69Q115.26 39.7 115.26 38.33Q115.26 36.52 116.9 35.41Q118.54 34.3 121.3 34.3Q124.04 34.3 125.53 35.5Q127.03 36.7 127.07 38.54H123.8Q123.73 37.83 123.12 37.42Q122.52 37.01 121.3 37.01Q120.19 37.01 119.57 37.46Q118.94 37.91 118.94 38.51Q118.94 39.53 120.68 40.04L124.07 41.31Q125.72 41.87 126.63 42.75Q127.54 43.64 127.54 44.99Q127.54 46.13 126.79 47.14Q126.03 48.15 124.67 48.78Q123.32 49.41 121.53 49.41ZM137.16 49.41Q135.37 49.41 133.83 48.48Q132.29 47.54 131.34 45.84Q130.39 44.14 130.39 41.84Q130.39 39.41 131.34 37.72Q132.29 36.03 133.83 35.17Q135.37 34.3 137.16 34.3Q138.56 34.3 139.63 34.75Q140.7 35.2 141.45 35.95Q142.2 36.71 142.63 37.64Q143.06 38.57 143.18 39.51L139.67 39.6Q139.43 38.66 138.79 38.04Q138.15 37.42 137.13 37.42Q136.3 37.42 135.56 37.88Q134.82 38.35 134.36 39.32Q133.89 40.29 133.89 41.84Q133.89 43.31 134.33 44.29Q134.76 45.27 135.5 45.77Q136.24 46.26 137.13 46.26Q138.46 46.26 139.07 45.62Q139.67 44.98 139.67 43.9H143.18Q143.18 45.42 142.48 46.67Q141.79 47.92 140.45 48.67Q139.11 49.41 137.16 49.41ZM109.41 49.41Q108.14 49.41 107.09 48.94Q106.03 48.47 105.41 47.5Q104.78 46.52 104.78 45.02V37.01H102.78V34.71H104.78V30.91H108.26V34.71H112.15V37.01H108.26V44.9Q108.26 46.67 109.94 46.67Q110.45 46.67 110.97 46.55Q111.48 46.44 112.15 46.2L112.65 48.65Q111.82 48.97 111.04 49.19Q110.26 49.41 109.41 49.41ZM79.59 49V34.65H83.07V49ZM65.61 39.01H68.85Q70.47 39.01 71.29 38.16Q72.12 37.3 72.12 35.98Q72.12 34.62 71.29 33.75Q70.47 32.88 68.85 32.88H65.61ZM91.07 40.63H97.18Q97.17 40.16 97.1 39.67Q96.99 38.97 96.68 38.38Q96.37 37.79 95.8 37.43Q95.23 37.07 94.35 37.07Q93.29 37.07 92.55 37.6Q91.82 38.13 91.43 39.04Q91.13 39.76 91.07 40.63ZM81.33 32.09Q80.31 32.09 79.74 31.55Q79.18 31.01 79.18 30.05Q79.18 29.13 79.74 28.57Q80.31 28.02 81.33 28.02Q82.33 28.02 82.9 28.57Q83.48 29.13 83.48 30.05Q83.48 31.01 82.9 31.55Q82.33 32.09 81.33 32.09Z" />
             </svg>
           </a>
-          <p class="footer__info">Frontend Developer<br />Löbau, Germany</p>
+          <p class="footer__info" data-i18n-html="footer.info"></p>
         </div>
         <p class="footer__copyright">© Angelo Pietsch 2026</p>
         <ul class="footer__links">
           <li><a class="footer__link" href="https://github.com/AngeloDevLab">GitHub</a></li>
           <li><a class="footer__link" href="#">LinkedIn</a></li>
-          <li><a class="footer__link" href="mailto:apietsch94@gmail.com">Email</a></li>
-          <li><a class="footer__link" href="imprint.html">Legal Notice</a></li>
-          <li><a class="footer__link" href="privacy.html">Privacy Policy</a></li>
+          <li><a class="footer__link" href="mailto:apietsch94@gmail.com" data-i18n="social.email"></a></li>
+          <li><a class="footer__link" href="imprint.html" data-i18n="footer.legal"></a></li>
+          <li><a class="footer__link" href="privacy.html" data-i18n="footer.privacy"></a></li>
         </ul>
       </footer>
       <section class="hero" aria-hidden="true">
         <div class="header">
           <nav class="nav">
             <div class="lang-toggle" role="group">
-              <button tabindex="-1" class="lang-toggle__option lang-toggle__option--active" type="button">EN</button>
-              <button tabindex="-1" class="lang-toggle__option" type="button">DE</button>
+              <button tabindex="-1" class="lang-toggle__option" type="button" data-lang="en">EN</button>
+              <button tabindex="-1" class="lang-toggle__option" type="button" data-lang="de">DE</button>
             </div>
             <ul class="nav__list">
-              <li><a tabindex="-1" class="nav__link" href="#about">About me</a></li>
-              <li><a tabindex="-1" class="nav__link" href="#skills">Skills</a></li>
-              <li><a tabindex="-1" class="nav__link" href="#projects">Projects</a></li>
+              <li><a tabindex="-1" class="nav__link" href="#about" data-i18n="nav.about"></a></li>
+              <li><a tabindex="-1" class="nav__link" href="#skills" data-i18n="nav.skills"></a></li>
+              <li><a tabindex="-1" class="nav__link" href="#projects" data-i18n="nav.projects"></a></li>
             </ul>
           </nav>
           <a tabindex="-1" class="logo" href="#">
@@ -418,8 +419,8 @@
         <p class="hero__role">Frontend Developer</p>
         <div class="hero__name">Angelo Pietsch</div>
         <div class="hero__actions">
-          <a tabindex="-1" class="button" href="#projects">Check my work</a>
-          <a tabindex="-1" class="button" href="#contact">Contact me</a>
+          <a tabindex="-1" class="button" href="#projects" data-i18n="hero.work"></a>
+          <a tabindex="-1" class="button" href="#contact" data-i18n="hero.contact"></a>
         </div>
         <div class="hero__decor">
           <div class="hero__column">

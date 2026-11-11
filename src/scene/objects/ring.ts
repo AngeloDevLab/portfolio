@@ -19,6 +19,7 @@ export interface Ring {
   front: Band;
   back: Band;
   lastHeroBottom: number | null;
+  maxAnisotropy: number;
 }
 
 /**
@@ -39,11 +40,16 @@ function createBand(geometry: THREE.CylinderGeometry, side: THREE.Side, color: n
 }
 
 /**
- * Applies a texture to a band and shows it.
+ * Applies a texture to a band, replacing an older one at the same position, and shows the band.
  * @param band - Band that receives the texture.
  * @param texture - Finished texture.
  */
 function applyTexture(band: Band, texture: THREE.CanvasTexture) {
+  const previous = band.material.map;
+  if (previous) {
+    texture.offset.x = previous.offset.x;
+    previous.dispose();
+  }
   band.material.map = texture;
   band.material.emissiveMap = texture;
   band.material.needsUpdate = true;
@@ -51,7 +57,7 @@ function applyTexture(band: Band, texture: THREE.CanvasTexture) {
 }
 
 /**
- * Creates the tilted ring from a sharp front and a blurred, darker back.
+ * Creates the tilted ring from a sharp front and a blurred, darker back. It stays hidden until setRingTexts runs.
  * @param maxAnisotropy - Highest texture filtering level the device supports.
  * @returns The ring parts.
  */
@@ -63,9 +69,17 @@ export function createRing(maxAnisotropy: number): Ring {
   group.rotation.z = TILT;
   front.renderOrder = 1;
   group.add(back, front);
-  createRingTexture(maxAnisotropy).then((texture) => applyTexture(front, texture));
-  createRingTexture(maxAnisotropy, BACK_BLUR).then((texture) => applyTexture(back, texture));
-  return { group, front, back, lastHeroBottom: null };
+  return { group, front, back, lastHeroBottom: null, maxAnisotropy };
+}
+
+/**
+ * Draws new texts onto the ring, e.g. after a language switch.
+ * @param ring - Ring to update.
+ * @param texts - Texts shown on the ring.
+ */
+export function setRingTexts(ring: Ring, texts: string[]) {
+  createRingTexture(texts, ring.maxAnisotropy).then((texture) => applyTexture(ring.front, texture));
+  createRingTexture(texts, ring.maxAnisotropy, BACK_BLUR).then((texture) => applyTexture(ring.back, texture));
 }
 
 /**
