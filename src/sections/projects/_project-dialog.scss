@@ -16,6 +16,7 @@ $dialog-gutter: fluid($space-12, $space-96);
   background: linear-gradient(to bottom left, $color-green-dark, $color-dark 60%);
   color: $color-white;
   overflow-y: auto;
+  @include scrollbar;
   overscroll-behavior: contain;
 
   &::backdrop {

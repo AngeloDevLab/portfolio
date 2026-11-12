@@ -25,6 +25,28 @@
   padding-inline: calc(#{fluid($space-16, $space-96)} + max(0px, (100% - #{$section-max-width}) / 2));
 }
 
+// Teal scrollbar on a transparent track. The width stays with the browser, so the
+// target size exception for user agent controls (WCAG 2.5.8) still applies.
+// Browsers without scrollbar-color (Safari) get the same look through the WebKit pseudo-elements.
+@mixin scrollbar {
+  scrollbar-color: $color-teal transparent;
+
+  @supports not (scrollbar-color: auto) {
+    &::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: $radius-100;
+      background: $color-teal;
+    }
+  }
+}
+
 // Layout switches. Only for real layout changes; sizes and spacing
 // scale fluidly via fluid() instead.
 @mixin tablet {

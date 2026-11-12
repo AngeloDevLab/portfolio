@@ -1,4 +1,5 @@
 @use 'tokens' as *;
+@use 'mixins' as *;
 
 * {
   margin: 0;
@@ -13,6 +14,7 @@ body {
 
 html {
   background: $color-dark;
+  @include scrollbar;
 }
 
 @media (prefers-reduced-motion: no-preference) {
