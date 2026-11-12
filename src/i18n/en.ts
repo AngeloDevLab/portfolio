@@ -26,7 +26,7 @@ export const en = {
   'about.title': 'About me',
   'about.intro':
     "Hey there, I'm Angelo! I build for the web with HTML, SCSS, TypeScript and Angular. I also have a passion for game development: I love bringing my own ideas to life and iterating on them, which is how the 3D elements on this page came about.",
-  'about.location': 'Based in Saxony, Germany and open to remote work.',
+  'about.location': 'Based in Saxony, Germany, and open to remote work.',
   'about.learning':
     "Always learning, always iterating. I'm finishing the frontend part of my training at Developer Akademie, and backend comes next. For this portfolio I taught myself three.js.",
   'about.approach':
@@ -49,23 +49,23 @@ export const en = {
   'dialog.next': 'Next project',
   'project.join.alt': 'Screenshot of Join',
   'project.join.text':
-    'Task manager inspired by the Kanban system. Create and organize tasks with drag and drop, assign contacts and categories. Started as a group project, then extended on my own with an n8n issue collector that turns incoming emails into tickets using AI.',
+    'Task manager inspired by the Kanban system. Create and organize tasks with drag and drop, and assign contacts and categories. Started as a group project, then extended on my own with an n8n issue collector that turns incoming emails into tickets using AI.',
   'project.chromatic.alt': 'Screenshot of CHROMATIC',
   'project.chromatic.text':
-    '2D jump and run built to learn and practice object-oriented programming in JavaScript. Fight your way through the level and defeat all enemies. Along the way I designed the maps in Tiled and took a deep dive into pixel art.',
+    '2D platformer built to learn and practice object-oriented programming in JavaScript. Fight your way through the level and defeat all enemies. Along the way I designed the maps in Tiled and took a deep dive into pixel art.',
   'project.poll.alt': 'Screenshot of the Poll App',
   'project.poll.text':
     'My first Angular app: create polls, vote and watch the results update live. It showed me how much a good framework takes off your hands, and was my first step into routing, custom pipes and Supabase as a database.',
   'project.cuisine.alt': 'Screenshot of Code à Cuisine',
   'project.cuisine.text':
-    'Recipe generator built with Angular. Enter the ingredients you have at home and an AI suggests three matching recipes, which are saved to a shared cookbook. n8n connects to Google Gemini with daily limits to keep costs under control, Supabase stores the recipes.',
+    'Recipe generator built with Angular. Enter the ingredients you have at home and an AI suggests three matching recipes, which are saved to a shared cookbook. n8n connects to Google Gemini with daily limits to keep costs under control, and Supabase stores the recipes.',
 
   'references.title': 'What my colleagues say about me',
   'references.quote1':
     'Angelo stands out through his initiative, creativity and eagerness to learn. He questions things and dives into new topics with real commitment, aiming not just to find solutions but to truly understand them.',
   'references.author1': 'ChatGPT - AI Assistant',
   'references.quote2':
-    'Angelo knows what he wants and says it clearly. He asks for honest answers instead of sugarcoating, and his Unity and C# background shows in his strong sense for structure and game logic.',
+    'Angelo knows what he wants and says it clearly. He asks for honest answers instead of sugarcoated ones, and his Unity and C# background shows in his strong sense for structure and game logic.',
   'references.author2': 'Claude - AI Pair Programmer',
   'references.quote3':
     'Placeholder: Angelo has proven to be a reliable group partner. His technical skills and proactive approach were crucial to the success of our project.',
@@ -83,8 +83,8 @@ export const en = {
   'contact.title': "Let's work together",
   'contact.subtitle': 'Got a problem to solve?',
   'contact.intro':
-    "Have an idea for a website or app, or are you looking for support in your team? Tell me what you are working on, and let's find out how I can help bring it to life.",
-  'contact.cta': 'Need a Frontend developer? <span class="contact__highlight">Let\'s talk!</span>',
+    "Have an idea for a website or app, or are you looking for support for your team? Tell me what you are working on, and let's find out how I can help bring it to life.",
+  'contact.cta': 'Need a frontend developer? <span class="contact__highlight">Let\'s talk!</span>',
   'contact.name.label': "What's your name?",
   'contact.name.placeholder': 'Your name goes here',
   'contact.name.error': 'Oops! It seems your name is missing',
