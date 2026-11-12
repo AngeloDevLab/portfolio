@@ -1,7 +1,12 @@
 import { MathUtils } from 'three';
 
 const LOOP_MARGIN = 2;
+const TOP_RESISTANCE = 250;
+const RESISTANCE_RESET_MS = 300;
 let smoothScrollY = 0;
+let topPull = 0;
+let lastPullTime = 0;
+let lastTouchY = 0;
 
 /**
  * Returns the maximum scroll distance of the page in pixels.
@@ -56,25 +61,40 @@ function jumpTo(targetY: number) {
 }
 
 /**
- * Moves the page slightly off the very top, so scrolling up can trigger the loop as well.
+ * Collects upward scrolling at the very top and jumps to the hero copy at the end once it passes the resistance.
+ * Short or interrupted pulls start over, so a small slip does not leave the hero.
+ * @param deltaY - Scroll distance of the gesture in pixels, negative when scrolling up.
  */
-export function initScrollLoop() {
-  if (window.scrollY < LOOP_MARGIN) {
-    window.scrollTo({ top: LOOP_MARGIN, behavior: 'instant' });
-  }
-  smoothScrollY = window.scrollY;
+function pullPastTop(deltaY: number) {
+  const now = performance.now();
+  if (window.scrollY > 0 || deltaY >= 0 || now - lastPullTime > RESISTANCE_RESET_MS) topPull = 0;
+  lastPullTime = now;
+  if (window.scrollY > 0 || deltaY >= 0) return;
+  topPull -= deltaY;
+  if (topPull < TOP_RESISTANCE) return;
+  topPull = 0;
+  jumpTo(getMaxScroll() - LOOP_MARGIN);
 }
 
 /**
- * Loops the page in both directions: past the bottom continues at the top, past the top continues at the bottom.
+ * Feeds mouse wheel and touch gestures into the resistance at the top of the page.
+ */
+export function initScrollLoop() {
+  smoothScrollY = window.scrollY;
+  window.addEventListener('wheel', (event) => pullPastTop(event.deltaY * (event.deltaMode === 1 ? 16 : 1)), { passive: true });
+  window.addEventListener('touchstart', (event) => (lastTouchY = event.touches[0].clientY), { passive: true });
+  window.addEventListener('touchmove', (event) => {
+    const touchY = event.touches[0].clientY;
+    pullPastTop(lastTouchY - touchY);
+    lastTouchY = touchY;
+  }, { passive: true });
+}
+
+/**
+ * Continues at the top once the page is scrolled past the bottom. Scrolling past the top is handled by the resistance.
  */
 export function loopScroll() {
-  const maxScroll = getMaxScroll();
-  if (window.scrollY >= maxScroll - 1) {
-    jumpTo(LOOP_MARGIN);
-  } else if (window.scrollY <= 0) {
-    jumpTo(maxScroll - LOOP_MARGIN);
-  }
+  if (window.scrollY >= getMaxScroll() - 1) jumpTo(LOOP_MARGIN);
 }
 
 /**
