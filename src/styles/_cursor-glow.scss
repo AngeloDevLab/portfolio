@@ -1,0 +1,27 @@
+@use 'tokens' as *;
+
+$glow-size: 420px;
+
+.cursor-glow {
+  position: fixed;
+  top: -$glow-size * 0.5;
+  left: -$glow-size * 0.5;
+  z-index: -1;
+  width: $glow-size;
+  height: $glow-size;
+  border-radius: 50%;
+  background: radial-gradient(circle closest-side, rgba($color-teal, 0.4), transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+
+  &--visible {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-glow {
+    transition: none;
+  }
+}

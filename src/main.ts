@@ -6,6 +6,7 @@ import { updateRingBlur } from './scene/objects/ring-blur.ts';
 import { createSkillIcons, updateSkillIcons } from './scene/objects/skill-icons.ts';
 import { getElementProgress, getVisibleBottom, initScrollLoop, jumpToHeroOnClick, keepFocusOutOfHeroCopy, loopScroll, updateSmoothProgress } from './scene/scroll.ts';
 import { openExternalLinksInNewTab } from './external-links.ts';
+import { initCursorGlow } from './cursor-glow.ts';
 import { initHeader } from './sections/header/header.ts';
 import { initMenu } from './sections/header/menu.ts';
 import { initProjectDialog } from './sections/projects/project-dialog.ts';
@@ -52,6 +53,7 @@ onLanguageChange(() => {
 });
 initI18n();
 openExternalLinksInNewTab();
+initCursorGlow();
 initMenu();
 initProjectDialog();
 initReferences();
