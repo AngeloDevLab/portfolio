@@ -10,6 +10,7 @@ $skill-icons: html, css, sass, js, ts, angular, vite, supabase, firebase, api, g
   gap: $space-40;
   padding-bottom: fluid($space-96, 144px);
   @include section-padding;
+  background: radial-gradient(ellipse 50% 60% at 0% 50%, rgba($color-green-dark, 0.3), transparent);
   font-family: $font-karla;
   font-size: fluid(16px, 18px);
   line-height: 1.2;
