@@ -4,6 +4,7 @@ import { createCube, updateCube } from './scene/objects/cube.ts';
 import { createRing, setRingTexts, updateRing } from './scene/objects/ring.ts';
 import { updateRingBlur } from './scene/objects/ring-blur.ts';
 import { createSkillIcons, updateSkillIcons } from './scene/objects/skill-icons.ts';
+import { createWater, dropIntoWater, liftWaterPointer, moveWaterPointer, resizeWater, updateWater, type Water } from './scene/water.ts';
 import { getElementProgress, getVisibleBottom, initScrollLoop, jumpToHeroOnClick, keepFocusOutOfHeroCopy, loopScroll, updateSmoothProgress } from './scene/scroll.ts';
 import { openExternalLinksInNewTab } from './external-links.ts';
 import { initCursorGlow } from './cursor-glow.ts';
@@ -16,6 +17,7 @@ import { initI18n, onLanguageChange, translate } from './i18n/i18n.ts';
 import type { TranslationKey } from './i18n/en.ts';
 
 const RING_TEXT_KEYS: TranslationKey[] = ['ring.role', 'ring.openToWork', 'ring.location', 'ring.remote'];
+const WATER_QUERY = '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
 
 const canvas = document.querySelector<HTMLCanvasElement>('.scene')!;
 const cubeSlot = document.querySelector<HTMLElement>('.about__photo')!;
@@ -29,8 +31,24 @@ const cube = createCube();
 const ring = createRing(stage.renderer.capabilities.getMaxAnisotropy());
 const skillIcons = createSkillIcons(skillSlots);
 stage.scene.add(cube, ring.group, skillIcons.group);
+const water = window.matchMedia(WATER_QUERY).matches ? createWater(document.querySelector<HTMLCanvasElement>('.water')!) : null;
 
 let lastTime = 0;
+
+/**
+ * Feeds mouse moves, clicks and window size changes into the water background.
+ * @param water - Water state.
+ */
+function connectWater(water: Water) {
+  document.addEventListener('pointermove', (event) => {
+    if (event.pointerType === 'mouse') moveWaterPointer(water, event.clientX, event.clientY);
+  });
+  document.addEventListener('pointerdown', (event) => {
+    if (event.pointerType === 'mouse') dropIntoWater(water, event.clientX, event.clientY);
+  });
+  document.documentElement.addEventListener('mouseleave', () => liftWaterPointer(water));
+  window.addEventListener('resize', () => resizeWater(water));
+}
 
 /**
  * Updates the 3D objects from the scroll position and renders the frame.
@@ -44,6 +62,7 @@ function animate(time: number) {
   updateRingBlur(ringBlur, ring, stage.camera);
   updateSkillIcons(skillIcons, stage.camera, skillsSection.getBoundingClientRect(), getElementProgress(skillsGrid));
   stage.renderer.render(stage.scene, stage.camera);
+  if (water) updateWater(water, deltaSeconds);
 }
 
 onLanguageChange(() => {
@@ -54,6 +73,7 @@ onLanguageChange(() => {
 initI18n();
 openExternalLinksInNewTab();
 initCursorGlow();
+if (water) connectWater(water);
 initMenu();
 initProjectDialog();
 initReferences();
