@@ -7,17 +7,33 @@ $lang-option-width: 44px;
 
 .header {
   position: absolute;
-  top: $space-16;
+  top: 0;
   left: 0;
   right: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-block: $space-16 $space-24;
   @include section-padding;
   z-index: 1;
+  background: linear-gradient(to bottom, $color-backdrop, transparent);
 
   @include desktop {
-    top: $space-24;
+    padding-top: $space-24;
+  }
+
+  &--fixed {
+    position: fixed;
+    z-index: 3;
+    transition: translate 300ms ease;
+  }
+
+  &--hidden {
+    translate: 0 -100%;
+  }
+
+  &--instant {
+    transition: none;
   }
 
   .logo__wordmark {
@@ -30,11 +46,8 @@ $lang-option-width: 44px;
 
   &--legal {
     position: static;
-    padding-top: $space-16;
-
-    @include desktop {
-      padding-top: $space-24;
-    }
+    padding-bottom: 0;
+    background: none;
 
     .logo {
       order: -1;
@@ -176,6 +189,7 @@ $lang-option-width: 44px;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .header--fixed,
   .burger__line,
   .nav__link,
   .nav__link::after,
