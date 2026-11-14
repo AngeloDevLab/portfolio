@@ -139,7 +139,7 @@ $lang-option-width: 44px;
     font-family: $font-fira;
     font-size: 16px;
     font-weight: $font-weight-bold;
-    color: $color-teal-50;
+    color: $color-teal;
     transition: color 200ms ease, background-color 200ms ease;
 
     & + & {
@@ -149,13 +149,13 @@ $lang-option-width: 44px;
 
     &--active {
       background: $color-teal;
-      color: $color-white;
+      color: $color-dark;
     }
   }
 
   &:hover &__option:not(&__option--active),
   &:focus-visible &__option:not(&__option--active) {
-    color: $color-teal;
+    color: $color-white;
   }
 }
 
