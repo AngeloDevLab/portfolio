@@ -77,12 +77,12 @@ $back-size: 32px;
 
   &__link {
     color: $color-white;
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 4px;
 
     &:hover,
     &:focus-visible {
-      text-decoration: underline $color-teal;
-      text-underline-offset: 4px;
+      text-decoration-color: $color-teal;
     }
   }
 
