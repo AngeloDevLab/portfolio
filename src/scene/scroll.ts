@@ -1,5 +1,3 @@
-import { MathUtils } from 'three';
-
 const LOOP_MARGIN = 2;
 const TOP_RESISTANCE = 250;
 const RESISTANCE_RESET_MS = 300;
@@ -35,7 +33,7 @@ export function getElementProgress(element: HTMLElement) {
   const screenHeight = window.innerHeight;
   const centeredAt = element.offsetTop + element.offsetHeight / 2 - screenHeight / 2;
   const distance = wrapScrollY(smoothScrollY) - centeredAt;
-  return MathUtils.clamp((distance + screenHeight) / (2 * screenHeight), 0, 1);
+  return Math.min(Math.max((distance + screenHeight) / (2 * screenHeight), 0), 1);
 }
 
 /**
