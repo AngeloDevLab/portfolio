@@ -37,16 +37,23 @@ export function getElementProgress(element: HTMLElement) {
 }
 
 /**
+ * Checks whether an element is at least partly inside the viewport.
+ * @param element - Element to check.
+ * @returns True if any part of the element is visible.
+ */
+export function isInViewport(element: HTMLElement) {
+  const { top, bottom } = element.getBoundingClientRect();
+  return bottom > 0 && top < window.innerHeight;
+}
+
+/**
  * Returns the bottom edge of the first element that is currently inside the viewport.
  * @param elements - Elements to check.
  * @returns Bottom edge in pixels, or null if none of them is visible.
  */
 export function getVisibleBottom(elements: NodeListOf<HTMLElement>) {
-  for (const element of elements) {
-    const { top, bottom } = element.getBoundingClientRect();
-    if (bottom > 0 && top < window.innerHeight) return bottom;
-  }
-  return null;
+  const visible = [...elements].find(isInViewport);
+  return visible ? visible.getBoundingClientRect().bottom : null;
 }
 
 /**

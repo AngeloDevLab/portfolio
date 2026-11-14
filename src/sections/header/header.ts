@@ -1,19 +1,9 @@
+import { isInViewport } from '../../scroll.ts';
+
 const SCROLL_THRESHOLD = 15;
 
 let lastScrollY = 0;
 let scrollDelta = 0;
-
-/**
- * Checks whether at least one of the elements is inside the viewport.
- * @param elements - Elements to check.
- * @returns True if any element is visible.
- */
-function isAnyVisible(elements: NodeListOf<HTMLElement>) {
-  return [...elements].some((element) => {
-    const { top, bottom } = element.getBoundingClientRect();
-    return bottom > 0 && top < window.innerHeight;
-  });
-}
 
 /**
  * Switches the header between its spot at the top of the hero and the fixed bar. The fixed bar starts hidden without sliding.
@@ -52,7 +42,7 @@ function updateHeader(header: HTMLElement, heroes: NodeListOf<HTMLElement>) {
   const atTop = heroes[0].getBoundingClientRect().top > -header.offsetHeight;
   setFixed(header, !atTop);
   if (atTop) return;
-  if (isAnyVisible(heroes) || Math.abs(delta) > window.innerHeight) {
+  if ([...heroes].some(isInViewport) || Math.abs(delta) > window.innerHeight) {
     scrollDelta = 0;
     header.classList.add('header--hidden');
     return;

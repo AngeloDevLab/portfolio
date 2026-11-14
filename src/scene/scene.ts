@@ -4,7 +4,7 @@ import { createRing, setRingTexts, updateRing, type Ring } from './objects/ring.
 import { updateRingBlur } from './objects/ring-blur.ts';
 import { createSkillIcons, updateSkillIcons, type SkillIcons } from './objects/skill-icons.ts';
 import { createWater, dropIntoWater, liftWaterPointer, moveWaterPointer, resizeWater, updateWater, type Water } from './water.ts';
-import { getElementProgress, getVisibleBottom, updateSmoothProgress } from './scroll.ts';
+import { getElementProgress, getVisibleBottom, updateSmoothProgress } from '../scroll.ts';
 
 const WATER_QUERY = '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
 
