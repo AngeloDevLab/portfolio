@@ -26,17 +26,15 @@ export function initProjectDialog() {
   const dialog = document.querySelector<HTMLDialogElement>('.project-dialog')!;
   const projects = [...dialog.querySelectorAll<HTMLElement>('.project-dialog__project')];
   let current = 0;
-  document.querySelectorAll('.projects__row').forEach((row, index) => {
-    row.addEventListener('click', () => {
-      current = index;
-      showProject(dialog, projects, current);
-      dialog.showModal();
-    });
-  });
-  dialog.querySelector('.project-dialog__next')!.addEventListener('click', () => {
-    current = (current + 1) % projects.length;
+  const show = (index: number) => {
+    current = index % projects.length;
     showProject(dialog, projects, current);
-  });
+  };
+  document.querySelectorAll('.projects__row').forEach((row, index) => row.addEventListener('click', () => {
+    show(index);
+    dialog.showModal();
+  }));
+  dialog.querySelector('.project-dialog__next')!.addEventListener('click', () => show(current + 1));
   dialog.querySelector('.project-dialog__close')!.addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', (event) => closeOnBackdrop(dialog, event));
 }

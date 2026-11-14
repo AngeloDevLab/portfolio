@@ -1,6 +1,13 @@
 const MIN_CARDS = 5;
 const SWIPE_THRESHOLD = 50;
 
+interface Carousel {
+  cards: HTMLElement[];
+  dots: HTMLElement[];
+  count: number;
+  current: number;
+}
+
 /**
  * Clones the card set until there are enough cards to show a neighbor on both sides at all times.
  * @param list - List that holds the reference cards.
@@ -100,6 +107,34 @@ function listenForSwipe(element: HTMLElement, onSwipe: (direction: number) => vo
 }
 
 /**
+ * Makes a card the active one, wrapping around the end, and updates cards and dots.
+ * @param carousel - Carousel state.
+ * @param index - Index of the card to show, may be negative or beyond the end.
+ */
+function goTo(carousel: Carousel, index: number) {
+  const { cards, dots, count } = carousel;
+  carousel.current = (index + cards.length) % cards.length;
+  renderCards(cards, carousel.current);
+  renderDots(dots, carousel.current % count);
+}
+
+/**
+ * Connects the arrows, the dots and swipes on the card list to the carousel.
+ * @param section - References section.
+ * @param list - List that holds the reference cards.
+ * @param carousel - Carousel state.
+ */
+function connectControls(section: HTMLElement, list: HTMLElement, carousel: Carousel) {
+  const { dots, count } = carousel;
+  section.querySelector('.references__arrow--prev')!.addEventListener('click', () => goTo(carousel, carousel.current - 1));
+  section.querySelector('.references__arrow--next')!.addEventListener('click', () => goTo(carousel, carousel.current + 1));
+  dots.forEach((dot, index) => dot.addEventListener('click', () => {
+    goTo(carousel, carousel.current + getOffset(index, carousel.current % count, count));
+  }));
+  listenForSwipe(list, (direction) => goTo(carousel, carousel.current + direction));
+}
+
+/**
  * Turns the reference list into an endless carousel with arrows, dots and swipe.
  */
 export function initReferences() {
@@ -108,16 +143,8 @@ export function initReferences() {
   const count = list.children.length;
   const cards = fillCards(list);
   const dots = createDots(section.querySelector<HTMLElement>('.references__dot')!, count);
+  const carousel: Carousel = { cards, dots, count, current: 0 };
   labelReferenceDots();
-  let current = 0;
-  const goTo = (index: number) => {
-    current = (index + cards.length) % cards.length;
-    renderCards(cards, current);
-    renderDots(dots, current % count);
-  };
-  section.querySelector('.references__arrow--prev')!.addEventListener('click', () => goTo(current - 1));
-  section.querySelector('.references__arrow--next')!.addEventListener('click', () => goTo(current + 1));
-  dots.forEach((dot, index) => dot.addEventListener('click', () => goTo(current + getOffset(index, current % count, count))));
-  listenForSwipe(list, (direction) => goTo(current + direction));
-  goTo(0);
+  connectControls(section, list, carousel);
+  goTo(carousel, 0);
 }
