@@ -27,6 +27,7 @@ export interface Scene3d {
   skillIcons: SkillIcons;
   water: Water | null;
   lastTime: number;
+  wasVisible: boolean;
 }
 
 /**
@@ -45,7 +46,16 @@ function connectWater(water: Water) {
 }
 
 /**
- * Updates the 3D objects from the scroll position and renders one frame.
+ * Checks whether any 3D object is currently shown.
+ * @param scene - Scene state.
+ * @returns True if the ring, the cube or a skill icon is visible.
+ */
+function hasVisibleObjects({ ring, cube, skillIcons }: Scene3d) {
+  return ring.group.visible || cube.visible || skillIcons.icons.some((icon) => icon.mesh.visible);
+}
+
+/**
+ * Updates the 3D objects from the scroll position and renders one frame. Skips rendering while nothing is shown, after one last frame that clears the canvas.
  * @param scene - Scene state.
  * @param time - Milliseconds since the page started.
  */
@@ -57,7 +67,9 @@ function renderFrame(scene: Scene3d, time: number) {
   updateRing(ring, stage.camera, getVisibleBottom(el.heroes), deltaSeconds);
   updateRingBlur(el.ringBlur, ring, stage.camera);
   updateSkillIcons(scene.skillIcons, stage.camera, el.skillsSection.getBoundingClientRect(), getElementProgress(el.skillsGrid));
-  stage.renderer.render(stage.scene, stage.camera);
+  const visible = hasVisibleObjects(scene);
+  if (visible || scene.wasVisible) stage.renderer.render(stage.scene, stage.camera);
+  scene.wasVisible = visible;
   if (scene.water) updateWater(scene.water, deltaSeconds);
 }
 
@@ -70,7 +82,7 @@ export function startScene(elements: SceneElements): Scene3d {
   const stage = createStage(elements.canvas);
   const ring = createRing(stage.renderer.capabilities.getMaxAnisotropy());
   const water = window.matchMedia(WATER_QUERY).matches ? createWater(elements.waterCanvas) : null;
-  const scene: Scene3d = { elements, stage, cube: createCube(), ring, skillIcons: createSkillIcons(elements.skillSlots), water, lastTime: performance.now() };
+  const scene: Scene3d = { elements, stage, cube: createCube(), ring, skillIcons: createSkillIcons(elements.skillSlots), water, lastTime: performance.now(), wasVisible: true };
   stage.scene.add(scene.cube, ring.group, scene.skillIcons.group);
   if (water) connectWater(water);
   window.addEventListener('resize', () => resizeStage(stage));
