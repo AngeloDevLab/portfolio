@@ -43,7 +43,7 @@ export const de: Dictionary = {
   'skills.growth': 'Growth Mindset',
   'skills.bubble': 'Als Nächstes möchte ich lernen',
 
-  'projects.title': 'Ausgewählte Projekte',
+  'projects.title': 'Aus­gewählte Projekte',
   'projects.intro': 'Hier findest du eine Auswahl meiner Arbeiten. Klick dich durch die Projekte und sieh dir meine Skills in Aktion an.',
   'dialog.close': 'Schließen',
   'dialog.question': 'Worum geht es in dem Projekt?',
