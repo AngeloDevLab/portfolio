@@ -1,21 +1,16 @@
 import * as THREE from 'three';
 import { SVGLoader, type SVGResult } from 'three/addons/loaders/SVGLoader.js';
-import { easeInSoft } from '../easing.ts';
+import { getFlight, getFlightDepth, type FlightPhases } from '../flight.ts';
 import { getSlotTransform } from '../stage.ts';
 
-const ENTER_START = 0.1;
-const LAND_START = 0.3;
-const EXIT_START = 0.62;
-const EXIT_END = 0.85;
+const PHASES: FlightPhases = { enterStart: 0.1, landStart: 0.3, exitStart: 0.62, exitEnd: 0.85 };
 const STAGGER = 0.08;
 const FLY_DISTANCE = 9;
 const FLY_BACK = 4;
 const MAX_DEPTH = 0.25;
-const MIN_DEPTH = 0.001;
-const FLATTEN_RANGE = 0.1;
 const FADE_RANGE = 0.06;
+const EDGE_FADE_RANGE = 0.3;
 const GOLDEN_ANGLE = 2.4;
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 interface SkillIcon {
   mesh: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>;
@@ -88,19 +83,6 @@ function buildGeometry(data: SVGResult) {
 }
 
 /**
- * Turns scroll progress into the flight state of one icon.
- * @param progress - Scroll progress between 0 and 1.
- * @param stagger - Delay of this icon in scroll progress.
- * @returns -1 at the enter position, 0 while landed, 1 at the exit position.
- */
-function getFlight(progress: number, stagger: number) {
-  if (reducedMotion.matches) return 0;
-  const toLanding = THREE.MathUtils.clamp((progress - ENTER_START - stagger) / (LAND_START - ENTER_START), 0, 1);
-  const toExit = THREE.MathUtils.clamp((progress - EXIT_START - stagger) / (EXIT_END - EXIT_START), 0, 1);
-  return easeInSoft(toExit) - easeInSoft(1 - toLanding);
-}
-
-/**
  * Places an icon on its element, then shifts and turns it along its flight path. It is flat when landed, so it matches the element.
  * @param icon - Icon to place.
  * @param camera - Camera that views the icon.
@@ -109,7 +91,7 @@ function getFlight(progress: number, stagger: number) {
 function placeIcon({ mesh, element, direction, spin }: SkillIcon, camera: THREE.PerspectiveCamera, flight: number) {
   const { size, x, y } = getSlotTransform(camera, element.getBoundingClientRect());
   const distance = Math.abs(flight);
-  const depth = size * Math.max(MIN_DEPTH, MAX_DEPTH * THREE.MathUtils.smoothstep(distance, 0, FLATTEN_RANGE));
+  const depth = size * getFlightDepth(flight, MAX_DEPTH);
   mesh.scale.set(size, -size, depth);
   mesh.position.set(x + direction.x * flight, y + direction.y * flight, -depth / 2 - FLY_BACK * distance);
   mesh.rotation.set(flight * Math.PI * spin, flight * Math.PI * 2, 0);
@@ -128,18 +110,19 @@ function getSectionFade(section: DOMRect) {
 }
 
 /**
- * Updates one icon and cross-fades between the 3D icon in flight and the element once landed.
+ * Updates one icon and cross-fades between the 3D icon in flight and the element once landed. The 3D icon also fades at the far ends of its flight.
  * @param icon - Icon to update.
  * @param camera - Camera that views the icon.
  * @param progress - Scroll progress between 0 and 1.
  * @param sectionFade - Visibility of the section between 0 and 1.
  */
 function updateIcon(icon: SkillIcon, camera: THREE.PerspectiveCamera, progress: number, sectionFade: number) {
-  const flight = getFlight(progress, icon.stagger);
+  const flight = getFlight(progress, PHASES, icon.stagger);
   const distance = Math.abs(flight);
   const fade = THREE.MathUtils.smoothstep(distance, 0, FADE_RANGE);
+  const edgeFade = 1 - THREE.MathUtils.smoothstep(distance, 1 - EDGE_FADE_RANGE, 1);
   icon.element.style.opacity = String(1 - fade);
-  icon.mesh.material.opacity = fade * sectionFade;
+  icon.mesh.material.opacity = fade * edgeFade * sectionFade;
   icon.mesh.visible = distance > 0 && distance < 1 && sectionFade > 0;
   if (icon.mesh.visible) placeIcon(icon, camera, flight);
 }

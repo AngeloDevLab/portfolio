@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { createRingTexture } from './ring-texture.ts';
+import { getPixelsPerUnit } from '../stage.ts';
 
 const TILT = THREE.MathUtils.degToRad(3);
 const MAX_SCROLL_TILT = 0.3;
@@ -10,6 +11,10 @@ const SPEED_IN_PIXELS = 40;
 const BACK_BLUR = 6;
 const FADE_START = 0.5;
 const FADE_END = 0.85;
+const BAND_HEIGHT_MIN = 48;
+const BAND_HEIGHT_MAX = 64;
+const FLUID_MIN_WIDTH = 320;
+const FLUID_MAX_WIDTH = 1440;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 type Band = THREE.Mesh<THREE.CylinderGeometry, THREE.MeshStandardMaterial>;
@@ -83,12 +88,12 @@ export function setRingTexts(ring: Ring, texts: string[]) {
 }
 
 /**
- * Returns the band height in pixels, matching fluid(48px, 64px).
+ * Returns the band height in pixels, matching fluid(48px, 64px) in the styles.
  * @returns Band height in pixels.
  */
 function getBandHeight() {
-  const progress = THREE.MathUtils.clamp((window.innerWidth - 320) / (1440 - 320), 0, 1);
-  return THREE.MathUtils.lerp(48, 64, progress);
+  const progress = THREE.MathUtils.clamp((window.innerWidth - FLUID_MIN_WIDTH) / (FLUID_MAX_WIDTH - FLUID_MIN_WIDTH), 0, 1);
+  return THREE.MathUtils.lerp(BAND_HEIGHT_MIN, BAND_HEIGHT_MAX, progress);
 }
 
 /**
@@ -142,8 +147,8 @@ function fadeRing({ group, front, back }: Ring, heroBottom: number) {
  * @param heroBottom - Bottom edge of the visible hero in pixels.
  */
 function layoutRing({ group, front, back }: Ring, camera: THREE.PerspectiveCamera, heroBottom: number) {
-  const viewHeight = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-  const pixelsPerUnit = window.innerHeight / viewHeight;
+  const pixelsPerUnit = getPixelsPerUnit(camera);
+  const viewHeight = window.innerHeight / pixelsPerUnit;
   const radiusX = ((viewHeight * camera.aspect) / 2) * WIDTH_PER_HALF_VIEWPORT;
   const radiusZ = viewHeight * DEPTH_PER_VIEW_HEIGHT;
   const height = getBandHeight() / pixelsPerUnit;
