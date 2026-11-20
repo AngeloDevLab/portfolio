@@ -1,5 +1,5 @@
 import { createStage, resizeStage, type Stage } from './stage.ts';
-import { createCube, updateCube } from './objects/cube.ts';
+import { createCube, updateCube, type Cube } from './objects/cube.ts';
 import { createRing, setRingTexts, updateRing, type Ring } from './objects/ring.ts';
 import { updateRingBlur } from './objects/ring-blur.ts';
 import { createSkillIcons, updateSkillIcons, type SkillIcons } from './objects/skill-icons.ts';
@@ -22,7 +22,7 @@ export interface SceneElements {
 export interface Scene3d {
   elements: SceneElements;
   stage: Stage;
-  cube: ReturnType<typeof createCube>;
+  cube: Cube;
   ring: Ring;
   skillIcons: SkillIcons;
   water: Water | null;
@@ -63,7 +63,7 @@ function renderFrame(scene: Scene3d, time: number) {
   const { elements: el, stage, ring } = scene;
   const deltaSeconds = (time - scene.lastTime) / 1000;
   scene.lastTime = time;
-  updateCube(scene.cube, stage.camera, el.cubeSlot.getBoundingClientRect(), updateSmoothProgress(deltaSeconds, el.cubeSlot));
+  updateCube(scene.cube, stage.camera, el.cubeSlot, updateSmoothProgress(deltaSeconds, el.cubeSlot));
   updateRing(ring, stage.camera, getVisibleBottom(el.heroes), deltaSeconds);
   updateRingBlur(el.ringBlur, ring, stage.camera);
   updateSkillIcons(scene.skillIcons, stage.camera, el.skillsSection.getBoundingClientRect(), getElementProgress(el.skillsGrid));

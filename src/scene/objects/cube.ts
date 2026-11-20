@@ -8,27 +8,32 @@ const enterOffset = new THREE.Vector3(-10, -8, -5);
 const exitOffset = new THREE.Vector3(10, 8, -5);
 const CORNER_RADIUS = 30;
 const CORNER_SEGMENTS = 6;
+const FADE_RANGE = 0.06;
+const FACE_IMAGES = ['me_left', 'me_arms', 'me_right'];
 let roundedForWidth = 0;
 
+export type Cube = THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial[]>;
+
 /**
- * Creates the textured cube.
+ * Creates the cube with one photo on each pair of opposite faces. The front face shows the same photo as the slot.
  * @returns The cube mesh.
  */
-export function createCube() {
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshStandardMaterial({ map: createTexture() });
-  return new THREE.Mesh(geometry, material);
+export function createCube(): Cube {
+  const loader = new THREE.TextureLoader();
+  const pairs = FACE_IMAGES.map((name) => new THREE.MeshStandardMaterial({ map: createTexture(loader, name), transparent: true }));
+  const materials = pairs.flatMap((material) => [material, material]);
+  return new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), materials);
 }
 
 /**
- * Loads the cube image and crops it to a centered square.
- * @returns The texture for the cube faces.
+ * Loads one photo as a texture.
+ * @param loader - Loader for the image.
+ * @param name - File name of the photo without extension.
+ * @returns The texture.
  */
-function createTexture() {
-  const texture = new THREE.TextureLoader().load(`${import.meta.env.BASE_URL}origin.webp`);
+function createTexture(loader: THREE.TextureLoader, name: string) {
+  const texture = loader.load(`${import.meta.env.BASE_URL}images/${name}.webp`);
   texture.colorSpace = THREE.SRGBColorSpace;
-  texture.repeat.x = 768 / 1376;
-  texture.offset.x = (1 - texture.repeat.x) / 2;
   return texture;
 }
 
@@ -60,17 +65,32 @@ function placeCube(cube: THREE.Mesh, camera: THREE.PerspectiveCamera, slot: DOMR
 }
 
 /**
+ * Cross-fades between the cube in flight and the photo element once landed.
+ * @param cube - Cube to fade.
+ * @param slot - Photo element the cube lands on.
+ * @param flight - Flight state between -1 and 1.
+ */
+function fadeCube(cube: Cube, slot: HTMLElement, flight: number) {
+  const distance = Math.abs(flight);
+  const fade = THREE.MathUtils.smoothstep(distance, 0, FADE_RANGE);
+  slot.style.opacity = String(1 - fade);
+  cube.material.forEach((material) => (material.opacity = fade));
+  cube.visible = distance > 0 && distance < 1;
+}
+
+/**
  * Flies the cube into the slot, keeps it there facing the camera and flies it out again.
  * @param cube - Cube to update.
  * @param camera - Camera that views the cube.
- * @param slot - Screen position of the element the cube lands on.
+ * @param slot - Photo element the cube lands on.
  * @param progress - Scroll progress between 0 and 1.
  */
-export function updateCube(cube: THREE.Mesh, camera: THREE.PerspectiveCamera, slot: DOMRect, progress: number) {
+export function updateCube(cube: Cube, camera: THREE.PerspectiveCamera, slot: HTMLElement, progress: number) {
   const flight = getFlight(progress, PHASES);
-  cube.visible = Math.abs(flight) < 1;
-  roundCorners(cube, slot.width);
-  placeCube(cube, camera, slot, flight);
+  const rect = slot.getBoundingClientRect();
+  fadeCube(cube, slot, flight);
+  roundCorners(cube, rect.width);
+  placeCube(cube, camera, rect, flight);
   cube.rotation.x = flight * Math.PI;
   cube.rotation.y = flight * Math.PI * 2;
 }

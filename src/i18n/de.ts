@@ -26,6 +26,7 @@ export const de: Dictionary = {
 
   'about.label': 'Wer ich bin',
   'about.title': 'Über mich',
+  'about.photoAlt': 'Schwarz-Weiß-Porträt von Angelo Pietsch',
   'about.intro':
     'Hi, ich bin Angelo! Ich entwickle fürs Web mit HTML, SCSS, TypeScript und Angular. Außerdem schlägt mein Herz für Spieleentwicklung: Ich setze gern eigene Ideen um und verbessere sie Schritt für Schritt. So sind auch die 3D-Elemente auf dieser Seite entstanden.',
   'about.location': 'Ich lebe in Sachsen und bin offen für Remote-Arbeit.',

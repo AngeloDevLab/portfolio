@@ -24,6 +24,7 @@ export const en = {
 
   'about.label': 'Who I Am',
   'about.title': 'About me',
+  'about.photoAlt': 'Black and white portrait of Angelo Pietsch',
   'about.intro':
     "Hey there, I'm Angelo! I build for the web with HTML, SCSS, TypeScript and Angular. I also have a passion for game development: I love bringing my own ideas to life and iterating on them, which is how the 3D elements on this page came about.",
   'about.location': 'Based in Saxony, Germany, and open to remote work.',

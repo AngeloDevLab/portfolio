@@ -19,7 +19,10 @@
   }
 
   &__photo {
+    width: 100%;
+    height: auto;
     aspect-ratio: 1;
+    object-fit: cover;
     border-radius: $radius-30;
     background: $color-teal-10;
   }

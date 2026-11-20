@@ -2,7 +2,7 @@
 @use '../../styles/mixins' as *;
 
 // File names in public/icons/skills.
-$skill-icons: html, css, sass, js, ts, angular, vite, supabase, firebase, api, git, n8n, figma, growth-mindset, threedotjs, dotnet;
+$skill-icons: html, css, sass, js, ts, angular, vite, supabase, firebase, api, git, n8n, figma, growth-mindset, threedotjs, csharp;
 
 .skills {
   display: flex;
@@ -128,12 +128,9 @@ $skill-icons: html, css, sass, js, ts, angular, vite, supabase, firebase, api, g
       background: $color-teal;
     }
 
-    &--threedotjs {
+    &--threedotjs,
+    &--csharp {
       background: $color-dark;
-    }
-
-    &--dotnet {
-      background: #512bd4;
     }
 
     &--small {
