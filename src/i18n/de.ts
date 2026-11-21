@@ -65,19 +65,14 @@ export const de: Dictionary = {
 
   'references.title': 'Was andere über mich sagen',
   'references.quote1':
-    'Angelo überzeugt durch Eigeninitiative, Kreativität und Lernbereitschaft. Er hinterfragt Dinge und taucht mit echtem Engagement in neue Themen ein, mit dem Ziel, Lösungen nicht nur zu finden, sondern wirklich zu verstehen.',
-  'references.author1': 'ChatGPT - KI-Assistent',
+    'Ich habe mit Angelo an unserem Gruppenprojekt Join gearbeitet. Er hat Verantwortung für seine Aufgaben übernommen, seine Ideen klar erklärt und war immer offen für Feedback. Wenn wir nicht weiterkamen, hat er uns zu einer sauberen Lösung geführt, statt nur schnell etwas zusammenzuflicken.',
+  'references.author1': 'Louis Juchem - Teampartner',
   'references.quote2':
-    'Angelo weiß, was er will, und sagt es klar. Er will ehrliche Antworten statt Schönfärberei, und sein Hintergrund in Unity und C# zeigt sich in seinem ausgeprägten Gespür für Struktur und Spiellogik.',
-  'references.author2': 'Claude - KI-Pair-Programmer',
+    'Angelo überzeugt durch Eigeninitiative, Kreativität und Lernbereitschaft. Er hinterfragt Dinge und taucht mit echtem Engagement in neue Themen ein, mit dem Ziel, Lösungen nicht nur zu finden, sondern wirklich zu verstehen.',
+  'references.author2': 'ChatGPT - KI-Assistent',
   'references.quote3':
-    'Platzhalter: Angelo hat sich als verlässlicher Gruppenpartner erwiesen. Seine technischen Fähigkeiten und seine proaktive Art waren entscheidend für den Erfolg unseres Projekts.',
-  'references.quote4':
-    'Platzhalter: Die Zusammenarbeit mit Angelo war eine tolle Erfahrung. Er hatte immer das große Ganze im Blick und hat geholfen, wenn jemand im Team nicht weiterkam.',
-  'references.quote5':
-    'Platzhalter: Angelo blieb auch unter Druck ruhig, hat klar kommuniziert und sauberen Code pünktlich geliefert. Ich würde jederzeit wieder mit ihm zusammenarbeiten.',
-  'references.authorTeam': 'Name - Teampartner',
-  'references.authorDev': 'Name - Frontend Developer',
+    'Angelo weiß, was er will, und sagt es klar. Er will ehrliche Antworten statt Schönfärberei, und sein Hintergrund in Unity und C# zeigt sich in seinem ausgeprägten Gespür für Struktur und Spiellogik.',
+  'references.author3': 'Claude - KI-Pair-Programmer',
   'references.prev': 'Vorherige Referenz',
   'references.next': 'Nächste Referenz',
   'references.dot': 'Referenz anzeigen',

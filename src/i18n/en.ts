@@ -63,19 +63,14 @@ export const en = {
 
   'references.title': 'What my colleagues say about me',
   'references.quote1':
-    'Angelo stands out through his initiative, creativity and eagerness to learn. He questions things and dives into new topics with real commitment, aiming not just to find solutions but to truly understand them.',
-  'references.author1': 'ChatGPT - AI Assistant',
+    'I worked with Angelo on our group project Join. He took ownership of his tasks, explained his ideas clearly and was always open to feedback. Whenever we got stuck, he helped us find a clean solution instead of a quick fix.',
+  'references.author1': 'Louis Juchem - Team Partner',
   'references.quote2':
-    'Angelo knows what he wants and says it clearly. He asks for honest answers instead of sugarcoated ones, and his Unity and C# background shows in his strong sense for structure and game logic.',
-  'references.author2': 'Claude - AI Pair Programmer',
+    'Angelo stands out through his initiative, creativity and eagerness to learn. He questions things and dives into new topics with real commitment, aiming not just to find solutions but to truly understand them.',
+  'references.author2': 'ChatGPT - AI Assistant',
   'references.quote3':
-    'Placeholder: Angelo has proven to be a reliable group partner. His technical skills and proactive approach were crucial to the success of our project.',
-  'references.quote4':
-    'Placeholder: Working with Angelo was a great experience. He always kept the bigger picture in mind and helped the team whenever someone got stuck.',
-  'references.quote5':
-    'Placeholder: Angelo stayed calm under pressure, communicated clearly and delivered clean code on time. I would happily work with him again.',
-  'references.authorTeam': 'Name - Team Partner',
-  'references.authorDev': 'Name - Frontend Developer',
+    'Angelo knows what he wants and says it clearly. He asks for honest answers instead of sugarcoated ones, and his Unity and C# background shows in his strong sense for structure and game logic.',
+  'references.author3': 'Claude - AI Pair Programmer',
   'references.prev': 'Previous reference',
   'references.next': 'Next reference',
   'references.dot': 'Show reference',
