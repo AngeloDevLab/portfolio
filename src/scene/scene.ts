@@ -12,7 +12,7 @@ export interface SceneElements {
   canvas: HTMLCanvasElement;
   waterCanvas: HTMLCanvasElement;
   cubeSlot: HTMLElement;
-  heroes: NodeListOf<HTMLElement>;
+  hero: HTMLElement;
   ringBlur: HTMLElement;
   skillsSection: HTMLElement;
   skillsGrid: HTMLElement;
@@ -64,7 +64,7 @@ function renderFrame(scene: Scene3d, time: number) {
   const deltaSeconds = (time - scene.lastTime) / 1000;
   scene.lastTime = time;
   updateCube(scene.cube, stage.camera, el.cubeSlot, updateSmoothProgress(deltaSeconds, el.cubeSlot));
-  updateRing(ring, stage.camera, getVisibleBottom(el.heroes), deltaSeconds);
+  updateRing(ring, stage.camera, getVisibleBottom(el.hero), deltaSeconds);
   updateRingBlur(el.ringBlur, ring, stage.camera);
   updateSkillIcons(scene.skillIcons, stage.camera, el.skillsSection.getBoundingClientRect(), getElementProgress(el.skillsGrid));
   const visible = hasVisibleObjects(scene);

@@ -7,7 +7,6 @@ My personal developer portfolio with a scroll-driven 3D scene.
 ## Features
 
 - **3D scene with three.js:** a rotating text ring in the hero, a photo cube that flies into the About me section and lands on the photo, and extruded skill icons that fly into the skill grid. All motion follows the scroll position.
-- **Endless scroll:** a copy of the hero at the end of the page loops back to the top in both directions, so the legal links stay reachable by scrolling up.
 - **Background effects:** a water ripple that follows the mouse (on its own WebGL canvas) and a soft cursor glow.
 - **English and German:** all texts switch at runtime, the choice is remembered once the toggle is used.
 - **Projects:** a list with hover previews and a dialog with details, links and screenshots.

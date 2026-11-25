@@ -32,17 +32,17 @@ function sumScrollDelta(delta: number) {
 }
 
 /**
- * Hides the fixed header while scrolling down or while a hero is visible, and shows it again while scrolling up.
+ * Hides the fixed header while scrolling down or while the hero is visible, and shows it again while scrolling up.
  * @param header - Page header.
- * @param heroes - Hero and its copy at the end of the page.
+ * @param hero - Hero section.
  */
-function updateHeader(header: HTMLElement, heroes: NodeListOf<HTMLElement>) {
+function updateHeader(header: HTMLElement, hero: HTMLElement) {
   const delta = window.scrollY - lastScrollY;
   lastScrollY = window.scrollY;
-  const atTop = heroes[0].getBoundingClientRect().top > -header.offsetHeight;
+  const atTop = hero.getBoundingClientRect().top > -header.offsetHeight;
   setFixed(header, !atTop);
   if (atTop) return;
-  if ([...heroes].some(isInViewport) || Math.abs(delta) > window.innerHeight) {
+  if (isInViewport(hero)) {
     scrollDelta = 0;
     header.classList.add('header--hidden');
     return;
@@ -53,12 +53,12 @@ function updateHeader(header: HTMLElement, heroes: NodeListOf<HTMLElement>) {
 
 /**
  * Makes the header a fixed bar below the hero that hides while scrolling down and returns while scrolling up.
- * @param heroes - Hero and its copy at the end of the page.
+ * @param hero - Hero section.
  */
-export function initHeader(heroes: NodeListOf<HTMLElement>) {
+export function initHeader(hero: HTMLElement) {
   const header = document.querySelector<HTMLElement>('.header')!;
   lastScrollY = window.scrollY;
   header.addEventListener('focusin', () => header.classList.remove('header--hidden'));
-  window.addEventListener('scroll', () => updateHeader(header, heroes), { passive: true });
-  updateHeader(header, heroes);
+  window.addEventListener('scroll', () => updateHeader(header, hero), { passive: true });
+  updateHeader(header, hero);
 }

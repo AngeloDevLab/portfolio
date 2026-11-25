@@ -179,10 +179,10 @@ function spinRing(ring: Ring, heroBottom: number, deltaSeconds: number) {
 }
 
 /**
- * Updates the ring for the current frame and hides it while no hero is visible.
+ * Updates the ring for the current frame and hides it while the hero is out of view.
  * @param ring - Ring to update.
  * @param camera - Camera that views the ring.
- * @param heroBottom - Bottom edge of the visible hero in pixels, or null if no hero is visible.
+ * @param heroBottom - Bottom edge of the visible hero in pixels, or null if the hero is out of view.
  * @param deltaSeconds - Time since the last frame in seconds.
  */
 export function updateRing(ring: Ring, camera: THREE.PerspectiveCamera, heroBottom: number | null, deltaSeconds: number) {

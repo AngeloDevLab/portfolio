@@ -1,5 +1,4 @@
 import './styles/main.scss';
-import { initScrollLoop, jumpToHeroOnClick, keepFocusOutOfHeroCopy, loopScroll } from './scroll.ts';
 import { openExternalLinksInNewTab } from './external-links.ts';
 import { initCursorGlow } from './cursor-glow.ts';
 import { initHeader } from './sections/header/header.ts';
@@ -15,15 +14,15 @@ const RING_TEXT_KEYS: TranslationKey[] = ['ring.role', 'ring.openToWork', 'ring.
 
 /**
  * Collects the page elements the 3D scene reads positions from or draws into.
- * @param heroes - Hero and its copy at the end of the page.
+ * @param hero - Hero section.
  * @returns Elements for the scene.
  */
-function getSceneElements(heroes: NodeListOf<HTMLElement>): SceneElements {
+function getSceneElements(hero: HTMLElement): SceneElements {
   return {
     canvas: document.querySelector<HTMLCanvasElement>('.scene')!,
     waterCanvas: document.querySelector<HTMLCanvasElement>('.water')!,
     cubeSlot: document.querySelector<HTMLElement>('.about__photo')!,
-    heroes,
+    hero,
     ringBlur: document.querySelector<HTMLElement>('.ring-blur')!,
     skillsSection: document.querySelector<HTMLElement>('.skills')!,
     skillsGrid: document.querySelector<HTMLElement>('.skills__grid')!,
@@ -33,33 +32,21 @@ function getSceneElements(heroes: NodeListOf<HTMLElement>): SceneElements {
 
 /**
  * Loads three.js, starts the 3D scene and keeps the ring texts in the active language.
- * @param heroes - Hero and its copy at the end of the page.
+ * @param hero - Hero section.
  */
-async function loadScene(heroes: NodeListOf<HTMLElement>) {
+async function loadScene(hero: HTMLElement) {
   const { startScene, setSceneTexts } = await import('./scene/scene.ts');
-  const scene = startScene(getSceneElements(heroes));
+  const scene = startScene(getSceneElements(hero));
   const showRingTexts = () => setSceneTexts(scene, RING_TEXT_KEYS.map(translate));
   showRingTexts();
   onLanguageChange(showRingTexts);
 }
 
 /**
- * Sets up the endless scroll loop, the header and the hero copy at the end of the page.
- * @param heroes - Hero and its copy at the end of the page.
- */
-function initScrolling(heroes: NodeListOf<HTMLElement>) {
-  initScrollLoop();
-  initHeader(heroes);
-  jumpToHeroOnClick(heroes[1]);
-  keepFocusOutOfHeroCopy(heroes[1]);
-  window.addEventListener('scroll', loopScroll);
-}
-
-/**
- * Sets up texts, sections and scrolling of the homepage and starts the 3D scene once the page has finished loading.
+ * Sets up texts, sections and header of the homepage and starts the 3D scene once the page has finished loading.
  */
 function initPage() {
-  const heroes = document.querySelectorAll<HTMLElement>('.hero');
+  const hero = document.querySelector<HTMLElement>('.hero')!;
   onLanguageChange(() => {
     labelReferenceDots();
     refreshContactTexts();
@@ -71,8 +58,8 @@ function initPage() {
   initProjectDialog();
   initReferences();
   initContactForm();
-  initScrolling(heroes);
-  window.addEventListener('load', () => loadScene(heroes), { once: true });
+  initHeader(hero);
+  window.addEventListener('load', () => loadScene(hero), { once: true });
 }
 
 initPage();

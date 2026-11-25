@@ -11,13 +11,11 @@ function closeOnBackdropOrLink(menu: HTMLDialogElement, event: MouseEvent) {
 }
 
 /**
- * Connects all burger buttons to the menu and closes it again when the layout switches to desktop.
+ * Connects the burger button to the menu and closes it again when the layout switches to desktop.
  */
 export function initMenu() {
   const menu = document.querySelector<HTMLDialogElement>('.menu')!;
-  document.querySelectorAll('.burger').forEach((burger) => {
-    burger.addEventListener('click', () => menu.showModal());
-  });
+  document.querySelector('.burger')!.addEventListener('click', () => menu.showModal());
   menu.addEventListener('click', (event) => closeOnBackdropOrLink(menu, event));
   window.matchMedia(DESKTOP_QUERY).addEventListener('change', () => menu.close());
 }
