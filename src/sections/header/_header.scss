@@ -25,6 +25,10 @@ $lang-option-width: 44px;
   &--fixed {
     position: fixed;
     z-index: 3;
+    padding-block: $space-16;
+    border-bottom: $border-width solid $color-teal-30;
+    background: $color-dark-80;
+    backdrop-filter: blur(12px);
     transition: translate 300ms ease;
   }
 
