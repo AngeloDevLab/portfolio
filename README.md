@@ -1,17 +1,17 @@
 # Portfolio
 
-My personal developer portfolio with a scroll-driven 3D scene.
+My personal developer portfolio with 3D elements built in three.js.
 
 **Live:** [angelodevelopment.de](https://angelodevelopment.de)
 
 ## Features
 
-- **3D scene with three.js:** a rotating text ring in the hero, a photo cube that flies into the About me section and lands on the photo, and extruded skill icons that fly into the skill grid. All motion follows the scroll position.
+- **3D scene with three.js:** a rotating text ring in the hero, a photo cube that flies into the About me section and lands on the photo, and extruded skill icons that fly into the skill grid. Cube and icons fly in while scrolling, stay landed as long as their target is fully visible and fly out again, on any screen height.
 - **Background effects:** a water ripple that follows the mouse (on its own WebGL canvas) and a soft cursor glow.
 - **English and German:** all texts switch at runtime, the choice is remembered once the toggle is used.
 - **Projects:** a list with hover previews and a dialog with details, links and screenshots.
-- **Contact form:** validation on blur without layout shift, the submit button only unlocks once everything is valid. Messages are sent through an [n8n](https://n8n.io) webhook, with a honeypot against bots.
-- **Imprint and privacy policy** as separate pages without three.js.
+- **Contact form:** validation on blur without layout shift. The submit button looks disabled until everything is valid, a click on it anyway shows what is missing. A toast confirms the message. Messages are sent through an [n8n](https://n8n.io) webhook, with a honeypot against bots.
+- **Imprint and privacy policy** as separate pages with the same header, without three.js.
 
 ### Accessibility and performance
 
