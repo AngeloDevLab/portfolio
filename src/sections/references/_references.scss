@@ -7,6 +7,10 @@ $side-scale: 0.9;
 // Distance between card centers in % of the card width, so the scaled side cards keep the gap.
 $card-step: math.div(1 + $side-scale, 2) * 100%;
 $slide-duration: 400ms;
+$cards-max-width: $section-max-width - 2 * $space-96;
+$edge-fade: 160px;
+// Room above the cards so the edge mask does not cut off the quote mark.
+$quote-room: $space-24;
 
 .references {
   display: flex;
@@ -34,8 +38,16 @@ $slide-duration: 400ms;
     display: grid;
     justify-items: center;
     width: 100%;
+    max-width: $cards-max-width;
+    overflow-x: clip;
     list-style: none;
     touch-action: pan-y;
+
+    @include desktop {
+      padding-top: $quote-room;
+      margin-top: -$quote-room;
+      mask-image: linear-gradient(to right, transparent, #000 $edge-fade, #000 calc(100% - #{$edge-fade}), transparent);
+    }
   }
 
   &__card {
