@@ -1,15 +1,23 @@
 let smoothScrollY = window.scrollY;
 
+export interface LandingOffsets {
+  enter: number;
+  exit: number;
+}
+
 /**
- * Returns the progress of an element passing through the screen: 0.5 when its center is at the screen center, 0 one screen earlier, 1 one screen later.
+ * Measures how far an element is from being fully visible, based on the smoothed scroll position. An element taller than the screen counts as fully visible while its center is at the screen center.
  * @param element - Element to measure against.
- * @returns Element progress between 0 and 1.
+ * @returns Scroll distance in screen heights: enter until the element is fully visible (0 once it is), exit since it started leaving at the top (0 before).
  */
-export function getElementProgress(element: HTMLElement) {
+export function getLandingOffsets(element: HTMLElement): LandingOffsets {
   const screenHeight = window.innerHeight;
-  const centeredAt = element.offsetTop + element.offsetHeight / 2 - screenHeight / 2;
-  const distance = smoothScrollY - centeredAt;
-  return Math.min(Math.max((distance + screenHeight) / (2 * screenHeight), 0), 1);
+  const top = element.offsetTop - smoothScrollY;
+  const bottom = top + element.offsetHeight;
+  const centerOffset = (top + bottom) / 2 - screenHeight / 2;
+  const enter = Math.max(Math.min(bottom - screenHeight, centerOffset), 0);
+  const exit = Math.max(Math.min(-top, -centerOffset), 0);
+  return { enter: enter / screenHeight, exit: exit / screenHeight };
 }
 
 /**
@@ -34,11 +42,8 @@ export function getVisibleBottom(element: HTMLElement) {
 /**
  * Moves the smoothed scroll position a bit closer to the real one.
  * @param deltaSeconds - Time since the last frame in seconds.
- * @param element - Element the progress is measured against.
- * @returns Element progress between 0 and 1.
  */
-export function updateSmoothProgress(deltaSeconds: number, element: HTMLElement) {
+export function updateSmoothScroll(deltaSeconds: number) {
   const factor = 1 - Math.exp(-8 * deltaSeconds);
   smoothScrollY += (window.scrollY - smoothScrollY) * factor;
-  return getElementProgress(element);
 }

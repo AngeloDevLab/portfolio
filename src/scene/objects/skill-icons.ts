@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 import { SVGLoader, type SVGResult } from 'three/addons/loaders/SVGLoader.js';
-import { getFlight, getFlightDepth, type FlightPhases } from '../flight.ts';
+import { getFlight, getFlightDepth, type FlightRanges } from '../flight.ts';
 import { getSlotTransform } from '../stage.ts';
+import type { LandingOffsets } from '../../scroll.ts';
 
-const PHASES: FlightPhases = { enterStart: 0.1, landStart: 0.3, exitStart: 0.62, exitEnd: 0.85 };
-const STAGGER = 0.08;
+const RANGES: FlightRanges = { enter: 0.4, exit: 0.46 };
+const STAGGER = 0.16;
 const FLY_DISTANCE = 9;
 const FLY_BACK = 4;
 const MAX_DEPTH = 0.25;
@@ -110,14 +111,15 @@ function getSectionFade(section: DOMRect) {
 }
 
 /**
- * Updates one icon and cross-fades between the 3D icon in flight and the element once landed. The 3D icon also fades at the far ends of its flight.
+ * Updates one icon and cross-fades between the 3D icon in flight and the element once landed. The 3D icon also fades at the far ends of its flight. Later icons land and leave later, the last one lands once the grid is fully visible.
  * @param icon - Icon to update.
  * @param camera - Camera that views the icon.
- * @param progress - Scroll progress between 0 and 1.
+ * @param offsets - Landing offsets of the icon grid.
  * @param sectionFade - Visibility of the section between 0 and 1.
  */
-function updateIcon(icon: SkillIcon, camera: THREE.PerspectiveCamera, progress: number, sectionFade: number) {
-  const flight = getFlight(progress, PHASES, icon.stagger);
+function updateIcon(icon: SkillIcon, camera: THREE.PerspectiveCamera, offsets: LandingOffsets, sectionFade: number) {
+  const staggered = { enter: offsets.enter - (STAGGER - icon.stagger), exit: offsets.exit - icon.stagger };
+  const flight = getFlight(staggered, RANGES);
   const distance = Math.abs(flight);
   const fade = THREE.MathUtils.smoothstep(distance, 0, FADE_RANGE);
   const edgeFade = 1 - THREE.MathUtils.smoothstep(distance, 1 - EDGE_FADE_RANGE, 1);
@@ -132,9 +134,9 @@ function updateIcon(icon: SkillIcon, camera: THREE.PerspectiveCamera, progress: 
  * @param skillIcons - Icons to update.
  * @param camera - Camera that views the icons.
  * @param section - Screen position of the section the icons belong to.
- * @param progress - Scroll progress between 0 and 1.
+ * @param offsets - Landing offsets of the icon grid.
  */
-export function updateSkillIcons({ icons }: SkillIcons, camera: THREE.PerspectiveCamera, section: DOMRect, progress: number) {
+export function updateSkillIcons({ icons }: SkillIcons, camera: THREE.PerspectiveCamera, section: DOMRect, offsets: LandingOffsets) {
   const sectionFade = getSectionFade(section);
-  icons.forEach((icon) => updateIcon(icon, camera, progress, sectionFade));
+  icons.forEach((icon) => updateIcon(icon, camera, offsets, sectionFade));
 }

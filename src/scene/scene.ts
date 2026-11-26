@@ -4,7 +4,7 @@ import { createRing, setRingTexts, updateRing, type Ring } from './objects/ring.
 import { updateRingBlur } from './objects/ring-blur.ts';
 import { createSkillIcons, updateSkillIcons, type SkillIcons } from './objects/skill-icons.ts';
 import { createWater, dropIntoWater, liftWaterPointer, moveWaterPointer, resizeWater, updateWater, type Water } from './water.ts';
-import { getElementProgress, getVisibleBottom, updateSmoothProgress } from '../scroll.ts';
+import { getLandingOffsets, getVisibleBottom, updateSmoothScroll } from '../scroll.ts';
 
 const WATER_QUERY = '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
 
@@ -63,10 +63,11 @@ function renderFrame(scene: Scene3d, time: number) {
   const { elements: el, stage, ring } = scene;
   const deltaSeconds = (time - scene.lastTime) / 1000;
   scene.lastTime = time;
-  updateCube(scene.cube, stage.camera, el.cubeSlot, updateSmoothProgress(deltaSeconds, el.cubeSlot));
+  updateSmoothScroll(deltaSeconds);
+  updateCube(scene.cube, stage.camera, el.cubeSlot, getLandingOffsets(el.cubeSlot));
   updateRing(ring, stage.camera, getVisibleBottom(el.hero), deltaSeconds);
   updateRingBlur(el.ringBlur, ring, stage.camera);
-  updateSkillIcons(scene.skillIcons, stage.camera, el.skillsSection.getBoundingClientRect(), getElementProgress(el.skillsGrid));
+  updateSkillIcons(scene.skillIcons, stage.camera, el.skillsSection.getBoundingClientRect(), getLandingOffsets(el.skillsGrid));
   const visible = hasVisibleObjects(scene);
   if (visible || scene.wasVisible) stage.renderer.render(stage.scene, stage.camera);
   scene.wasVisible = visible;

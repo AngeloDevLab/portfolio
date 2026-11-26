@@ -1,9 +1,10 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { getFlight, getFlightDepth, type FlightPhases } from '../flight.ts';
+import { getFlight, getFlightDepth, type FlightRanges } from '../flight.ts';
 import { getSlotTransform } from '../stage.ts';
+import type { LandingOffsets } from '../../scroll.ts';
 
-const PHASES: FlightPhases = { enterStart: 0.15, landStart: 0.4, exitStart: 0.6, exitEnd: 0.85 };
+const RANGES: FlightRanges = { enter: 0.5, exit: 0.5 };
 const enterOffset = new THREE.Vector3(-10, -8, -5);
 const exitOffset = new THREE.Vector3(10, 8, -5);
 const CORNER_RADIUS = 30;
@@ -83,10 +84,10 @@ function fadeCube(cube: Cube, slot: HTMLElement, flight: number) {
  * @param cube - Cube to update.
  * @param camera - Camera that views the cube.
  * @param slot - Photo element the cube lands on.
- * @param progress - Scroll progress between 0 and 1.
+ * @param offsets - Landing offsets of the slot.
  */
-export function updateCube(cube: Cube, camera: THREE.PerspectiveCamera, slot: HTMLElement, progress: number) {
-  const flight = getFlight(progress, PHASES);
+export function updateCube(cube: Cube, camera: THREE.PerspectiveCamera, slot: HTMLElement, offsets: LandingOffsets) {
+  const flight = getFlight(offsets, RANGES);
   const rect = slot.getBoundingClientRect();
   fadeCube(cube, slot, flight);
   roundCorners(cube, rect.width);

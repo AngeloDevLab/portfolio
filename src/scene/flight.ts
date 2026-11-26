@@ -1,28 +1,26 @@
 import { MathUtils } from 'three';
 import { easeInSoft } from './easing.ts';
+import type { LandingOffsets } from '../scroll.ts';
 
 const MIN_DEPTH = 0.001;
 const FLATTEN_RANGE = 0.1;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-export interface FlightPhases {
-  enterStart: number;
-  landStart: number;
-  exitStart: number;
-  exitEnd: number;
+export interface FlightRanges {
+  enter: number;
+  exit: number;
 }
 
 /**
- * Turns scroll progress into the flight state of an object that flies in, stays landed and flies out again. With reduced motion it stays landed.
- * @param progress - Scroll progress between 0 and 1.
- * @param phases - Scroll progress at which each part of the flight starts or ends.
- * @param delay - Extra delay of this object in scroll progress.
+ * Turns the landing offsets of the target element into the flight state of an object that flies in, stays landed while the target is fully visible and flies out again. With reduced motion it stays landed.
+ * @param offsets - Scroll distance of the target to being fully visible and since it started leaving, in screen heights.
+ * @param ranges - Scroll distance of the fly in and the fly out, in screen heights.
  * @returns -1 at the enter position, 0 while landed, 1 at the exit position.
  */
-export function getFlight(progress: number, { enterStart, landStart, exitStart, exitEnd }: FlightPhases, delay = 0) {
+export function getFlight(offsets: LandingOffsets, ranges: FlightRanges) {
   if (reducedMotion.matches) return 0;
-  const toLanding = MathUtils.clamp((progress - delay - enterStart) / (landStart - enterStart), 0, 1);
-  const toExit = MathUtils.clamp((progress - delay - exitStart) / (exitEnd - exitStart), 0, 1);
+  const toLanding = MathUtils.clamp(1 - offsets.enter / ranges.enter, 0, 1);
+  const toExit = MathUtils.clamp(offsets.exit / ranges.exit, 0, 1);
   return easeInSoft(toExit) - easeInSoft(1 - toLanding);
 }
 
