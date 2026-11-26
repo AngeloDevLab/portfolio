@@ -22,6 +22,11 @@ $lang-option-width: 44px;
     padding-top: $space-24;
   }
 
+  &--legal {
+    padding-bottom: 0;
+    background: none;
+  }
+
   &--fixed {
     position: fixed;
     z-index: 3;
@@ -45,20 +50,6 @@ $lang-option-width: 44px;
 
     @include desktop {
       display: block;
-    }
-  }
-
-  &--legal {
-    position: static;
-    padding-bottom: 0;
-    background: none;
-
-    .logo {
-      order: -1;
-
-      @include desktop {
-        order: 0;
-      }
     }
   }
 }

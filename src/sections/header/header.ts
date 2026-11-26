@@ -32,17 +32,28 @@ function sumScrollDelta(delta: number) {
 }
 
 /**
+ * Checks whether the header still sits in its spot at the top of the page.
+ * @param header - Page header.
+ * @param hero - Hero section, if the page has one.
+ * @returns True until the header has been scrolled out of view.
+ */
+function isAtTop(header: HTMLElement, hero?: HTMLElement) {
+  const top = hero ? hero.getBoundingClientRect().top : -window.scrollY;
+  return top > -header.offsetHeight;
+}
+
+/**
  * Hides the fixed header while scrolling down or while the hero is visible, and shows it again while scrolling up.
  * @param header - Page header.
- * @param hero - Hero section.
+ * @param hero - Hero section, if the page has one.
  */
-function updateHeader(header: HTMLElement, hero: HTMLElement) {
+function updateHeader(header: HTMLElement, hero?: HTMLElement) {
   const delta = window.scrollY - lastScrollY;
   lastScrollY = window.scrollY;
-  const atTop = hero.getBoundingClientRect().top > -header.offsetHeight;
+  const atTop = isAtTop(header, hero);
   setFixed(header, !atTop);
   if (atTop) return;
-  if (isInViewport(hero)) {
+  if (hero && isInViewport(hero)) {
     scrollDelta = 0;
     header.classList.add('header--hidden');
     return;
@@ -52,10 +63,10 @@ function updateHeader(header: HTMLElement, hero: HTMLElement) {
 }
 
 /**
- * Makes the header a fixed bar below the hero that hides while scrolling down and returns while scrolling up.
- * @param hero - Hero section.
+ * Makes the header a fixed bar below the hero, or below the page top without a hero, that hides while scrolling down and returns while scrolling up.
+ * @param hero - Hero section, if the page has one.
  */
-export function initHeader(hero: HTMLElement) {
+export function initHeader(hero?: HTMLElement) {
   const header = document.querySelector<HTMLElement>('.header')!;
   lastScrollY = window.scrollY;
   header.addEventListener('focusin', () => header.classList.remove('header--hidden'));

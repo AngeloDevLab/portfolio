@@ -4,9 +4,21 @@
 $content-max-width: 970px;
 $back-size: 32px;
 
+body:has(.legal) {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 100%;
+}
+
 .legal {
-  padding-block: fluid($space-32, $space-56) fluid($space-64, $space-96);
+  flex-grow: 1;
+  padding-block: calc(#{$space-16 + $logo-height} + #{fluid($space-32, $space-56)}) fluid($space-64, $space-96);
   @include section-padding;
+
+  @include desktop {
+    padding-top: calc(#{$space-24 + $logo-height} + #{fluid($space-32, $space-56)});
+  }
   font-family: $font-karla;
   font-size: 16px;
   line-height: 1.3;
