@@ -90,6 +90,7 @@ export const de: Dictionary = {
   'contact.email.label': 'Wie lautet deine E-Mail?',
   'contact.email.placeholder': 'deine@email.de',
   'contact.email.error': 'Ups! Deine E-Mail fehlt noch',
+  'contact.email.invalid': 'Bitte gib eine gültige E-Mail-Adresse ein',
   'contact.message.label': 'Wie kann ich helfen?',
   'contact.message.placeholder': 'Hallo Angelo, ich interessiere mich für ...',
   'contact.message.error': 'Was soll entwickelt werden?',

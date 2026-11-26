@@ -13,7 +13,7 @@
   text-decoration: none;
   transition: color 200ms ease, border-color 200ms ease;
 
-  &:hover:not(:disabled),
+  &:hover:not(:disabled, [aria-disabled='true']),
   &:focus-visible {
     color: $color-teal;
     border-color: $color-teal;

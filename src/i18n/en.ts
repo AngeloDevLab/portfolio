@@ -88,6 +88,7 @@ export const en = {
   'contact.email.label': "What's your email?",
   'contact.email.placeholder': 'youremail@email.com',
   'contact.email.error': 'Whoops! Your email is required',
+  'contact.email.invalid': 'Please enter a valid email address',
   'contact.message.label': 'How can I help you?',
   'contact.message.placeholder': 'Hello Angelo, I am interested in...',
   'contact.message.error': 'What do you need to develop?',

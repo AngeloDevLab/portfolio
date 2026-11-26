@@ -342,7 +342,8 @@
           </div>
           <div class="contact__field">
             <label class="contact__question" for="contact-email" data-i18n="contact.email.label"></label>
-            <input class="contact__input" id="contact-email" name="email" type="email" autocomplete="email" data-i18n-attr="data-placeholder:contact.email.placeholder; data-error:contact.email.error" required />
+            <input class="contact__input" id="contact-email" name="email" type="email" autocomplete="email" aria-describedby="contact-email-error" data-i18n-attr="data-placeholder:contact.email.placeholder; data-error:contact.email.error" required />
+            <p class="contact__field-error" id="contact-email-error" data-i18n="contact.email.invalid"></p>
           </div>
           <div class="contact__field">
             <label class="contact__question" for="contact-message" data-i18n="contact.message.label"></label>
@@ -354,7 +355,7 @@
           </label>
           <p class="contact__privacy-error" id="contact-privacy-error" data-i18n="contact.privacy.error"></p>
           <button class="button contact__submit" type="submit" data-i18n="contact.submit"></button>
-          <p class="contact__status" role="status" data-i18n-attr="data-success:contact.success; data-error:contact.failed"></p>
+          <p class="contact__toast" role="status" data-i18n-attr="data-success:contact.success; data-error:contact.failed"></p>
         </form>
       </section>
       <footer class="footer">

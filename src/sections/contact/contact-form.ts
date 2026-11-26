@@ -1,15 +1,16 @@
+import { hideToast, renderToast, showToast } from './contact-toast.ts';
+
 type Control = HTMLInputElement | HTMLTextAreaElement;
-type StatusState = 'success' | 'error';
 
 interface ContactForm {
   form: HTMLFormElement;
   controls: Control[];
   submit: HTMLButtonElement;
-  status: HTMLElement;
+  toast: HTMLElement;
   sending: boolean;
 }
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const EMAIL_PATTERN = /^[^\s@.]+(\.[^\s@.]+)*@([\p{L}\d]([\p{L}\d-]*[\p{L}\d])?\.)+\p{L}{2,}$/u;
 
 /**
  * Checks whether a required form control holds a valid value.
@@ -24,13 +25,24 @@ function isValid(control: Control): boolean {
 }
 
 /**
- * Shows or clears the error state of a text field. Empty fields show their error text as placeholder.
+ * Returns the error text linked to a control via aria-describedby.
+ * @param control - Form control.
+ * @returns The error text element, or null if the control has none.
+ */
+function getErrorText(control: Control) {
+  const id = control.getAttribute('aria-describedby');
+  return id ? document.getElementById(id) : null;
+}
+
+/**
+ * Shows or clears the error state of a text field. Empty fields show their error as placeholder, filled ones below the field.
  * @param control - Text field, email field or textarea.
  * @param valid - Whether the value is valid.
  */
 function renderFieldState(control: Control, valid: boolean) {
   control.closest('.contact__field')!.classList.toggle('contact__field--invalid', !valid);
   control.placeholder = valid ? control.dataset.placeholder! : control.dataset.error!;
+  getErrorText(control)?.classList.toggle('contact__field-error--visible', !valid && control.value !== '');
 }
 
 /**
@@ -39,15 +51,15 @@ function renderFieldState(control: Control, valid: boolean) {
  * @param valid - Whether the checkbox is checked.
  */
 function renderPrivacyState(control: Control, valid: boolean) {
-  const error = document.getElementById(control.getAttribute('aria-describedby')!)!;
-  error.classList.toggle('contact__privacy-error--visible', !valid);
+  getErrorText(control)!.classList.toggle('contact__privacy-error--visible', !valid);
 }
 
 /**
- * Validates a control and shows the result.
+ * Trims the value of a text control, then validates it and shows the result.
  * @param control - Control to validate.
  */
 function validate(control: Control) {
+  if (control.type !== 'checkbox') control.value = control.value.trim();
   const valid = isValid(control);
   control.setAttribute('aria-invalid', String(!valid));
   if (control.type === 'checkbox') renderPrivacyState(control, valid);
@@ -55,19 +67,31 @@ function validate(control: Control) {
 }
 
 /**
- * Enables the submit button only when every required control is valid and nothing is being sent.
- * @param ctx - Contact form elements and state.
+ * Handles input: the checkbox is validated right away, a text field drops its error while the user types.
+ * @param control - Control that received input.
  */
-function updateSubmit(ctx: ContactForm) {
-  ctx.submit.disabled = ctx.sending || !ctx.controls.every(isValid);
+function handleInput(control: Control) {
+  if (control.type === 'checkbox') return validate(control);
+  if (control.getAttribute('aria-invalid') !== 'true') return;
+  control.setAttribute('aria-invalid', 'false');
+  renderFieldState(control, true);
 }
 
 /**
- * Re-validates while typing only if the control already shows an error, so errors never appear mid-input.
- * @param control - Control that received input.
+ * Marks the submit button as disabled while a control is invalid or the form is being sent. It stays clickable to show what is missing.
+ * @param ctx - Contact form elements and state.
  */
-function revalidateIfInvalid(control: Control) {
-  if (control.type === 'checkbox' || control.getAttribute('aria-invalid') === 'true') validate(control);
+function updateSubmit(ctx: ContactForm) {
+  ctx.submit.setAttribute('aria-disabled', String(ctx.sending || !ctx.controls.every(isValid)));
+}
+
+/**
+ * Validates every control, shows all errors and moves the focus to the first invalid control.
+ * @param ctx - Contact form elements and state.
+ */
+function showAllErrors(ctx: ContactForm) {
+  ctx.controls.forEach(validate);
+  ctx.controls.find((control) => !isValid(control))?.focus({ focusVisible: true });
 }
 
 /**
@@ -106,35 +130,25 @@ async function sendForm(form: HTMLFormElement): Promise<boolean> {
 }
 
 /**
- * Shows the success or error text of the status line, or clears it.
- * @param status - Status line holding both texts in its data attributes.
- * @param state - Text to show, or null to clear the line.
- */
-function renderStatus(status: HTMLElement, state: StatusState | null) {
-  status.dataset.state = state ?? '';
-  status.textContent = state ? status.dataset[state]! : '';
-  status.classList.toggle('contact__status--error', state === 'error');
-}
-
-/**
- * Sends the form, shows the result and empties the form after a successful send.
+ * Shows what is missing if the form is incomplete, otherwise sends it, shows the result and empties the form after a successful send.
  * @param ctx - Contact form elements and state.
  */
 async function handleSubmit(ctx: ContactForm) {
   if (ctx.sending) return;
+  if (!ctx.controls.every(isValid)) return showAllErrors(ctx);
   ctx.sending = true;
   updateSubmit(ctx);
-  renderStatus(ctx.status, null);
+  hideToast(ctx.toast);
   const sent = await sendForm(ctx.form);
   if (sent) ctx.form.reset();
-  renderStatus(ctx.status, sent ? 'success' : 'error');
+  showToast(ctx.toast, sent ? 'success' : 'error');
   ctx.sending = false;
   updateSubmit(ctx);
 }
 
 /**
  * Finds the contact form elements.
- * @returns Form, required controls, submit button, status line and sending state.
+ * @returns Form, required controls, submit button, toast and sending state.
  */
 function getContactForm(): ContactForm {
   const form = document.querySelector<HTMLFormElement>('.contact__form')!;
@@ -142,7 +156,7 @@ function getContactForm(): ContactForm {
     form,
     controls: [...form.querySelectorAll<Control>('[required]')],
     submit: form.querySelector<HTMLButtonElement>('.contact__submit')!,
-    status: form.querySelector<HTMLElement>('.contact__status')!,
+    toast: form.querySelector<HTMLElement>('.contact__toast')!,
     sending: false,
   };
 }
@@ -155,7 +169,7 @@ export function initContactForm() {
   ctx.controls.forEach((control) => {
     control.addEventListener('blur', () => validate(control));
     control.addEventListener('input', () => {
-      revalidateIfInvalid(control);
+      handleInput(control);
       updateSubmit(ctx);
     });
   });
@@ -168,13 +182,12 @@ export function initContactForm() {
 }
 
 /**
- * Shows the current placeholder, error and status texts again, e.g. after their data attributes were translated.
+ * Shows the current placeholder, error and toast texts again, e.g. after their data attributes were translated.
  */
 export function refreshContactTexts() {
   const form = document.querySelector<HTMLFormElement>('.contact__form')!;
   form.querySelectorAll<Control>('.contact__input').forEach((control) => {
     renderFieldState(control, control.getAttribute('aria-invalid') !== 'true');
   });
-  const status = form.querySelector<HTMLElement>('.contact__status')!;
-  renderStatus(status, (status.dataset.state || null) as StatusState | null);
+  renderToast(form.querySelector<HTMLElement>('.contact__toast')!);
 }

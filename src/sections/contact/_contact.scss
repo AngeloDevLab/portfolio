@@ -4,6 +4,8 @@
 $checkbox-size: 18px;
 $message-max-height: 200px;
 $error-font-size: 14px;
+$field-padding-inline: fluid($space-16, $space-32);
+$toast-icon-size: 20px;
 
 .contact {
   display: flex;
@@ -66,10 +68,11 @@ $error-font-size: 14px;
   }
 
   &__field {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: $space-16;
-    padding: fluid($space-24, $space-32) fluid($space-16, $space-32);
+    padding: fluid($space-24, $space-32) $field-padding-inline;
     border-bottom: $border-width solid $color-teal;
 
     &:first-child {
@@ -82,6 +85,20 @@ $error-font-size: 14px;
       &::placeholder {
         color: $color-red;
       }
+    }
+  }
+
+  // Sits in the bottom padding of the field, so showing it never shifts the layout.
+  &__field-error {
+    position: absolute;
+    inset-inline: $field-padding-inline;
+    bottom: $space-4;
+    font-size: $error-font-size;
+    color: $color-red;
+    visibility: hidden;
+
+    &--visible {
+      visibility: visible;
     }
   }
 
@@ -184,22 +201,55 @@ $error-font-size: 14px;
     background: none;
     cursor: pointer;
 
-    &:disabled {
+    &[aria-disabled='true'] {
       opacity: 0.4;
-      cursor: not-allowed;
     }
   }
 
-  &__status {
-    min-height: 2.8em;
-    margin-top: $space-16;
-    font-size: 15px;
-    line-height: 1.4;
-    text-align: center;
-    color: $color-teal;
+  &__toast {
+    position: fixed;
+    bottom: fluid($space-16, $space-32);
+    left: 50%;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: $space-12;
+    width: max-content;
+    max-width: calc(100% - #{2 * $space-16});
+    padding: $space-16 $space-24;
+    border-radius: $radius-16;
+    background: $color-teal;
+    color: $color-dark;
+    font-size: fluid(16px, 18px);
+    font-weight: $font-weight-bold;
+    line-height: 1.3;
+    box-shadow: 0 8px 32px $color-backdrop;
+    opacity: 0;
+    visibility: hidden;
+    translate: -50% $space-24;
+    transition: opacity 300ms ease, translate 300ms ease, visibility 300ms;
+
+    &::before {
+      content: '';
+      flex-shrink: 0;
+      width: $toast-icon-size;
+      height: $toast-icon-size;
+      background: currentColor;
+      mask: url('/icons/check.svg') center / contain no-repeat;
+    }
 
     &--error {
-      color: $color-red;
+      background: $color-red;
+
+      &::before {
+        mask-image: url('/icons/close.svg');
+      }
+    }
+
+    &--visible {
+      opacity: 1;
+      visibility: visible;
+      translate: -50% 0;
     }
   }
 
@@ -213,7 +263,8 @@ $error-font-size: 14px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .contact__checkbox {
+  .contact__checkbox,
+  .contact__toast {
     transition: none;
   }
 }
