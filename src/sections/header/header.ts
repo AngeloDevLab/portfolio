@@ -63,6 +63,15 @@ function updateHeader(header: HTMLElement, hero?: HTMLElement) {
 }
 
 /**
+ * Scrolls back to the top instead of following the "#" link of the logo, so a click at the top does nothing.
+ * @param event - Click event of the logo.
+ */
+function scrollToTop(event: Event) {
+  event.preventDefault();
+  if (window.scrollY > 0) window.scrollTo({ top: 0 });
+}
+
+/**
  * Makes the header a fixed bar below the hero, or below the page top without a hero, that hides while scrolling down and returns while scrolling up.
  * @param hero - Hero section, if the page has one.
  */
@@ -70,6 +79,7 @@ export function initHeader(hero?: HTMLElement) {
   const header = document.querySelector<HTMLElement>('.header')!;
   lastScrollY = window.scrollY;
   header.addEventListener('focusin', () => header.classList.remove('header--hidden'));
+  header.querySelector('.logo[href="#"]')?.addEventListener('click', scrollToTop);
   window.addEventListener('scroll', () => updateHeader(header, hero), { passive: true });
   updateHeader(header, hero);
 }
