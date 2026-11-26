@@ -1,7 +1,7 @@
 import type { Dictionary } from './en.ts';
 
 export const de: Dictionary = {
-  'meta.title': 'Angelo Pietsch | Frontend Developer',
+  'meta.title': 'Angelo Pietsch | Frontend-Entwickler',
   'meta.description': 'Portfolio von Angelo Pietsch, Frontend-Entwickler aus Sachsen, mit Projekten in Angular, TypeScript und three.js.',
 
   'lang.switch': 'EN, DE: Sprache auf Englisch umstellen',
@@ -14,12 +14,13 @@ export const de: Dictionary = {
   'menu.label': 'Menü',
   'menu.nav': 'Mobile Navigation',
 
+  'hero.role': 'Frontend-Entwickler',
   'hero.work': 'Meine Projekte',
   'hero.contact': 'Kontakt',
   'hero.scroll': 'Weiter zu Über mich',
   'social.email': 'E-Mail',
 
-  'ring.role': 'Frontend Developer',
+  'ring.role': 'Frontend-Entwickler',
   'ring.openToWork': 'Offen für neue Aufgaben',
   'ring.location': 'Aus Sachsen',
   'ring.remote': 'Remote verfügbar',
@@ -102,7 +103,7 @@ export const de: Dictionary = {
   'imprint.title': 'Impressum | Angelo Pietsch',
   'privacy.title': 'Datenschutzerklärung | Angelo Pietsch',
 
-  'footer.info': 'Frontend Developer<br />Löbau, Deutschland',
+  'footer.info': 'Frontend-Entwickler<br />Löbau, Deutschland',
   'footer.legal': 'Impressum',
   'footer.privacy': 'Datenschutz',
 };

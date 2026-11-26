@@ -12,6 +12,7 @@ export const en = {
   'menu.label': 'Menu',
   'menu.nav': 'Mobile',
 
+  'hero.role': 'Frontend Developer',
   'hero.work': 'Check my work',
   'hero.contact': 'Contact me',
   'hero.scroll': 'Scroll to about me',
